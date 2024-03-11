@@ -1,0 +1,243 @@
+/*@tailwind base;*/
+
+/**
+ * Custom base styles
+ */
+
+* {
+    /* Text rendering */
+    text-rendering: optimizeLegibility;
+    -o-text-rendering: optimizeLegibility;
+    -ms-text-rendering: optimizeLegibility;
+    -moz-text-rendering: optimizeLegibility;
+    -webkit-text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: transparent;
+}
+
+* :focus {
+    outline: none !important;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: 'Inter var', Roboto, Helvetica Neue, Arial, sans-serif;
+    background-color: #121212;
+}
+
+body {
+    font-size: 14px;
+    line-height: 1.4;
+    overflow-x: hidden;
+    font-feature-settings: "salt";
+}
+
+html,
+body {
+    -webkit-font-smoothing: auto;
+    -moz-osx-font-smoothing: auto;
+}
+
+html,
+body {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin: 0;
+    min-height: 100%;
+    width: 100%;
+    flex: 1 1 auto;
+}
+
+#root {
+    display: flex;
+    flex: 1 1 auto;
+    width: 100%;
+    height: 100%;
+}
+
+h1,
+.h1 {
+    font-size: 24px;
+}
+
+h2,
+.h2 {
+    font-size: 20px;
+}
+
+h3,
+.h3 {
+    font-size: 16px;
+}
+
+h4,
+.h4 {
+    font-size: 15px;
+}
+
+h5,
+.h5 {
+    font-size: 13px;
+}
+
+h6,
+.h6 {
+    font-size: 12px;
+}
+
+.ps>.ps__rail-y,
+.ps>.ps__rail-x {
+    z-index: 99;
+}
+
+a[role=button] {
+    text-decoration: none;
+}
+
+[role="tooltip"] {
+    z-index: 9999;
+}
+
+.MuiModal-root {
+    z-index: 9999;
+}
+
+/* Medium Devices, Desktops Only */
+@media only screen and (min-width: 992px) {
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    ::-webkit-scrollbar:hover {
+        width: 8px;
+        height: 8px;
+        background-color: rgba(0, 0, 0, 0.06);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border: 2px solid transparent;
+        border-radius: 20px;
+    }
+
+    ::-webkit-scrollbar-thumb:active {
+        border-radius: 20px;
+    }
+}
+
+form label {
+    z-index: 99;
+}
+
+body.no-animate *,
+body.no-animate *::before,
+body.no-animate *::after {
+    transition: none !important;
+    animation: none !important;
+}
+
+button:focus {
+    outline: none;
+}
+
+/* Removes webkit's autofill backgorund color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transitionDelay: 9999s;
+    transitionProperty: background-color, color;
+}
+
+:focus {
+    outline-color: transparent;
+}
+
+/*fullcalendar Fix*/
+.fc-scrollgrid-section-liquid {
+    height: 1px !important;
+}
+
+.MuiCardContent-root {
+    transition: transform 250ms !important;
+}
+
+.MuiCardContent-root:hover {
+    transform: translateY(-10px) !important;
+    cursor: pointer;
+}
+
+.animated-div {
+    transition: all 0.5s ease;
+    /* You can adjust the timing */
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.animated-div.show {
+    opacity: 1;
+    height: auto;
+}
+
+.animated-div.hide {
+    opacity: 0;
+    height: 0;
+}
+
+.react-chatbot-kit-chat-inner-container {
+    height: 450px !important;
+}
+
+.react-chatbot-kit-chat-message-container {
+    background-image: linear-gradient(to right, hsl(227, 56%, 90%), #fefefe) !important;
+    height:374px !important; 
+}
+
+.react-chatbot-kit-chat-header {
+    background-image: linear-gradient(to right, #0164c9, #013366) !important;
+    color: white !important;
+    font-size: 14px !important;
+}
+
+.react-chatbot-kit-chat-bot-message {
+    background-image: linear-gradient(to right, #0164c9, #013366) !important;
+    color: white !important;
+    width: auto !important;
+    font-size: 12px !important;
+}
+
+.nav-tabs .nav-link.active {
+    background-image: linear-gradient(to right, #0164c9, #013366) !important;
+    color: white;
+}
+
+.react-chatbot-kit-user-chat-message {
+    background-color: #0085ff !important;
+    color: white !important;
+    font-size: 12px !important;
+}
+
+.react-chatbot-kit-user-chat-message-arrow {
+    border-left: 8px solid #0085ff !important;
+}
+
+.react-chatbot-kit-user-avatar-container {
+    background-color: #0085ff !important;
+    color: white !important;
+}
+
+.react-chatbot-kit-chat-bot-message-arrow {
+    border-right: 8px solid #0164c9 !important;
+}
+
+.react-chatbot-kit-chat-btn-send {
+    background-image: linear-gradient(to right, #0164c9, #013366) !important;
+}
+.react-chatbot-kit-chat-input{
+    font-size: 12px !important;
+}
+.card-header{
+    padding: 10px;
+}

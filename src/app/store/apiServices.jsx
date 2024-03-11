@@ -1,0 +1,108 @@
+// apiService.jsx
+import axios from 'axios';
+
+const BASE_URL = 'https://api.example.com'; // Your API base URL
+
+
+
+// await axios.get('http://13.59.144.105:9003/upload')
+// Function to make a GET request
+export const getGraphData = async () => {
+  return axios.get('http://13.59.144.105:9004/get_re')
+    .then(response => {
+      // Return data from the API call
+      return response.data;
+    })
+    .catch(error => {
+      // Handle error
+      console.error('Error fetching data:', error);
+    });
+};
+
+// http://13.59.144.105:9004/get_re
+// 'assets/graphHome.json'
+export const getGraphDocData = async () => {
+  return axios.get('assets/graphHome.json')
+    .then(response => {
+      // Return data from the API call
+      return response.data;
+    })
+    .catch(error => {
+      // Handle error
+      console.error('Error fetching data:', error);
+    });
+};
+export const getGraphDataLocal = async () => {
+  return axios.get('assets/graph.json')
+    .then(response => {
+      // Return data from the API call
+      return response.data;
+    })
+    .catch(error => {
+      // Handle error
+      console.error('Error fetching data:', error);
+    });
+};
+export const fileUpload = async (formData) => {
+  return axios.post('http://13.59.144.105:9004/upload_pdf_to_s3/', formData).then((response) => {
+    console.log('Upload successful:', response);
+    // Handle response as needed
+  }).catch((error) => {
+    console.error('Upload failed:', error);
+    // Handle error as needed
+  });
+};
+
+
+export const getPdfData = async () => {
+  return process.env.PUBLIC_URL + 'assets/20240223_1521241.pdf';
+  // return axios.get('assets/20240223_1521241.pdf')
+  //   .then(response => {
+  //     // Return data from the API call
+  //     return response.data;
+  //   })
+  //   .catch(error => {
+  //     // Handle error
+  //     console.error('Error fetching data:', error);
+  //   });
+};
+
+export const fetchFilterData = async () => {
+  return axios.get('assets/filter.json')
+    .then(response => {
+      // Return data from the API call
+      return response.data;
+    })
+    .catch(error => {
+      // Handle error
+      console.error('Error fetching data:', error);
+    });
+};
+
+export const postGraphData = async (payload) => {
+  try {
+    const response = await axios.post(`${Content_BASE_URL}/process-query/`, payload);
+    return response.data.response;
+  } catch (error) {
+    throw error;
+  }
+};
+const Content_BASE_URL = 'http://184.105.215.91:8000';
+
+export const postContentData = async (payload) => {
+  try {
+    const response = await axios.post(`${Content_BASE_URL}/process-query/`, payload);
+    return response.data.response;
+  } catch (error) {
+    throw error;
+  }
+};
+// Function to make a POST request
+export const createExampleData = async (payload) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/example`, payload);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}

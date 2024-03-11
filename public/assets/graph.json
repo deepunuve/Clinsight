@@ -1,0 +1,274 @@
+{
+  "nodes": [
+    {
+      "data": {
+        "id": 1,
+        "label": "hct"
+      }
+    },
+    {
+      "data": {
+        "id": 2,
+        "label": "source"
+      }
+    },
+    {
+      "data": {
+        "id": 3,
+        "label": "cord"
+      }
+    },
+    {
+      "data": {
+        "id": 4,
+        "label": "neonatal"
+      }
+    },
+    {
+      "data": {
+        "id": 5,
+        "label": "jaundice"
+      }
+    },
+    {
+      "data": {
+        "id": 6,
+        "label": "hemoglobin"
+      }
+    },
+    {
+      "data": {
+        "id": 7,
+        "label": "transfusion"
+      }
+    },
+    {
+      "data": {
+        "id": 8,
+        "label": "cord clamping"
+      }
+    },
+    {
+      "data": {
+        "id": 9,
+        "label": "vitamins"
+      }
+    },
+    {
+      "data": {
+        "id": 10,
+        "label": "cord c"
+      }
+    },
+    {
+      "data": {
+        "id": 11,
+        "label": "life"
+      }
+    },
+    {
+      "data": {
+        "id": 12,
+        "label": "effect"
+      }
+    },
+    {
+      "data": {
+        "id": 13,
+        "label": "delayed cord lamp"
+      }
+    },
+    {
+      "data": {
+        "id": 14,
+        "label": "mother ewborn believe"
+      }
+    },
+    {
+      "data": {
+        "id": 15,
+        "label": "infants"
+      }
+    },
+    {
+      "data": {
+        "id": 16,
+        "label": "delaying"
+      }
+    },
+    {
+      "data": {
+        "id": 17,
+        "label": "father"
+      }
+    },
+    {
+      "data": {
+        "id": 18,
+        "label": "newborn"
+      }
+    },
+    {
+      "data": {
+        "id": 19,
+        "label": "born"
+      }
+    },
+    {
+      "data": {
+        "id": 20,
+        "label": "8"
+      }
+    },
+    {
+      "data": {
+        "id": 21,
+        "label": "trans"
+      }
+    },
+    {
+      "data": {
+        "id": 22,
+        "label": "contact"
+      }
+    },
+    {
+      "data": {
+        "id": 23,
+        "label": "deficiency"
+      }
+    },
+    {
+      "data": {
+        "id": 24,
+        "label": "infant"
+      }
+    },
+    {
+      "data": {
+        "id": 25,
+        "label": "hemorrh"
+      }
+    },
+    {
+      "data": {
+        "id": 26,
+        "label": "birth"
+      }
+    },
+    {
+      "data": {
+        "id": 27,
+        "label": "adverse effect"
+      }
+    },
+    {
+      "data": {
+        "id": 28,
+        "label": "hem"
+      }
+    },
+    {
+      "data": {
+        "id": 29,
+        "label": "mentor"
+      }
+    },
+    {
+      "data": {
+        "id": 30,
+        "label": "breastfeeding"
+      }
+    },
+    {
+      "data": {
+        "id": 31,
+        "label": "iron"
+      }
+    },
+    {
+      "data": {
+        "id": 32,
+        "label": "-"
+      }
+    },
+    {
+      "data": {
+        "id": 33,
+        "label": "1"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "data": {
+        "source": 5,
+        "target": 8,
+        "label": "drug used for treatment"
+      }
+    },
+    {
+      "data": {
+        "source": 2,
+        "target": 3,
+        "label": "has part"
+      }
+    },
+    {
+      "data": {
+        "source": 3,
+        "target": 1,
+        "label": "has part"
+      }
+    },
+    {
+      "data": {
+        "source": 5,
+        "target": 10,
+        "label": "drug used for treatment"
+      }
+    },
+    {
+      "data": {
+        "source": 13,
+        "target": 7,
+        "label": "use"
+      }
+    },
+    {
+      "data": {
+        "source": 13,
+        "target": 11,
+        "label": "instance of"
+      }
+    },
+    {
+      "data": {
+        "source": 13,
+        "target": 5,
+        "label": "subclass of"
+      }
+    },
+    {
+      "data": {
+        "source": 13,
+        "target": 1,
+        "label": "subclass of"
+      }
+    },
+    {
+      "data": {
+        "source": 13,
+        "target": 12,
+        "label": "instance of"
+      }
+    },
+    {
+      "data": {
+        "source": 13,
+        "target": 8,
+        "label": "uses"
+      }
+    }
+  ]
+}
