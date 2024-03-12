@@ -45,15 +45,16 @@ function SignInPage() {
 			<Paper className="h-full w-full px-16 py-8 ltr:border-r-1 rtl:border-l-1 sm:h-auto sm:w-auto sm:rounded-2xl sm:p-48 sm:shadow md:flex md:h-full md:w-1/2 md:items-center md:justify-end md:rounded-none md:p-64 md:shadow-none">
 				<CardContent className="mx-auto w-full max-w-320 sm:mx-0 sm:w-320">
 					<img
-						className="w-48"
-						src="assets/images/logo/logo.svg"
+						className=""
+						style={{width:"150px"}}
+						src="assets/images/logo/logo.png"
 						alt="logo"
 					/>
 
 					<Typography className="mt-32 text-4xl font-extrabold leading-tight tracking-tight">
 						Sign in
 					</Typography>
-					<div className="mt-2 flex items-baseline font-medium">
+					{/* <div className="mt-2 flex items-baseline font-medium">
 						<Typography>Don't have an account?</Typography>
 						<Link
 							className="ml-4"
@@ -61,16 +62,16 @@ function SignInPage() {
 						>
 							Sign up
 						</Link>
-					</div>
+					</div> */}
 
-					<Alert
+					{/* <Alert
 						icon={false}
 						severity="info"
 						className="mt-24 px-16 text-13 leading-relaxed"
 					>
 						You are browsing <b>Fuse React Demo</b>. Click on the "Sign in" button to access the Demo and
 						Documentation.
-					</Alert>
+					</Alert> */}
 
 					<Tabs
 						value={_.findIndex(tabs, { id: selectedTabId })}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import IconButton from '@mui/material/IconButton';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
+import FuseLoading from '@fuse/core/FuseLoading';
 
 export default class SourceViewer extends Component {
 
@@ -9,12 +10,12 @@ export default class SourceViewer extends Component {
         super(props);
         this.state = {
             fileShow: false,
-            expanded: false,
+            expanded: true,
             pdfUrl: '',
             fileData: null,
-            s3Key: ''
+            s3Key: '',
+            isLoading: true
         };
-        // this.s3Service = new S3BucketService();
     }
     componentDidMount() {
         this.getPdfDetails();
@@ -51,7 +52,8 @@ export default class SourceViewer extends Component {
         //     this.setState({ pdfUrl: url });
         //   });
         // const pdfUrlData = await this.s3Service.getObject("trial/annotated_pdf_data/20240227_141854.pdf");
-        this.setState({ pdfUrl: "assets/20240223_1521241.pdf" });
+        this.setState({ pdfUrl: "assets/20240223_1521241.pdf" });        
+        this.setState({ isLoading: false });
         //}
 
     };
@@ -64,9 +66,10 @@ export default class SourceViewer extends Component {
                     <IconButton onClick={this.toggleExpand} aria-label="toggle sidebar" >
                         <FuseSvgIcon>heroicons-outline:menu</FuseSvgIcon>
                     </IconButton>
-                    <h4 style={{"padding":'10px'}}>Source Viewer</h4>
+                    <h4 style={{ "padding": '10px' }}>Source Viewer</h4>
                 </div>
                 <div className={`animated-div ${expanded ? 'show' : 'hide'}`}>
+                    {this.state.isLoading && <FuseLoading />}
                     <iframe
                         src="assets/20240223_1521241.pdf"
                         title="PDF Viewer"

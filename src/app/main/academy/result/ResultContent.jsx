@@ -11,7 +11,7 @@ export default class ResultContent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            expanded: false
+            expanded: true
         };
     }
     componentDidMount() {
@@ -35,11 +35,10 @@ export default class ResultContent extends Component {
                     <IconButton onClick={this.toggleExpand} aria-label="toggle sidebar" >
                         <FuseSvgIcon>heroicons-outline:menu</FuseSvgIcon>
                     </IconButton>
-                    <h4 style={{"padding":'10px'}}>Result Data</h4>
                     <Button
                         to={`/apps/academy/content/${course.id}/${course.slug}`}
                         component={Link}
-                        className="px-16 min-w-128"
+                        style={{ background: "none" }}
                         variant="contained"
                         endIcon={<FuseSvgIcon size={20}>heroicons-solid:arrows-expand</FuseSvgIcon>}
                     >

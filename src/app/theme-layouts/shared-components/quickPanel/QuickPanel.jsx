@@ -15,10 +15,12 @@ import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'app/store/hooks';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { selectQuickPanelData, selectQuickPanelOpen, toggleQuickPanel } from './quickPanelSlice';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 const StyledSwipeableDrawer = styled(SwipeableDrawer)(() => ({
 	'& .MuiDrawer-paper': {
-		width: 280
+		width: 320
 	}
 }));
 
@@ -51,105 +53,60 @@ function QuickPanel() {
 			disableSwipeToOpen
 		>
 			<FuseScrollbars>
-				<ListSubheader component="div">Today</ListSubheader>
-
-				<div className="mb-0 px-24 py-16">
-					<Typography
-						className="mb-12 text-32"
-						color="text.secondary"
+				<div className="p-32">
+					<Box
+						component="form"
+						sx={{
+							'& .MuiTextField-root': { m: 1, width: '25ch' },
+						}}
+						noValidate
+						autoComplete="off"
 					>
-						{format(new Date(), 'eeee')}
-					</Typography>
-					<div className="flex">
-						<Typography
-							className="text-32 leading-none"
-							color="text.secondary"
-						>
-							{format(new Date(), 'dd')}
-						</Typography>
-						<Typography
-							className="text-16 leading-none"
-							color="text.secondary"
-						>
-							th
-						</Typography>
-						<Typography
-							className="text-32 leading-none"
-							color="text.secondary"
-						>
-							{format(new Date(), 'MMMM')}
-						</Typography>
-					</div>
+						<div>
+							<Typography variant="h6" gutterBottom>
+								Filter
+							</Typography>
+							<TextField
+								required
+								id="outlined-required"
+								label="Required"
+								defaultValue="Hello World"
+							/>
+							<TextField
+								disabled
+								id="outlined-disabled"
+								label="Disabled"
+								defaultValue="Hello World"
+							/>
+							<TextField
+								id="outlined-password-input"
+								label="Password"
+								type="password"
+								autoComplete="current-password"
+							/>
+							<TextField
+								id="outlined-read-only-input"
+								label="Read Only"
+								defaultValue="Hello World"
+								InputProps={{
+									readOnly: true,
+								}}
+							/>
+
+						</div>
+						<div>
+							<TextField
+								required
+								id="filled-required"
+								label="Required"
+								defaultValue="Hello World"
+								variant="filled"
+							/>
+
+						</div>
+
+					</Box>
 				</div>
-				<Divider />
-				<List>
-					<ListSubheader component="div">Events</ListSubheader>
-					{data &&
-						data.events.map((event) => (
-							<ListItem key={event.id}>
-								<ListItemText
-									primary={event.title}
-									secondary={event.detail}
-								/>
-							</ListItem>
-						))}
-				</List>
-				<Divider />
-				<List>
-					<ListSubheader component="div">Notes</ListSubheader>
-					{data &&
-						data.notes.map((note) => (
-							<ListItem key={note.id}>
-								<ListItemText
-									primary={note.title}
-									secondary={note.detail}
-								/>
-							</ListItem>
-						))}
-				</List>
-				<Divider />
-				<List>
-					<ListSubheader component="div">Quick Settings</ListSubheader>
-					<ListItem>
-						<ListItemIcon className="min-w-40">
-							<FuseSvgIcon>material-outline:notifications</FuseSvgIcon>
-						</ListItemIcon>
-						<ListItemText primary="Notifications" />
-						<ListItemSecondaryAction>
-							<Switch
-								color="primary"
-								onChange={handleToggle('notifications')}
-								checked={checked.indexOf('notifications') !== -1}
-							/>
-						</ListItemSecondaryAction>
-					</ListItem>
-					<ListItem>
-						<ListItemIcon className="min-w-40">
-							<FuseSvgIcon>material-outline:cloud</FuseSvgIcon>
-						</ListItemIcon>
-						<ListItemText primary="Cloud Sync" />
-						<ListItemSecondaryAction>
-							<Switch
-								color="secondary"
-								onChange={handleToggle('cloudSync')}
-								checked={checked.indexOf('cloudSync') !== -1}
-							/>
-						</ListItemSecondaryAction>
-					</ListItem>
-					<ListItem>
-						<ListItemIcon className="min-w-40">
-							<FuseSvgIcon>material-outline:brightness_high</FuseSvgIcon>
-						</ListItemIcon>
-						<ListItemText primary="Retro Thrusters" />
-						<ListItemSecondaryAction>
-							<Switch
-								color="primary"
-								onChange={handleToggle('retroThrusters')}
-								checked={checked.indexOf('retroThrusters') !== -1}
-							/>
-						</ListItemSecondaryAction>
-					</ListItem>
-				</List>
 			</FuseScrollbars>
 		</StyledSwipeableDrawer>
 	);

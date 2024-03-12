@@ -5,7 +5,9 @@ import Content from './courses/Content';
 const AcademyApp = lazy(() => import('./AcademyApp'));
 const Course = lazy(() => import('./course/Course'));
 const Courses = lazy(() => import('./courses/Courses'));
-const ResultDash = lazy(() => import('./result/ResultDash'));
+const ResultDashNew = lazy(() => import('./result/ResultDashNew'));
+const GraphView = lazy(() => import('./result/GraphView'));
+const SourceView = lazy(() => import('./result/SourceView'));
 /**
  * The Academy app config.
  */
@@ -28,11 +30,19 @@ const AcademyAppConfig = {
 				},
 				{
 					path: 'results/:courseId/*',
-					element: <ResultDash />
+					element: <ResultDashNew />
 				},
 				{
 					path: 'content/:courseId/*',
 					element: <Content />
+				},
+				{
+					path: 'graphView/:courseId/*',
+					element: <GraphView />
+				},
+				{
+					path: 'sourceView/:courseId/*',
+					element: <SourceView />
 				},
 				{
 					path: 'courses',

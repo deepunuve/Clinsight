@@ -9,7 +9,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import { any } from 'zod';
-// Register the Cola layout
+import FuseLoading from '@fuse/core/FuseLoading';
 cytoscape.use(cola);
 
 class DocumentGraph extends Component {
@@ -18,7 +18,8 @@ class DocumentGraph extends Component {
     this.state = {
       elements: any,
       isVisible: false,
-      layout: ''
+      layout: '',
+      isLoading: true
     };
     this.cyRef = React.createRef();
   }
@@ -68,6 +69,7 @@ class DocumentGraph extends Component {
       style: styleSheet,
       edgeLength: function (edge) { return 200; }
     });
+    this.setState({ isLoading: false });
     this.cy.pan({ x: 1000, y: 1000 });
     this.cy.on('tap', 'node', (event) => {
       const node = event.target;
@@ -229,6 +231,7 @@ class DocumentGraph extends Component {
   render() {
     return (
       <div style={{ width: "100%" }}>
+        {this.state.isLoading && <FuseLoading />}
         <div
           ref={this.cyRef}
           style={{ width: '100%', height: '600px' }}

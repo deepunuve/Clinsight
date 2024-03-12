@@ -11,6 +11,9 @@ import FormControl from '@mui/material/FormControl';
 import { any } from 'zod';
 import IconButton from '@mui/material/IconButton';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
+import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
+import FuseLoading from '@fuse/core/FuseLoading';
 
 // Register the Cola layout
 cytoscape.use(cola);
@@ -20,8 +23,9 @@ class Graph extends Component {
     super(props);
     this.state = {
       elements: any,
-      isVisible: false,
-      layout: ''
+      isVisible: true,
+      layout: '',
+      isLoading: true
     };
     this.cyRef = React.createRef();
   }
@@ -82,6 +86,7 @@ class Graph extends Component {
       style: styleSheet,
       edgeLength: function (edge) { return 200; }
     });
+    this.setState({ isLoading: false });
     this.cy.pan({ x: 1000, y: 1000 });
     this.cy.on('tap', 'node', (event) => {
       const node = event.target;
@@ -243,16 +248,22 @@ class Graph extends Component {
 
   render() {
     const { isVisible, age } = this.state;
+    const { course} = this.props;
     return (
       <div style={{ width: "100%" }}>
+
         <div className="flex shrink-0 items-center">
           <IconButton onClick={this.toggleVisibility} aria-label="toggle sidebar" >
             <FuseSvgIcon>heroicons-outline:menu</FuseSvgIcon>
           </IconButton>
-          <h4 style={{"padding":'10px'}}>Graph Visualization</h4>
-        </div>
-        <div className={`animated-div ${isVisible ? 'show' : 'hide'}`}>
-          {this.state.isLoading && <Loader />}
+          <Button
+            to={`/apps/academy/graphView/${course.id}/${course.slug}`}
+            component={Link}           
+            style={{background:'none'}}
+            variant="contained"
+            endIcon={<FuseSvgIcon size={20}>heroicons-solid:arrows-expand</FuseSvgIcon>}
+          >
+          </Button>
           <FormControl sx={{ m: 1, width: 300 }}>
             <InputLabel id="category-select-label">Layout</InputLabel>
             <Select
@@ -273,9 +284,13 @@ class Graph extends Component {
               <MenuItem value="concentric">concentric</MenuItem>
             </Select>
           </FormControl>
+        </div>
+        <div className={`animated-div ${isVisible ? 'show' : 'hide'}`}>
+
+          {this.state.isLoading && <FuseLoading />}
           <div
             ref={this.cyRef}
-            style={{ width: '100%', height: '600px' }}
+            style={{ width: '100%', height: '400px' }}
           />
         </div>
       </div>
