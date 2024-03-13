@@ -30,7 +30,7 @@ const AcademyAppConfig = {
 				},
 				{
 					path: 'results/:courseId/*',
-					element: <ResultDashNew />
+					element: <ResultDashNew state={{ key: 'value' }}/>
 				},
 				{
 					path: 'content/:courseId/*',

@@ -2,7 +2,7 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import clsx from 'clsx';
-import CourseCategory from './CourseCategory';
+import Chip from '@mui/material/Chip';
 
 /**
  * The CourseInfo component.
@@ -17,16 +17,26 @@ function CourseInfo(props) {
 	return (
 		<div className={clsx('w-full', className)}>
 			<div className="flex items-center justify-between mb-16">
-				<CourseCategory slug={course.category} />
+				<Chip
+					className="font-semibold text-12"
+					label={course.study_type}
+					sx={{
+						color: (theme) =>
+							theme.palette.mode === 'light' ? 'black' : 'white',
+						backgroundColor: (theme) =>
+							theme.palette.mode === 'light' ? '#90EE90' : '#FFFFE0'
+					}}
+					size="small"
+				/>
 
-				{course.progress.completed > 0 && (
-					<FuseSvgIcon
-						className="text-green-600"
-						size={20}
-					>
-						heroicons-solid:badge-check
-					</FuseSvgIcon>
-				)}
+				{/* {course.progress.completed > 0 && ( */}
+				<FuseSvgIcon
+					className="text-green-600"
+					size={20}
+				>
+					heroicons-solid:badge-check
+				</FuseSvgIcon>
+				{/* )} */}
 			</div>
 
 			<Typography className="text-16 font-medium">{course.title}</Typography>
@@ -35,7 +45,7 @@ function CourseInfo(props) {
 				className="text-13 mt-2 line-clamp-2"
 				color="text.secondary"
 			>
-				{course.description}
+				{course.brief_summary}
 			</Typography>
 
 			<Divider
@@ -51,9 +61,9 @@ function CourseInfo(props) {
 					color="disabled"
 					size={20}
 				>
-					heroicons-solid:clock
+					heroicons-solid:document
 				</FuseSvgIcon>
-				<span className="whitespace-nowrap leading-none">{`${course.duration} minutes`}</span>
+				<span className="whitespace-nowrap leading-none">{`${course.id}`}</span>
 			</Typography>
 			<Typography
 				className="flex items-center space-x-6 text-13 mt-8"
@@ -66,10 +76,7 @@ function CourseInfo(props) {
 					heroicons-solid:academic-cap
 				</FuseSvgIcon>
 				<span className="whitespace-nowrap leading-none">
-					{course.progress.completed === 1 && 'Completed once'}
-					{course.progress.completed === 2 && 'Completed twice'}
-					{course.progress.completed > 2 && `Completed ${course.progress.completed} times`}
-					{course.progress.completed <= 0 && 'Never completed'}
+					{course.id}
 				</span>
 			</Typography>
 		</div>

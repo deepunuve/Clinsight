@@ -15,6 +15,8 @@ import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import FuseLoading from '@fuse/core/FuseLoading';
 import CourseCard from './CourseCard';
 import { useGetAcademyCategoriesQuery, useGetAcademyCoursesQuery } from '../AcademyApi';
+import { getStudiesLocal, getStudyType } from '../../../store/apiServices';
+import { any } from 'zod';
 
 const container = {
 	show: {
@@ -38,25 +40,41 @@ const item = {
  * The Courses page.
  */
 function Courses() {
-	const { data: courses, isLoading } = useGetAcademyCoursesQuery();
-	const { data: categories } = useGetAcademyCategoriesQuery();
+	const [studies, setStudies] = useState([]);
+	const [studyType, setStudyType] = useState([]);
 	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
-	const [filteredData, setFilteredData] = useState(courses);
+	const [filteredData, setFilteredData] = useState(studies);
 	const [searchText, setSearchText] = useState('');
 	const [selectedCategory, setSelectedCategory] = useState('all');
 	const [hideCompleted, setHideCompleted] = useState(false);
-	useEffect(() => {
-		function getFilteredArray() {
-			if (courses && searchText.length === 0 && selectedCategory === 'all' && !hideCompleted) {
-				return courses;
-			}
+	const [isLoading, setIsLoading] = useState(false);
 
-			return _.filter(courses, (item) => {
-				if (selectedCategory !== 'all' && item.category !== selectedCategory) {
+
+	useEffect(() => {
+		const fetchData = async () => {
+			await getStudiesLocal().
+				then(response => {
+					setStudies(response);
+				});
+		};
+		fetchData(); // Call the async function
+		const fetchType = async () => {
+			await getStudyType().
+				then(response => {
+					setStudyType(response);
+				});
+		};
+		fetchType(); // Call the async function
+		function getFilteredArray() {
+			if (studies && searchText.length === 0 && selectedCategory === 'all' && !hideCompleted) {
+				return studies;
+			}
+			return _.filter(studies, (item) => {
+				if (selectedCategory !== 'all' && item.study_type !== selectedCategory) {
 					return false;
 				}
 
-				if (hideCompleted && item.progress.completed > 0) {
+				if (hideCompleted) {
 					return false;
 				}
 
@@ -64,10 +82,10 @@ function Courses() {
 			});
 		}
 
-		if (courses) {
+		if (studies) {
 			setFilteredData(getFilteredArray());
 		}
-	}, [courses, hideCompleted, searchText, selectedCategory]);
+	}, [studies, hideCompleted, searchText, selectedCategory]);
 
 	function handleSelectedCategory(event) {
 		setSelectedCategory(event.target.value);
@@ -83,7 +101,6 @@ function Courses() {
 
 	return (
 		<FusePageSimple
-
 			content={
 				<div className="flex flex-col flex-1 w-full mx-auto px-24 pt-24 sm:p-40">
 					<div className="flex flex-col shrink-0 sm:flex-row items-center justify-between space-y-16 sm:space-y-0">
@@ -92,7 +109,7 @@ function Courses() {
 								className="flex w-full sm:w-136"
 								variant="outlined"
 							>
-								<InputLabel id="category-select-label">Category</InputLabel>
+								<InputLabel id="category-select-label">Study Type</InputLabel>
 								<Select
 									labelId="category-select-label"
 									id="category-select"
@@ -103,9 +120,9 @@ function Courses() {
 									<MenuItem value="all">
 										<em> All </em>
 									</MenuItem>
-									{categories?.map((category) => (
+									{studyType?.map((category) => (
 										<MenuItem
-											value={category.slug}
+											value={category.title}
 											key={category.id}
 										>
 											{category.title}
@@ -150,16 +167,17 @@ function Courses() {
 								initial="hidden"
 								animate="show"
 							>
-								{filteredData.map((course) => {
+								{filteredData.map((study) => {
 									return (
 										<motion.div
 											variants={item}
-											key={course.id}
+											key={study.id}
 										>
-											<CourseCard course={course} />
+											<CourseCard course={study} />
 										</motion.div>
 									);
 								})}
+
 							</motion.div>
 						) : (
 							<div className="flex flex-1 items-center justify-center">

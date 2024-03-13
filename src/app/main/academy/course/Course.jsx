@@ -22,7 +22,10 @@ import Error404Page from '../../404/Error404Page';
 import { useGetAcademyCourseQuery, useUpdateAcademyCourseMutation } from '../AcademyApi';
 import DocumentGraph from '../graph/DocumentGraph';
 import CourseHeader from './CourseHeader';
-
+import { getStudyDetails } from '../../../store/apiServices';
+import ResultDashNew from '../result/ResultDashNew';
+import QuickPanelToggleButton from 'app/theme-layouts/shared-components/quickPanel/QuickPanelToggleButton';
+import { useNavigate } from 'react-router-dom';
 /**
  * The Course page.
  */
@@ -34,79 +37,101 @@ function Course() {
 	const [rightSidebarOpen, setRightSidebarOpen] = useState(!isMobile);
 	const routeParams = useParams();
 	const { courseId } = routeParams;
+	const [isLoading, setIsLoading] = useState(false);
+	const [study, setStudy] = useState(null);
+	const [studyCount, setStudyCount] = useState(0);
+	const [childStateValue, setChildStateValue] = useState([]);
+	const navigate = useNavigate();
 
-	const { data: course, isLoading } = useGetAcademyCourseQuery(
-		{ courseId },
-		{
-			skip: !courseId
-		}
-	);
-	const [updateCourse] = useUpdateAcademyCourseMutation();
-	useEffect(() => {
-		/**
-		 * If the course is opened for the first time
-		 * Change ActiveStep to 1
-		 */
-		if (course && course?.progress?.currentStep === 0) {
-			updateCourse({ courseId, data: { progress: { currentStep: 1 } } });
-		}
-	}, [course]);
+	const graphClick = (childValue) => {
+		setChildStateValue(childValue);
+		study.source = childValue;
+	};
+
 	useEffect(() => {
 		setLeftSidebarOpen(!isMobile);
 		setRightSidebarOpen(!isMobile);
+		const fetchData = async () => {
+			await getStudyDetails(courseId).
+				then(response => {
+					setStudyCount(response.source.length);
+					setStudy(response);
+				});
+		};
+		fetchData(); // Call the async function
 	}, [isMobile]);
-	const currentStep = course?.progress?.currentStep || 0;
+	// const currentStep = course?.progress?.currentStep || 0;
 
-	function updateCurrentStep(index) {
-		if (course && (index > course.totalSteps || index < 0)) {
-			return;
-		}
+	// function updateCurrentStep(index) {
+	// 	if (course && (index > course.totalSteps || index < 0)) {
+	// 		return;
+	// 	}
 
-		updateCourse({ courseId, data: { progress: { currentStep: index } } });
-	}
+	// 	updateCourse({ courseId, data: { progress: { currentStep: index } } });
+	// }
 
-	function handleNext() {
-		updateCurrentStep(currentStep + 1);
-	}
+	// function handleNext() {
+	// 	updateCurrentStep(currentStep + 1);
+	// }
 
-	function handleBack() {
-		updateCurrentStep(currentStep - 1);
-	}
+	// function handleBack() {
+	// 	updateCurrentStep(currentStep - 1);
+	// }
 
 	function handleStepChange(index) {
 		updateCurrentStep(index + 1);
 	}
+	function handleClick() {
+		const destination = `/apps/academy/results/${study.id}`; 
+        const state = { data: study };
+        navigate(destination, { state });
+	}
 
-	const activeStep = currentStep !== 0 ? currentStep : 1;
+	// const activeStep = currentStep !== 0 ? currentStep : 1;
 
 	if (isLoading) {
 		return <FuseLoading />;
-	}
+	}	
 
-	if (!course) {
+	if (!study) {
 		return <Error404Page />;
 	}
 
 	return (
 		<FusePageSimple
 			header={
-				<CourseHeader
-					leftSidebarToggle={() => {
-						setLeftSidebarOpen(!leftSidebarOpen);
-					}}
-					rightSidebarToggle={() => {
-						setRightSidebarOpen(!rightSidebarOpen);
-					}}
-					course={course}
-					page="1"
-				/>
+				<div className="flex flex-col p-24 w-full sm:px-40">
+
+					<div className="flex items-center w-full mt-8 -mx-10">
+						
+						<Typography
+							component="h2"
+							className="flex-1 text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate mx-10"
+						>
+							<Button
+								onClick={handleClick}
+								className="px-16 min-w-128"
+								color="secondary"
+								variant="contained"
+								endIcon={<FuseSvgIcon size={20}>heroicons-solid:arrow-sm-right</FuseSvgIcon>}
+							>
+								Explore More
+							</Button>
+						</Typography>
+
+						<div className="flex shrink-0 items-center">
+							<QuickPanelToggleButton />
+						</div>
+					</div>
+				</div>
+
 			}
 			content={
 				<div className="w-full">
 					<SwipeableViews>
 						<div className="flex justify-center p-16 pb-64  sm:pb-64  md:pb-64">
 							<Paper className="w-full mx-auto p-16 pb-64  sm:pb-64  md:pb-64 rounded-16 shadow overflow-hidden">
-								<DocumentGraph />
+								<DocumentGraph onClick={graphClick} />
 							</Paper>
 						</div>
 					</SwipeableViews>
@@ -136,60 +161,62 @@ function Course() {
 						>
 							Back to Studies
 						</Button>
-
-						<CourseInfo course={course} />
+						{study && (<CourseInfo course={study} />)}
 					</div>
 					<Divider />
 					<Stepper
 						classes={{ root: 'p-32' }}
-						activeStep={activeStep - 1}
+						activeStep={studyCount}
 						orientation="vertical"
 					>
-						{course.steps.map((step, index) => {
-							return (
-								<Step
-									key={index}
-									sx={{
-										'& .MuiStepLabel-root, & .MuiStepContent-root': {
-											cursor: 'pointer!important'
-										},
-										'& .MuiStepContent-root': {
-											color: 'text.secondary',
-											fontSize: 13
-										}
-									}}
-									onClick={() => handleStepChange(step.order)}
-									expanded
-								>
-									<StepLabel
-										className="font-medium"
+
+						{study.source && (
+							study.source.map((source, index) => {
+								return (
+									<Step
+										key={index}
 										sx={{
-											'& .MuiSvgIcon-root': {
-												color: 'background.default',
-												'& .MuiStepIcon-text': {
-													fill: (_theme) => _theme.palette.text.secondary
-												},
-												'&.Mui-completed': {
-													color: 'secondary.main',
-													'& .MuiStepIcon-text ': {
-														fill: (_theme) => _theme.palette.secondary.contrastText
-													}
-												},
-												'&.Mui-active': {
-													color: 'secondary.main',
-													'& .MuiStepIcon-text ': {
-														fill: (_theme) => _theme.palette.secondary.contrastText
-													}
-												}
+											'& .MuiStepLabel-root, & .MuiStepContent-root': {
+												cursor: 'pointer!important'
+											},
+											'& .MuiStepContent-root': {
+												color: 'text.secondary',
+												fontSize: 13
 											}
 										}}
+										// onClick={() => handleStepChange(source.id)}
+										expanded
 									>
-										{step.title}
-									</StepLabel>
-									<StepContent>{step.subtitle}</StepContent>
-								</Step>
-							);
-						})}
+										<StepLabel
+											className="font-medium"
+											sx={{
+												'& .MuiSvgIcon-root': {
+													color: 'background.default',
+													'& .MuiStepIcon-text': {
+														fill: (_theme) => _theme.palette.text.secondary
+													},
+													'&.Mui-completed': {
+														color: 'secondary.main',
+														'& .MuiStepIcon-text ': {
+															fill: (_theme) => _theme.palette.secondary.contrastText
+														}
+													},
+													'&.Mui-active': {
+														color: 'secondary.main',
+														'& .MuiStepIcon-text ': {
+															fill: (_theme) => _theme.palette.secondary.contrastText
+														}
+													}
+												}
+											}}
+										>
+											{source.source_name}
+										</StepLabel>
+										{/* <StepContent>{step.subtitle}</StepContent> */}
+									</Step>
+								);
+							}))
+						}
 					</Stepper>
 				</>
 			}

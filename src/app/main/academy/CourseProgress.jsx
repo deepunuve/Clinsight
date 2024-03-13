@@ -10,7 +10,7 @@ function CourseProgress(props) {
 		<LinearProgress
 			className={clsx('w-full h-2', className)}
 			variant="determinate"
-			value={(course.progress.currentStep * 100) / course.totalSteps}
+			value={100}
 			color="secondary"
 		/>
 	);

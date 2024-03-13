@@ -18,15 +18,9 @@ import FirebaseSignInTab from './tabs/FirebaseSignInTab';
 const tabs = [
 	{
 		id: 'jwt',
-		title: 'JWT',
-		logo: 'assets/images/logo/jwt.svg',
-		logoClass: 'h-40 p-4 bg-black rounded-12'
-	},
-	{
-		id: 'firebase',
-		title: 'Firebase',
-		logo: 'assets/images/logo/firebase.svg',
-		logoClass: 'h-40'
+		title: 'sign in',
+		// logo: 'assets/images/logo/jwt.svg',
+		// logoClass: 'h-40 p-4 bg-black rounded-12'
 	}
 ];
 
@@ -46,32 +40,11 @@ function SignInPage() {
 				<CardContent className="mx-auto w-full max-w-320 sm:mx-0 sm:w-320">
 					<img
 						className=""
-						style={{width:"150px"}}
+						style={{ width: "150px" }}
 						src="assets/images/logo/logo.png"
 						alt="logo"
 					/>
 
-					<Typography className="mt-32 text-4xl font-extrabold leading-tight tracking-tight">
-						Sign in
-					</Typography>
-					{/* <div className="mt-2 flex items-baseline font-medium">
-						<Typography>Don't have an account?</Typography>
-						<Link
-							className="ml-4"
-							to="/sign-up"
-						>
-							Sign up
-						</Link>
-					</div> */}
-
-					{/* <Alert
-						icon={false}
-						severity="info"
-						className="mt-24 px-16 text-13 leading-relaxed"
-					>
-						You are browsing <b>Fuse React Demo</b>. Click on the "Sign in" button to access the Demo and
-						Documentation.
-					</Alert> */}
 
 					<Tabs
 						value={_.findIndex(tabs, { id: selectedTabId })}
@@ -82,14 +55,7 @@ function SignInPage() {
 						{tabs.map((item) => (
 							<Tab
 								onClick={() => handleSelectTab(item.id)}
-								key={item.id}
-								icon={
-									<img
-										className={item.logoClass}
-										src={item.logo}
-										alt={item.title}
-									/>
-								}
+								key={item.id}								
 								className="min-w-0"
 								label={item.title}
 							/>
@@ -99,52 +65,7 @@ function SignInPage() {
 					{selectedTabId === 'jwt' && <JwtLoginTab />}
 					{selectedTabId === 'firebase' && <FirebaseSignInTab />}
 
-					<div className="mt-32 flex items-center">
-						<div className="mt-px flex-auto border-t" />
-						<Typography
-							className="mx-8"
-							color="text.secondary"
-						>
-							Or continue with
-						</Typography>
-						<div className="mt-px flex-auto border-t" />
-					</div>
-
-					<div className="mt-32 flex items-center space-x-16">
-						<Button
-							variant="outlined"
-							className="flex-auto"
-						>
-							<FuseSvgIcon
-								size={20}
-								color="action"
-							>
-								feather:facebook
-							</FuseSvgIcon>
-						</Button>
-						<Button
-							variant="outlined"
-							className="flex-auto"
-						>
-							<FuseSvgIcon
-								size={20}
-								color="action"
-							>
-								feather:twitter
-							</FuseSvgIcon>
-						</Button>
-						<Button
-							variant="outlined"
-							className="flex-auto"
-						>
-							<FuseSvgIcon
-								size={20}
-								color="action"
-							>
-								feather:github
-							</FuseSvgIcon>
-						</Button>
-					</div>
+					
 				</CardContent>
 			</Paper>
 

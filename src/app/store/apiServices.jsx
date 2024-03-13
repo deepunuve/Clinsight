@@ -32,6 +32,39 @@ export const getGraphDocData = async () => {
       console.error('Error fetching data:', error);
     });
 };
+export const getStudiesLocal= async () => {
+  return axios.get('assets/study.json')
+    .then(response => {
+      // Return data from the API call
+      return response.data;
+    })
+    .catch(error => {
+      // Handle error
+      console.error('Error fetching data:', error);
+    });
+};
+export const getStudyType= async () => {
+  return axios.get('assets/studytype.json')
+    .then(response => {
+      // Return data from the API call
+      return response.data;
+    })
+    .catch(error => {
+      // Handle error
+      console.error('Error fetching data:', error);
+    });
+};
+export const getStudyDetails= async () => {
+  return axios.get('assets/studyDetails.json')
+    .then(response => {
+      // Return data from the API call
+      return response.data;
+    })
+    .catch(error => {
+      // Handle error
+      console.error('Error fetching data:', error);
+    });
+};
 export const getGraphDataLocal = async () => {
   return axios.get('assets/graph.json')
     .then(response => {

@@ -19,7 +19,9 @@ class DocumentGraph extends Component {
       elements: any,
       isVisible: false,
       layout: '',
-      isLoading: true
+      isLoading: true,
+      graphSelection: [],
+      sourceNames: []
     };
     this.cyRef = React.createRef();
   }
@@ -36,6 +38,12 @@ class DocumentGraph extends Component {
     if (this.state.elements !== null) {
       this.initializeCytoscape(this.state.elements, event.target.value);
     }
+  };
+
+
+  handleGraphClick(newValue) {
+    this.setState({ graphSelection: newValue });
+    this.props.onClick(newValue);
   };
 
   componentDidUpdate(prevProps) {
@@ -69,6 +77,7 @@ class DocumentGraph extends Component {
       style: styleSheet,
       edgeLength: function (edge) { return 200; }
     });
+    this.highlightNodeAndAnimateChildren();
     this.setState({ isLoading: false });
     this.cy.pan({ x: 1000, y: 1000 });
     this.cy.on('tap', 'node', (event) => {
@@ -77,9 +86,9 @@ class DocumentGraph extends Component {
 
     });
   }
-  highlightNodeAndAnimateChildren(nodeId) {
+  highlightNodeAndAnimateChildren() {
 
-    const selectedNode = this.cy.getElementById(nodeId);;
+    // const selectedNode = this.cy.getElementById(nodeId);;
     // Define animation functions for highlighting and fading
 
     const highlightedColor = 'red';
@@ -89,40 +98,40 @@ class DocumentGraph extends Component {
     const highlightDuration = 2000; // Duration of each animation cycle
     // Define animation functions for highlighting and fading
 
-    let connectedEdges = selectedNode.connectedEdges()
-    let connectedNodes = selectedNode.connectedNodes();
-    let nonConnectedEdges = this.cy.edges().not(connectedEdges);
+    // let connectedEdges = selectedNode.connectedEdges()
+    // let connectedNodes = selectedNode.connectedNodes();
+    // let nonConnectedEdges = this.cy.edges().not(connectedEdges);
 
-    nonConnectedEdges.animate({
-      style: { 'opacity': nonHighlightedOpacity, 'border-color': 'none', width: 3 },
-      duration: highlightDuration
-    });
+    // nonConnectedEdges.animate({
+    //   style: { 'opacity': nonHighlightedOpacity, 'border-color': 'none', width: 3 },
+    //   duration: highlightDuration
+    // });
     this.cy.nodes().animate({
       style: { 'opacity': nonHighlightedOpacity, 'border-color': 'none', width: '30px', height: '30px', },
       duration: highlightDuration
     });
-    this.cy.nodes().not(connectedNodes).animate({
-      style: { 'border-color': 'none', width: '30px', height: '30px', 'opacity': nonHighlightedOpacity },
-    })
+    // this.cy.nodes().not(connectedNodes).animate({
+    //   style: { 'border-color': 'none', width: '30px', height: '30px', 'opacity': nonHighlightedOpacity },
+    // })
 
 
-    selectedNode.animate({
-      style: { 'border-color': '#AAD8FF', width: '50px', height: '50px', 'opacity': highlightedOpacity },
-      duration: highlightDuration
-    });
-    const neighborhood = selectedNode.neighborhood();
+    // selectedNode.animate({
+    //   style: { 'border-color': '#AAD8FF', width: '50px', height: '50px', 'opacity': highlightedOpacity },
+    //   duration: highlightDuration
+    // });
+    // const neighborhood = selectedNode.neighborhood();
 
-    // Highlight connected nodes
-    neighborhood.nodes().forEach(node => {
-      node.animate({
-        style: { 'border-color': '#AAD8FF', width: '50px', height: '50px', 'border-width': '6px', 'opacity': highlightedOpacity },
-        duration: highlightDuration
-      });
-    });
-    connectedEdges.animate({
-      style: { 'border-color': '#AAD8FF', width: 5, 'opacity': highlightedOpacity },
-      duration: highlightDuration
-    });
+    // // Highlight connected nodes
+    // neighborhood.nodes().forEach(node => {
+    //   node.animate({
+    //     style: { 'border-color': '#AAD8FF', width: '50px', height: '50px', 'border-width': '6px', 'opacity': highlightedOpacity },
+    //     duration: highlightDuration
+    //   });
+    // });
+    // connectedEdges.animate({
+    //   style: { 'border-color': '#AAD8FF', width: 5, 'opacity': highlightedOpacity },
+    //   duration: highlightDuration
+    // });
   }
 
 
@@ -187,19 +196,22 @@ class DocumentGraph extends Component {
     let connectedNodes = selectedNode.connectedNodes();
     let nonConnectedEdges = this.cy.edges().not(connectedEdges);
 
-    nonConnectedEdges.animate({
-      style: { 'opacity': nonHighlightedOpacity, 'border-color': 'none', width: 3 },
-      duration: highlightDuration
-    });
-    this.cy.nodes().animate({
-      style: { 'opacity': nonHighlightedOpacity, 'border-color': 'none', width: '30px', height: '30px', },
-      duration: highlightDuration
-    });
-    this.cy.nodes().not(connectedNodes).animate({
-      style: { 'border-color': 'none', width: '30px', height: '30px', 'opacity': nonHighlightedOpacity },
-    })
-    const newItems = [];
-    newItems.push({ id: selectedNode.data('id'), value: selectedNode.data('label') });
+    // nonConnectedEdges.animate({
+    //   style: { 'opacity': nonHighlightedOpacity, 'border-color': 'none', width: 3 },
+    //   duration: highlightDuration
+    // });
+    // this.cy.nodes().animate({
+    //   style: { 'opacity': nonHighlightedOpacity, 'border-color': 'none', width: '30px', height: '30px', },
+    //   duration: highlightDuration
+    // });
+    // this.cy.nodes().not(connectedNodes).animate({
+    //   style: { 'border-color': 'none', width: '30px', height: '30px', 'opacity': nonHighlightedOpacity },
+    // })
+    const { sourceNames } = this.state;
+
+    // Create a new array to store the updated items
+    const updatedItems = [...sourceNames];
+    updatedItems.push({ id: node.id(), source_name: node.data('label'), key: 'key' });
     selectedNode.animate({
       style: { 'border-color': '#AAD8FF', width: '50px', height: '50px', 'opacity': highlightedOpacity },
       duration: highlightDuration
@@ -208,7 +220,7 @@ class DocumentGraph extends Component {
 
     // Highlight connected nodes
     neighborhood.nodes().forEach(node => {
-      newItems.push({ id: node.id(), value: node.data('label') });
+      updatedItems.push({ id: node.id(), source_name: node.data('label'), key: 'key' });
 
       node.animate({
         style: { 'border-color': '#AAD8FF', width: '50px', height: '50px', 'border-width': '6px', 'opacity': highlightedOpacity },
@@ -218,9 +230,9 @@ class DocumentGraph extends Component {
     connectedEdges.animate({
       style: { 'border-color': '#AAD8FF', width: 5, 'opacity': highlightedOpacity },
       duration: highlightDuration
-    });
-    this.setState({ sourceNames: newItems });
-    this.props.updateParentState(newItems);
+    });   
+    this.setState({ sourceNames: updatedItems });
+    this.handleGraphClick(updatedItems);
   }
   componentWillUnmount() {
     if (this.cy) {

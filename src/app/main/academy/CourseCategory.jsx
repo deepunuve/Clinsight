@@ -18,7 +18,7 @@ function CourseCategory(props) {
 	return (
 		<Chip
 			className="font-semibold text-12"
-			label={category?.title}
+			label={category}
 			sx={{
 				color: (theme) =>
 					theme.palette.mode === 'light' ? darken(category?.color, 0.4) : lighten(category?.color, 0.8),

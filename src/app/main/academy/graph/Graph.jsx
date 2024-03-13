@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import cytoscape from 'cytoscape';
 import cola from 'cytoscape-cola';
 import { layout, styleSheet } from './graphLayout';
-import { getGraphDataLocal } from '../../../store/apiServices'
+import { getGraphDataLocal, getGraphData } from '../../../store/apiServices'
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -58,6 +58,7 @@ class Graph extends Component {
       await getGraphDataLocal().
         then(response => {
           this.setState({ elements: response });
+          this.setState({ isLoading: false });
           this.initializeCytoscape(response, 'cola');
         });
 
@@ -86,7 +87,7 @@ class Graph extends Component {
       style: styleSheet,
       edgeLength: function (edge) { return 200; }
     });
-    this.setState({ isLoading: false });
+
     this.cy.pan({ x: 1000, y: 1000 });
     this.cy.on('tap', 'node', (event) => {
       const node = event.target;
@@ -238,32 +239,36 @@ class Graph extends Component {
       duration: highlightDuration
     });
     this.setState({ sourceNames: newItems });
-    this.props.updateParentState(newItems);
   }
   componentWillUnmount() {
     if (this.cy) {
       this.cy.destroy();
     }
   }
+  // graphDetailsClick() {
+  //   const { history } = this.props;
+  //   const destination = `/apps/academy/graphView/${study.id}`;
+  //   const state = { data: study };
+  //   return <Redirect to={{ pathname: destination, state }} />;
+  // }
 
   render() {
     const { isVisible, age } = this.state;
-    const { course} = this.props;
+    const { course, max } = this.props;
     return (
       <div style={{ width: "100%" }}>
-
         <div className="flex shrink-0 items-center">
           <IconButton onClick={this.toggleVisibility} aria-label="toggle sidebar" >
             <FuseSvgIcon>heroicons-outline:menu</FuseSvgIcon>
           </IconButton>
-          <Button
-            to={`/apps/academy/graphView/${course.id}/${course.slug}`}
-            component={Link}           
-            style={{background:'none'}}
+          {max == undefined ? (<Button
+            onClick={this.props.onClick}
+            style={{ background: 'none' }}
             variant="contained"
             endIcon={<FuseSvgIcon size={20}>heroicons-solid:arrows-expand</FuseSvgIcon>}
           >
-          </Button>
+          </Button>) : null}
+
           <FormControl sx={{ m: 1, width: 300 }}>
             <InputLabel id="category-select-label">Layout</InputLabel>
             <Select
@@ -286,7 +291,6 @@ class Graph extends Component {
           </FormControl>
         </div>
         <div className={`animated-div ${isVisible ? 'show' : 'hide'}`}>
-
           {this.state.isLoading && <FuseLoading />}
           <div
             ref={this.cyRef}

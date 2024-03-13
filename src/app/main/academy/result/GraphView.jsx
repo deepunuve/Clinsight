@@ -4,7 +4,7 @@ import Hidden from '@mui/material/Hidden';
 import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import Stepper from '@mui/material/Stepper';
-import React,{ useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import SwipeableViews from 'react-swipeable-views';
 import { Step, StepContent, StepLabel } from '@mui/material';
@@ -23,7 +23,8 @@ import { useGetAcademyCourseQuery, useUpdateAcademyCourseMutation } from '../Aca
 import DocumentGraph from '../graph/DocumentGraph';
 import CourseHeader from '../course/CourseHeader';
 import Graph from '../graph/Graph';
-
+import { getStudyDetails } from '../../../store/apiServices';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function GraphView() {
 	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
@@ -34,66 +35,49 @@ function GraphView() {
 	const routeParams = useParams();
 	const { courseId } = routeParams;
 	const childRef = React.createRef();
-	const { data: course, isLoading } = useGetAcademyCourseQuery(
-		{ courseId },
-		{
-			skip: !courseId
-		}
-	);
-	const [updateCourse] = useUpdateAcademyCourseMutation();
+	const [study, setStudy] = useState(null);
+	const [studyCount, setStudyCount] = useState(0);
+	const [isLoading, setIsLoading] = useState(false);
+	const location = useLocation();
+	const state = location.state; // Access state object here
+	const { data, max } = state;
+	const navigate = useNavigate();
 	useEffect(() => {
-		/**
-		 * If the course is opened for the first time
-		 * Change ActiveStep to 1
-		 */
-		if (course && course?.progress?.currentStep === 0) {
-			updateCourse({ courseId, data: { progress: { currentStep: 1 } } });
+		if (data) {
+			setStudy(data);
+			setStudyCount(data.source.length);
 		}
-	}, [course]);
+	}, [isMobile, study]);
+
 	useEffect(() => {
 		setLeftSidebarOpen(!isMobile);
 		setRightSidebarOpen(!isMobile);
 	}, [isMobile]);
-	const currentStep = course?.progress?.currentStep || 0;
 
-	function updateCurrentStep(index) {
-		if (course && (index > course.totalSteps || index < 0)) {
-			return;
-		}
 
-		updateCourse({ courseId, data: { progress: { currentStep: index } } });
+	function handleClick() {
+		const destination = `/apps/academy/results/${study.id}`;
+		const state = { data: study, max: true };
+		navigate(destination, { state });
 	}
 
-	function handleNext() {
-		updateCurrentStep(currentStep + 1);
-	}
-
-	function handleBack() {
-		updateCurrentStep(currentStep - 1);
-	}
-
-	function handleStepChange(index) {
-		updateCurrentStep(index + 1);
-	}
-
-	const activeStep = currentStep !== 0 ? currentStep : 1;
 
 	if (isLoading) {
 		return <FuseLoading />;
 	}
 
-	if (!course) {
+	if (!study) {
 		return <Error404Page />;
 	}
 	return (
 		<FusePageSimple
-			
+
 			content={
 				<div className="w-full">
 					<SwipeableViews>
 						<div className="flex justify-center p-16 pb-64  sm:pb-64  md:pb-64">
 							<Paper className="w-full mx-auto p-16 pb-64  sm:pb-64  md:pb-64 rounded-16 shadow overflow-hidden">
-								<Graph ref={childRef} course={course} />
+								<Graph ref={childRef} course={study} max={max} />
 							</Paper>
 						</div>
 					</SwipeableViews>
@@ -108,8 +92,7 @@ function GraphView() {
 				<>
 					<div className="p-32">
 						<Button
-							 to={`/apps/academy/results/${course.id}/${course.slug}`}
-							component={Link}
+							onClick={handleClick}
 							className="mb-24"
 							color="secondary"
 							variant="text"
@@ -124,59 +107,61 @@ function GraphView() {
 							Back to results
 						</Button>
 
-						<CourseInfo course={course} />
+						<CourseInfo course={study} />
 					</div>
 					<Divider />
 					<Stepper
 						classes={{ root: 'p-32' }}
-						activeStep={activeStep - 1}
+						activeStep={studyCount}
 						orientation="vertical"
 					>
-						{course.steps.map((step, index) => {
-							return (
-								<Step
-									key={index}
-									sx={{
-										'& .MuiStepLabel-root, & .MuiStepContent-root': {
-											cursor: 'pointer!important'
-										},
-										'& .MuiStepContent-root': {
-											color: 'text.secondary',
-											fontSize: 13
-										}
-									}}
-									onClick={() => handleStepChange(step.order)}
-									expanded
-								>
-									<StepLabel
-										className="font-medium"
+						{study.source && (
+							study.source.map((source, index) => {
+								return (
+									<Step
+										key={index}
 										sx={{
-											'& .MuiSvgIcon-root': {
-												color: 'background.default',
-												'& .MuiStepIcon-text': {
-													fill: (_theme) => _theme.palette.text.secondary
-												},
-												'&.Mui-completed': {
-													color: 'secondary.main',
-													'& .MuiStepIcon-text ': {
-														fill: (_theme) => _theme.palette.secondary.contrastText
-													}
-												},
-												'&.Mui-active': {
-													color: 'secondary.main',
-													'& .MuiStepIcon-text ': {
-														fill: (_theme) => _theme.palette.secondary.contrastText
-													}
-												}
+											'& .MuiStepLabel-root, & .MuiStepContent-root': {
+												cursor: 'pointer!important'
+											},
+											'& .MuiStepContent-root': {
+												color: 'text.secondary',
+												fontSize: 13
 											}
 										}}
+										// onClick={() => handleStepChange(step.order)}
+										expanded
 									>
-										{step.title}
-									</StepLabel>
-									<StepContent>{step.subtitle}</StepContent>
-								</Step>
-							);
-						})}
+										<StepLabel
+											className="font-medium"
+											sx={{
+												'& .MuiSvgIcon-root': {
+													color: 'background.default',
+													'& .MuiStepIcon-text': {
+														fill: (_theme) => _theme.palette.text.secondary
+													},
+													'&.Mui-completed': {
+														color: 'secondary.main',
+														'& .MuiStepIcon-text ': {
+															fill: (_theme) => _theme.palette.secondary.contrastText
+														}
+													},
+													'&.Mui-active': {
+														color: 'secondary.main',
+														'& .MuiStepIcon-text ': {
+															fill: (_theme) => _theme.palette.secondary.contrastText
+														}
+													}
+												}
+											}}
+										>
+											{source.source_name}
+										</StepLabel>
+										{/* <StepContent>{step.subtitle}</StepContent> */}
+									</Step>
+								);
+							}))
+						}
 					</Stepper>
 				</>
 			}

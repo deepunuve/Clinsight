@@ -36,7 +36,7 @@ export default class ResultContent extends Component {
                         <FuseSvgIcon>heroicons-outline:menu</FuseSvgIcon>
                     </IconButton>
                     <Button
-                        to={`/apps/academy/content/${course.id}/${course.slug}`}
+                        to={`/apps/academy/content/694e4e5f-f25f-470b-bd0e-26b1d4f64028`}
                         component={Link}
                         style={{ background: "none" }}
                         variant="contained"
