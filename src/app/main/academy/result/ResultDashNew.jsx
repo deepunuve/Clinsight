@@ -219,8 +219,8 @@ function ResultDashNew(props) {
                     </motion.div>
 
                     <motion.div variants={item} className="sm:col-span-2 md:col-span-4 lg:col-span-2" >
-                        <Paper className="flex flex-col flex-auto p-24 shadow rounded-2xl overflow-hidden">
-                            <div className="flex flex-col sm:flex-row items-start justify-between">
+                        <Paper className="flex flex-col flex-auto p-24 shadow rounded-2xl overflow-hidden" style={{height:'520px', 'overflow-y': 'auto'}}>
+                            <div className="flex flex-col sm:flex-row items-start justify-between" >
                                 <Graph ref={childRef} course={study} onClick={handleClick} />
                             </div>
                         </Paper>

@@ -305,9 +305,9 @@ input:-webkit-autofill:active {
     /* Ensure it appears on top of other content */
 }
 
-.graph-normal {
-    width: 500px !important;
-    height: 500px !important;
+.graph {
+    width: 500px;
+    min-height: 500px;
 }
 
 .graph-full {

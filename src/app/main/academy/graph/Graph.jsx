@@ -14,6 +14,7 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import FuseLoading from '@fuse/core/FuseLoading';
+import { height } from '@mui/system';
 
 // Register the Cola layout
 cytoscape.use(cola);
@@ -265,51 +266,43 @@ class Graph extends Component {
     const { isVisible, age, isFullScreen } = this.state;
     const { course, max } = this.props;
     return (
-      <div>
+      <div className={` ${isFullScreen ? 'fullscreen' : 'fullscreen-container'}`} >
+        {this.state.isLoading && <FuseLoading />}
+        <div className="flex shrink-0 items-center">
+          <Button
+            onClick={this.toggleFullScreen}
+            style={{ background: 'none' }}
+            variant="contained"
+            endIcon={<FuseSvgIcon size={20}>heroicons-solid:arrows-expand</FuseSvgIcon>}
+          >
+          </Button>
 
-        <div className={`animated-div ${isVisible ? 'show' : 'hide'}`}>
-          {this.state.isLoading && <FuseLoading />}
-          <div className={` ${isFullScreen ? 'fullscreen' : 'fullscreen-container'}`}>
-            <div className="flex shrink-0 items-center">
-              <IconButton onClick={this.toggleVisibility} aria-label="toggle sidebar" >
-                <FuseSvgIcon>heroicons-outline:menu</FuseSvgIcon>
-              </IconButton>
-              <Button
-                onClick={this.toggleFullScreen}
-                style={{ background: 'none' }}
-                variant="contained"
-                endIcon={<FuseSvgIcon size={20}>heroicons-solid:arrows-expand</FuseSvgIcon>}
-              >
-              </Button>
-
-              <FormControl sx={{ m: 1, width: 300 }}>
-                <InputLabel id="category-select-label">Layout</InputLabel>
-                <Select
-                  labelId="demo-select-small-label"
-                  id="demo-select-small"
-                  value={layout}
-                  label="layout"
-                  onChange={this.handleChange}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value="cola">cola</MenuItem>
-                  <MenuItem value="breadthfirst">breadthfirst</MenuItem>
-                  <MenuItem value="grid">grid</MenuItem>
-                  <MenuItem value="circle">circle</MenuItem>
-                  <MenuItem value="random">random</MenuItem>
-                  <MenuItem value="concentric">concentric</MenuItem>
-                </Select>
-              </FormControl>
-            </div>
-
-            <div
-              ref={this.cyRef}
-              className={` ${isFullScreen ? 'graph-full' : 'graph-normal'}`}
-            />
-          </div>
+          <FormControl sx={{ m: 1, width: 300 }}>
+            <InputLabel id="category-select-label">Layout</InputLabel>
+            <Select
+              labelId="demo-select-small-label"
+              id="demo-select-small"
+              value={layout}
+              label="layout"
+              onChange={this.handleChange}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value="cola">cola</MenuItem>
+              <MenuItem value="breadthfirst">breadthfirst</MenuItem>
+              <MenuItem value="grid">grid</MenuItem>
+              <MenuItem value="circle">circle</MenuItem>
+              <MenuItem value="random">random</MenuItem>
+              <MenuItem value="concentric">concentric</MenuItem>
+            </Select>
+          </FormControl>
         </div>
+
+        <div
+          ref={this.cyRef}
+          className={` ${isFullScreen ? 'graph-full' : 'graph'}`}
+        />
       </div>
     );
   }
