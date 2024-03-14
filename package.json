@@ -22,6 +22,7 @@
         "crypto-js": "4.2.0",
         "cytoscape": "^3.28.1",
         "cytoscape-cola": "^2.5.1",
+        "d3": "^6.7.0",
         "date-fns": "2.30.0",
         "draft-js": "0.11.7",
         "draftjs-to-html": "0.9.1",
@@ -43,6 +44,9 @@
         "react-chatbot-kit": "^2.2.2",
         "react-dom": "18.2.0",
         "react-draft-wysiwyg": "1.15.0",
+        "react-force-graph": "^1.44.3",
+        "react-force-graph-2d": "^1.25.4",
+        "react-force-graph-3d": "^1.24.2",
         "react-hook-form": "7.49.3",
         "react-i18next": "14.0.0",
         "react-popper": "2.3.0",
@@ -56,6 +60,8 @@
         "styled-components": "6.1.8",
         "stylis": "4.3.1",
         "stylis-plugin-rtl": "2.1.1",
+        "three": "^0.162.0",
+        "three-spritetext": "^1.8.2",
         "zod": "3.22.4"
     },
     "peerDependencies": {

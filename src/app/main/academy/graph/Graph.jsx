@@ -255,19 +255,12 @@ class Graph extends Component {
       this.cy.destroy();
     }
   }
-  // graphDetailsClick() {
-  //   const { history } = this.props;
-  //   const destination = `/apps/academy/graphView/${study.id}`;
-  //   const state = { data: study };
-  //   return <Redirect to={{ pathname: destination, state }} />;
-  // }
 
   render() {
     const { isVisible, age, isFullScreen } = this.state;
     const { course, max } = this.props;
     return (
-      <div className={` ${isFullScreen ? 'fullscreen' : 'fullscreen-container'}`} >
-        {this.state.isLoading && <FuseLoading />}
+      <div className={` ${isFullScreen ? 'fullscreen' : 'fullscreen-container'}`} >       
         <div className="flex shrink-0 items-center">
           <Button
             onClick={this.toggleFullScreen}
@@ -298,7 +291,7 @@ class Graph extends Component {
             </Select>
           </FormControl>
         </div>
-
+        {this.state.isLoading && <FuseLoading />}
         <div
           ref={this.cyRef}
           className={` ${isFullScreen ? 'graph-full' : 'graph'}`}

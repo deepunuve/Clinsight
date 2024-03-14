@@ -34,7 +34,6 @@ export const getGraphDocData = async () => {
 };
 export const getStudiesLocal = async () => {
   return axios.get('assets/study.json')
-  //return axios.get('http://13.59.144.105:9003/return_studylist/')
     .then(response => {
       // Return data from the API call
       return response.data;
@@ -44,6 +43,7 @@ export const getStudiesLocal = async () => {
       console.error('Error fetching data:', error);
     });
 };
+
 export const getStudyType = async () => {
   return axios.get('assets/studytype.json')
     .then(response => {
@@ -57,7 +57,7 @@ export const getStudyType = async () => {
 };
 export const getStudyDetails = async (id) => {
   return axios.get('assets/studyDetails.json')
-  //return axios.get(`http://13.59.144.105:9003/return_study_details/?nct_id=${id}`)
+    //return axios.get(`http://13.59.144.105:9003/return_study_details/?nct_id=${id}`)
     .then(response => {
       // Return data from the API call
       return response.data;
@@ -78,6 +78,19 @@ export const getGraphDataLocal = async () => {
       console.error('Error fetching data:', error);
     });
 };
+
+export const getGraphDataLocalNew = async () => {
+  return axios.get('assets/graphN.json')
+    .then(response => {
+      // Return data from the API call
+      return response.data;
+    })
+    .catch(error => {
+      // Handle error
+      console.error('Error fetching data:', error);
+    });
+};
+
 export const fileUpload = async (formData) => {
   return axios.post('http://13.59.144.105:9004/upload_pdf_to_s3/', formData).then((response) => {
     console.log('Upload successful:', response);

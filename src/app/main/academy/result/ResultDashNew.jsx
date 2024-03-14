@@ -34,6 +34,7 @@ import ResultContent from './ResultContent';
 import { getStudyDetails } from '../../../store/apiServices';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import GraphNew from '../graph/GraphNew';
 
 const container = {
     show: {
@@ -219,9 +220,10 @@ function ResultDashNew(props) {
                     </motion.div>
 
                     <motion.div variants={item} className="sm:col-span-2 md:col-span-4 lg:col-span-2" >
-                        <Paper className="flex flex-col flex-auto p-24 shadow rounded-2xl overflow-hidden" style={{height:'520px', 'overflow-y': 'auto'}}>
+                        <Paper className="flex flex-col flex-auto p-24 shadow rounded-2xl overflow-hidden" style={{ height: '520px', 'overflow-y': 'auto' }}>
                             <div className="flex flex-col sm:flex-row items-start justify-between" >
-                                <Graph ref={childRef} course={study} onClick={handleClick} />
+                                {/* <Graph ref={childRef} course={study} onClick={handleClick} /> */}
+                                <GraphNew />
                             </div>
                         </Paper>
                     </motion.div>
@@ -264,7 +266,7 @@ function ResultDashNew(props) {
                                         />
                                     </Tabs>
                                     {tabValue === 0 && <ResultContent course={study} />}
-                                    {tabValue === 1 && <div></div>}
+                                    {tabValue === 1 && <div> </div>}
                                     {tabValue === 2 && <div></div>}
                                 </div>
 
