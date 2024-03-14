@@ -39,7 +39,7 @@ function CourseInfo(props) {
 				{/* )} */}
 			</div>
 
-			<Typography className="text-16 font-medium">{course.title}</Typography>
+			<Typography className="text-16 font-medium line-clamp-2">{course.title}</Typography>
 
 			<Typography
 				className="text-13 mt-2 line-clamp-2"
@@ -76,7 +76,7 @@ function CourseInfo(props) {
 					heroicons-solid:academic-cap
 				</FuseSvgIcon>
 				<span className="whitespace-nowrap leading-none">
-					{course.id}
+					{course.study_status}
 				</span>
 			</Typography>
 		</div>

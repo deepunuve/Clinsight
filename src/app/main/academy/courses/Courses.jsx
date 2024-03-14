@@ -47,7 +47,7 @@ function Courses() {
 	const [searchText, setSearchText] = useState('');
 	const [selectedCategory, setSelectedCategory] = useState('all');
 	const [hideCompleted, setHideCompleted] = useState(false);
-	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 
 
 	useEffect(() => {
@@ -55,16 +55,21 @@ function Courses() {
 			await getStudiesLocal().
 				then(response => {
 					setStudies(response);
+					setIsLoading(false);
 				});
 		};
-		fetchData(); // Call the async function
+		if (studies.length === 0) {
+			fetchData(); // Call the async function
+		}
 		const fetchType = async () => {
 			await getStudyType().
 				then(response => {
 					setStudyType(response);
 				});
 		};
-		fetchType(); // Call the async function
+		if (studyType.length === 0) {
+			fetchType(); // Call the async function
+		}
 		function getFilteredArray() {
 			if (studies && searchText.length === 0 && selectedCategory === 'all' && !hideCompleted) {
 				return studies;
@@ -73,8 +78,7 @@ function Courses() {
 				if (selectedCategory !== 'all' && item.study_type !== selectedCategory) {
 					return false;
 				}
-
-				if (hideCompleted) {
+				if (hideCompleted && item.study_status ==='Completed') {
 					return false;
 				}
 
@@ -98,7 +102,6 @@ function Courses() {
 	if (isLoading) {
 		return <FuseLoading />;
 	}
-
 	return (
 		<FusePageSimple
 			content={
@@ -185,7 +188,7 @@ function Courses() {
 									color="text.secondary"
 									className="text-24 my-24"
 								>
-									No courses found!
+									No courses found!									
 								</Typography>
 							</div>
 						))}

@@ -3,271 +3,560 @@
     {
       "data": {
         "id": 1,
-        "label": "hct"
+        "label": "preterm infants"
       }
     },
     {
       "data": {
         "id": 2,
-        "label": "source"
+        "label": " neonatal transfusion"
       }
     },
     {
       "data": {
         "id": 3,
-        "label": "cord"
-      }
-    },
-    {
-      "data": {
-        "id": 4,
-        "label": "neonatal"
-      }
-    },
-    {
-      "data": {
-        "id": 5,
-        "label": "jaundice"
-      }
-    },
-    {
-      "data": {
-        "id": 6,
-        "label": "hemoglobin"
-      }
-    },
-    {
-      "data": {
-        "id": 7,
-        "label": "transfusion"
-      }
-    },
-    {
-      "data": {
-        "id": 8,
-        "label": "cord clamping"
-      }
-    },
-    {
-      "data": {
-        "id": 9,
-        "label": "vitamins"
-      }
-    },
-    {
-      "data": {
-        "id": 10,
-        "label": "cord c"
-      }
-    },
-    {
-      "data": {
-        "id": 11,
-        "label": "life"
-      }
-    },
-    {
-      "data": {
-        "id": 12,
-        "label": "effect"
-      }
-    },
-    {
-      "data": {
-        "id": 13,
-        "label": "delayed cord lamp"
-      }
-    },
-    {
-      "data": {
-        "id": 14,
-        "label": "mother ewborn believe"
-      }
-    },
-    {
-      "data": {
-        "id": 15,
         "label": "infants"
       }
     },
     {
       "data": {
+        "id": 4,
+        "label": " neonatal iron stores"
+      }
+    },
+    {
+      "data": {
+        "id": 5,
+        "label": "ematocrit"
+      }
+    },
+    {
+      "data": {
+        "id": 6,
+        "label": " infants with delayed cord clamping above the perineum"
+      }
+    },
+    {
+      "data": {
+        "id": 7,
+        "label": " infants with delayed cord clamping below the perineum"
+      }
+    },
+    {
+      "data": {
+        "id": 8,
+        "label": "maternal Hgb/Hct"
+      }
+    },
+    {
+      "data": {
+        "id": 9,
+        "label": " thirty two patients in each group"
+      }
+    },
+    {
+      "data": {
+        "id": 10,
+        "label": "maternal demographics"
+      }
+    },
+    {
+      "data": {
+        "id": 11,
+        "label": " age"
+      }
+    },
+    {
+      "data": {
+        "id": 12,
+        "label": " race"
+      }
+    },
+    {
+      "data": {
+        "id": 13,
+        "label": " socioeconomic status"
+      }
+    },
+    {
+      "data": {
+        "id": 14,
+        "label": "pre-natal care information"
+      }
+    },
+    {
+      "data": {
+        "id": 15,
+        "label": " IR NUMBER: HSC-MS-11-0633"
+      }
+    },
+    {
+      "data": {
         "id": 16,
-        "label": "delaying"
+        "label": "neonatal hematocrit"
       }
     },
     {
       "data": {
         "id": 17,
-        "label": "father"
+        "label": " sixty four study participants"
       }
     },
     {
       "data": {
         "id": 18,
-        "label": "newborn"
+        "label": "neonatal hematocrit at 2 ours of life"
       }
     },
     {
       "data": {
         "id": 19,
-        "label": "born"
+        "label": "maternal-neonatal contact"
       }
     },
     {
       "data": {
         "id": 20,
-        "label": "8"
+        "label": " common practice in many hospitals"
       }
     },
     {
       "data": {
         "id": 21,
-        "label": "trans"
+        "label": " maternal-infant attachment"
       }
     },
     {
       "data": {
         "id": 22,
-        "label": "contact"
+        "label": "females"
       }
     },
     {
       "data": {
         "id": 23,
-        "label": "deficiency"
+        "label": " pregnancies"
       }
     },
     {
       "data": {
         "id": 24,
-        "label": "infant"
+        "label": "32 0/7-36 6/7 gestation"
       }
     },
     {
       "data": {
         "id": 25,
-        "label": "hemorrh"
+        "label": " iron deficiency"
       }
     },
     {
       "data": {
         "id": 26,
-        "label": "birth"
+        "label": "newborns"
       }
     },
     {
       "data": {
         "id": 27,
-        "label": "adverse effect"
+        "label": " fetal hemoglobin levels"
       }
     },
     {
       "data": {
         "id": 28,
-        "label": "hem"
+        "label": "placenta"
       }
     },
     {
       "data": {
         "id": 29,
-        "label": "mentor"
+        "label": " delayed cord clamping"
       }
     },
     {
       "data": {
         "id": 30,
-        "label": "breastfeeding"
+        "label": " hematocrit"
       }
     },
     {
       "data": {
         "id": 31,
-        "label": "iron"
+        "label": " extend"
       }
     },
     {
       "data": {
         "id": 32,
-        "label": "-"
+        "label": "spontaneous aginal delivery"
       }
     },
     {
       "data": {
         "id": 33,
-        "label": "1"
+        "label": " skin-to-skin contact"
+      }
+    },
+    {
+      "data": {
+        "id": 34,
+        "label": "patients"
+      }
+    },
+    {
+      "data": {
+        "id": 35,
+        "label": " spontaneous vaginal delivery"
+      }
+    },
+    {
+      "data": {
+        "id": 36,
+        "label": "study group"
+      }
+    },
+    {
+      "data": {
+        "id": 37,
+        "label": " hematocrit value"
+      }
+    },
+    {
+      "data": {
+        "id": 38,
+        "label": "mother"
+      }
+    },
+    {
+      "data": {
+        "id": 39,
+        "label": " infant"
+      }
+    },
+    {
+      "data": {
+        "id": 40,
+        "label": "infant"
+      }
+    },
+    {
+      "data": {
+        "id": 41,
+        "label": " mother’s abdomen"
+      }
+    },
+    {
+      "data": {
+        "id": 42,
+        "label": "cord"
+      }
+    },
+    {
+      "data": {
+        "id": 43,
+        "label": " clamped"
+      }
+    },
+    {
+      "data": {
+        "id": 44,
+        "label": " Group A"
+      }
+    },
+    {
+      "data": {
+        "id": 45,
+        "label": " Group B"
+      }
+    },
+    {
+      "data": {
+        "id": 46,
+        "label": "Group A"
+      }
+    },
+    {
+      "data": {
+        "id": 47,
+        "label": "designated time-keeper"
+      }
+    },
+    {
+      "data": {
+        "id": 48,
+        "label": " sole responsibility"
+      }
+    },
+    {
+      "data": {
+        "id": 49,
+        "label": " intraventricular hemorrhage"
+      }
+    },
+    {
+      "data": {
+        "id": 50,
+        "label": " periventricular leukomalacia"
+      }
+    },
+    {
+      "data": {
+        "id": 51,
+        "label": " respiratory distress syndrome"
+      }
+    },
+    {
+      "data": {
+        "id": 52,
+        "label": " jaundice"
       }
     }
   ],
   "edges": [
     {
       "data": {
-        "source": 5,
-        "target": 8,
-        "label": "drug used for treatment"
-      }
-    },
-    {
-      "data": {
-        "source": 2,
-        "target": 3,
-        "label": "has part"
+        "source": 1,
+        "target": 2,
+        "label": " risk"
       }
     },
     {
       "data": {
         "source": 3,
-        "target": 1,
-        "label": "has part"
+        "target": 4,
+        "label": " source"
       }
     },
     {
       "data": {
         "source": 5,
-        "target": 10,
-        "label": "drug used for treatment"
+        "target": 6,
+        "label": "no clinically significant difference"
       }
     },
     {
       "data": {
-        "source": 13,
+        "source": 5,
         "target": 7,
-        "label": "use"
+        "label": "no clinically significant difference"
       }
     },
     {
       "data": {
-        "source": 13,
+        "source": 8,
+        "target": 9,
+        "label": "documented"
+      }
+    },
+    {
+      "data": {
+        "source": 10,
         "target": 11,
-        "label": "instance of"
+        "label": " documented"
       }
     },
     {
       "data": {
-        "source": 13,
-        "target": 5,
-        "label": "subclass of"
-      }
-    },
-    {
-      "data": {
-        "source": 13,
-        "target": 1,
-        "label": "subclass of"
-      }
-    },
-    {
-      "data": {
-        "source": 13,
+        "source": 10,
         "target": 12,
-        "label": "instance of"
+        "label": " documented"
       }
     },
     {
       "data": {
-        "source": 13,
-        "target": 8,
-        "label": "uses"
+        "source": 10,
+        "target": 13,
+        "label": " documented"
+      }
+    },
+    {
+      "data": {
+        "source": 14,
+        "target": 15,
+        "label": " documented"
+      }
+    },
+    {
+      "data": {
+        "source": 16,
+        "target": 9,
+        "label": "needed"
+      }
+    },
+    {
+      "data": {
+        "source": 16,
+        "target": 17,
+        "label": "total"
+      }
+    },
+    {
+      "data": {
+        "source": 18,
+        "target": 9,
+        "label": "anticipated"
+      }
+    },
+    {
+      "data": {
+        "source": 19,
+        "target": 20,
+        "label": "relating to"
+      }
+    },
+    {
+      "data": {
+        "source": 19,
+        "target": 21,
+        "label": "benefits"
+      }
+    },
+    {
+      "data": {
+        "source": 22,
+        "target": 23,
+        "label": " include"
+      }
+    },
+    {
+      "data": {
+        "source": 24,
+        "target": 23,
+        "label": " with"
+      }
+    },
+    {
+      "data": {
+        "source": 1,
+        "target": 25,
+        "label": " at risk"
+      }
+    },
+    {
+      "data": {
+        "source": 26,
+        "target": 27,
+        "label": " improve"
+      }
+    },
+    {
+      "data": {
+        "source": 28,
+        "target": 29,
+        "label": " related to"
+      }
+    },
+    {
+      "data": {
+        "source": 1,
+        "target": 30,
+        "label": " compare"
+      }
+    },
+    {
+      "data": {
+        "source": 1,
+        "target": 31,
+        "label": " study"
+      }
+    },
+    {
+      "data": {
+        "source": 32,
+        "target": 33,
+        "label": "encouraging"
+      }
+    },
+    {
+      "data": {
+        "source": 34,
+        "target": 35,
+        "label": "proceed"
+      }
+    },
+    {
+      "data": {
+        "source": 36,
+        "target": 37,
+        "label": " not change"
+      }
+    },
+    {
+      "data": {
+        "source": 38,
+        "target": 39,
+        "label": " delivery"
+      }
+    },
+    {
+      "data": {
+        "source": 40,
+        "target": 41,
+        "label": " placed"
+      }
+    },
+    {
+      "data": {
+        "source": 42,
+        "target": 43,
+        "label": " 30-45 seconds"
+      }
+    },
+    {
+      "data": {
+        "source": 34,
+        "target": 44,
+        "label": " randomized"
+      }
+    },
+    {
+      "data": {
+        "source": 34,
+        "target": 45,
+        "label": " randomized"
+      }
+    },
+    {
+      "data": {
+        "source": 46,
+        "target": 39,
+        "label": " held below perineum"
+      }
+    },
+    {
+      "data": {
+        "source": 47,
+        "target": 48,
+        "label": " ensuring accurate timing"
+      }
+    },
+    {
+      "data": {
+        "source": 1,
+        "target": 49,
+        "label": " lower risk"
+      }
+    },
+    {
+      "data": {
+        "source": 1,
+        "target": 50,
+        "label": " lower risk"
+      }
+    },
+    {
+      "data": {
+        "source": 1,
+        "target": 51,
+        "label": " lower risk"
+      }
+    },
+    {
+      "data": {
+        "source": 1,
+        "target": 52,
+        "label": " lower risk"
       }
     }
   ]

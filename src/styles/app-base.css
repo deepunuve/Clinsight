@@ -185,12 +185,15 @@ input:-webkit-autofill:active {
     opacity: 0;
     height: 0;
 }
-.chat-box{
+
+.chat-box {
     width: 100% !important;
 }
-.react-chatbot-kit-chat-container{
+
+.react-chatbot-kit-chat-container {
     width: 100% !important;
 }
+
 .react-chatbot-kit-chat-inner-container {
     height: 450px !important;
     width: 100% !important;
@@ -198,7 +201,7 @@ input:-webkit-autofill:active {
 
 .react-chatbot-kit-chat-message-container {
     background-image: linear-gradient(to right, hsl(227, 56%, 90%), #fefefe) !important;
-    height:374px !important; 
+    height: 374px !important;
 }
 
 .react-chatbot-kit-chat-header {
@@ -241,34 +244,73 @@ input:-webkit-autofill:active {
 .react-chatbot-kit-chat-btn-send {
     background-image: linear-gradient(to right, #0164c9, #013366) !important;
 }
-.react-chatbot-kit-chat-input{
+
+.react-chatbot-kit-chat-input {
     font-size: 12px !important;
 }
-.card-header{
+
+.card-header {
     padding: 10px;
 }
 
 @keyframes spinner {
     0% {
-      transform: rotate(0deg);
+        transform: rotate(0deg);
     }
+
     100% {
-      transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-  }
-  .loading-spinner {
+}
+
+.loading-spinner {
     width: 50px;
     height: 50px;
-    border: 10px solid #f3f3f3; /* Light grey */
-    border-top: 10px solid #383636; /* Blue */
+    border: 10px solid #f3f3f3;
+    /* Light grey */
+    border-top: 10px solid #383636;
+    /* Blue */
     border-radius: 50%;
     animation: spinner 1.5s linear infinite;
-  }
-  
-  .spinner-container {
+}
+
+.spinner-container {
     display: grid;
     justify-content: center;
     align-items: center;
     left: 40% !important;
     top: 1%;
-  }
+}
+
+.fullscreen-container {
+    width: 500px;
+    /* Initial width */
+    height: 400px;
+    /* Initial height */
+
+    transition: all 0.3s ease;
+    /* Smooth transition for size changes */
+}
+
+.fullscreen {
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    /* Full width of the viewport */
+    height: 100vh;
+    /* Full height of the viewport */
+    z-index: 1000;
+    /* Ensure it appears on top of other content */
+}
+
+.graph-normal {
+    width: 500px !important;
+    height: 500px !important;
+}
+
+.graph-full {
+    width: 100% !important;
+    height: 100% !important;
+}

@@ -89,7 +89,12 @@ function ResultDashNew(props) {
         const state = { data: study, max: true };
         navigate(destination, { state });
     }
-
+    // function handleClickBackToInput() {
+    //     alert("");
+    //     const destination = `/apps/academy/course/${study.id}`;
+    //     const state = { data: study };
+    //     navigate(destination, { state });
+    // }
     // function updateCurrentStep(index) {
     //     if (course && (index > course.totalSteps || index < 0)) {
     //         return;
@@ -166,9 +171,8 @@ function ResultDashNew(props) {
     }
 
     if (!study) {
-        return <Error404Page />;
+        return <FuseLoading />;
     }
-
     return (
         <FusePageSimple
 
@@ -279,8 +283,13 @@ function ResultDashNew(props) {
                 <>
                     <div className="p-32">
                         <Button
-                            to={`/apps/academy/courses/${study.id}`}
+                            // to={`/apps/academy/courses/${study.id}`}
+                            to={{
+                                pathname: `/apps/academy/courses/${study.id}`,
+                                state: { data: 'Hello from state!' } // Pass state data
+                            }}
                             component={Link}
+                            // onClick={handleClickBackToInput}
                             className="mb-24"
                             color="secondary"
                             variant="text"

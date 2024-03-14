@@ -26,6 +26,8 @@ import { getStudyDetails } from '../../../store/apiServices';
 import ResultDashNew from '../result/ResultDashNew';
 import QuickPanelToggleButton from 'app/theme-layouts/shared-components/quickPanel/QuickPanelToggleButton';
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
 /**
  * The Course page.
  */
@@ -42,24 +44,58 @@ function Course() {
 	const [studyCount, setStudyCount] = useState(0);
 	const [childStateValue, setChildStateValue] = useState([]);
 	const navigate = useNavigate();
+	const location = useLocation();
+	const state = location.state; // Access state object here
 
+	const [sessionData, setSessionData] = useState(() => {
+		// Retrieve data from sessionStorage on component mount
+		const storedSessionData = sessionStorage.getItem('sessionData');
+		return storedSessionData ? JSON.parse(storedSessionData) : null;
+	});
+	const updateSessionData = (newData) => {
+		setSessionData(newData);
+		// Store data in sessionStorage
+		sessionStorage.setItem('sessionData', JSON.stringify(newData));
+	};
+	const clearSessionData = () => {
+		setSessionData(null);
+		// Clear data from sessionStorage
+		sessionStorage.removeItem('sessionData');
+	};
 	const graphClick = (childValue) => {
 		setChildStateValue(childValue);
 		study.source = childValue;
+		updateSessionData(study);
 	};
-
+	const fetchData = async () => {
+		await getStudyDetails(courseId).
+			then(response => {
+				setStudyCount(response.source.length);
+				setStudy(response);
+				updateSessionData(response);
+			});
+	};
 	useEffect(() => {
 		setLeftSidebarOpen(!isMobile);
 		setRightSidebarOpen(!isMobile);
-		const fetchData = async () => {
-			await getStudyDetails(courseId).
-				then(response => {
-					setStudyCount(response.source.length);
-					setStudy(response);
-				});
-		};
-		fetchData(); // Call the async function
+		if (!sessionData) {
+			fetchData();
+		}
+		else {
+			setStudyCount(sessionData.source.length);
+			setStudy(sessionData);
+		}
 	}, [isMobile]);
+	useEffect(() => {
+		const previousData = JSON.parse(sessionStorage.getItem('sessionData'));
+		const previousId = previousData ? previousData.id : null;
+
+		// Clear session data if the id has changed
+		if (courseId !== previousId) {
+			clearSessionData();
+			fetchData();
+		}
+	}, [location.search]);
 	// const currentStep = course?.progress?.currentStep || 0;
 
 	// function updateCurrentStep(index) {
@@ -82,19 +118,19 @@ function Course() {
 		updateCurrentStep(index + 1);
 	}
 	function handleClick() {
-		const destination = `/apps/academy/results/${study.id}`; 
-        const state = { data: study };
-        navigate(destination, { state });
+		const destination = `/apps/academy/results/${study.id}`;
+		const state = { data: study };
+		navigate(destination, { state });
 	}
 
 	// const activeStep = currentStep !== 0 ? currentStep : 1;
 
 	if (isLoading) {
 		return <FuseLoading />;
-	}	
+	}
 
 	if (!study) {
-		return <Error404Page />;
+		return <FuseLoading />;
 	}
 
 	return (
@@ -103,7 +139,7 @@ function Course() {
 				<div className="flex flex-col p-24 w-full sm:px-40">
 
 					<div className="flex items-center w-full mt-8 -mx-10">
-						
+
 						<Typography
 							component="h2"
 							className="flex-1 text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate mx-10"

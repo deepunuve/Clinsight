@@ -1,48 +1,33 @@
 {
-  "id": "NCT01665521",
-  "title": "Efficacy Evaluation of the HEART Pathway in Emergency Department Patients With Acute Chest Pain",
-  "brief_summary": "Approximately 8-10 million patients complaining of chest pain present to an Emergency Department (ED) annually in the United States. The total cost of chest pain evaluations has been estimated at $5-10 billion annually, yet only 10% of these patients are ultimately diagnosed with an acute coronary syndrome. American College of Cardiology/ American Heart Association (ACC/AHA) guidelines recommend that patients at low-risk for acute coronary syndrome should receive serial cardiac markers followed by objective cardiac testing (stress testing or cardiac imaging). However, many have questioned the value of objective cardiac testing in all low-risk patients.Cardiac testing for all patients at low-risk for acute coronary syndrome (ACS) is not sustainable from a healthcare quality or economic perspective. In addition to increasing costs, objective cardiac testing is associated with a substantial number of false positive and non-diagnostic tests, which lead to additional unnecessary and often invasive procedures.\n\nImplementation of accurate risk stratification care pathways designed to eliminate unnecessary cardiac testing could improve the efficiency and quality of care by decreasing false positive/non-diagnostic testing, radiation, and costs. The HEART pathway, which combines a clinical decision rule, the HEART score, and two serial troponin measurements, is a recently developed care pathway designed to identify chest pain patients for early discharge without objective testing.\n\nPrimary Hypothesis: The HEART Pathway, when compared to usual care, will reduce 30 day objective cardiac testing, hospital length of stay, and cost, while maintaining patient safety.\n\nMethods: Participants (n=282) at risk for ACS will be recruited into a clinical trial from Wake Forest Baptist Medical Center (WFBMC) ED. Patients will be equally randomized to HEART Pathway or Usual Care. HEART Pathway participant's treating physician will follow HEART Pathway guidelines for identifying patients to be admitted to the hospital or observation unit for cardiac testing or to be discharged home without testing. Usual Care participant's treating physicians will decide whether the patients should be discharged home or admitted to the hospital or observation unit based on ACC/AHA guidelines without using the HEART pathway.",
-  "study_type": "Interventional",
+  "id": "NCT04667455",
+  "title": "Improving Care for Children With Congenital Heart Disease by Cardiovascular Biomarker Profiling and Advanced Non-invasive Cardiac Imaging Techniques.",
+  "brief_summary": "Establish a cardiovascular biomarker profile to help screening for congenital heart disease in infants and children as well as use non-invasive cardiac imaging in combination with such profiling to better predict the need for future cardiac interventions such as open heart surgery or cardiac catheter intervention selected types of with congenital heart disease.",
+  "detailed_description": "Analyzing circulating cardiovascular biomarkers using blood samples should improve identification of congenital heart disease in newborns, in particular for those needing future cardiac interventions.\n\nComparing such biomarker profiles and non-invasive cardiac imaging results over time in infants and children should lead to better understanding of the complex cardiovascular remodeling processes in common congenital heart lesions such as atrial or ventricular septal defects. This in turn should lead to an improved risk factor assessment model to guide treatment decisions in children with congenital heart disease in the foreseeable future.\n\nTo test our hypothesis, that cardiovascular biomarker profiling and non-invasive cardiac imaging findings in infants and children with congenital heart disease, differs from healthy controls, we will assess controls at enrolment and follow cases with predefined congenital heart disease lesions over a maximum of three years or up till one year after open heart surgery / cardiac catheter intervention to correct such lesions.\n\nInfants and children resident in designated healthcare regions of Sweden will be invited to participate after study advertisement. Written informed consent will be obtained from legal guardians and assent will be sought from children who can communicate verbally with the dedicated paediatric research team.\n\nHealthy subjects 0-17 years at enrolment will undergo standard electrocardiogram (ECG), echocardiography and blood sampling to evaluate the heart's anatomy and function and to obtain samples for subsequent biomarker analyses.\n\nAdditionally, saliva will be sampled and/or neonatal blood samples from national biobank storage will be retrieved for comparison with cardiovascular biomarker profiles in these controls if available.\n\nTo evaluate these cardiovascular assessments in predefined age groups, a subgroup of these participating subjects will be asked to complete additional cardiac magnetic resonance imaging based on study protocols.\n\nIncidental findings will be followed up according to standard care protocols in designated paediatric cardiology clinics throughout the participating healthcare regions in Sweden.\n\nCases of congenital heart disease that lead to pulmonary over-circulation, such as atrial and ventricular septal defects, partial anomalous pulmonary venous drainage, aort-pulmonary windows and patent ductus arterious, will be asked to participate if the lesion has not been treated by open heart surgery or cardiac catheter interventions at enrolment.\n\nSubjects with these predefined types of congenital heart disease aged 0-17 years at enrolment will undergo standard electrocardiograms (ECG), echocardiography and blood sampling to assess biomarkers at baseline and at 6-12 month follow-up intervals in dedicated paediatric cardiology clinics over a maximum period of three years.\n\nSaliva samples and/or cardiovascular tissue obtained during open heart surgery may also be analysed for studied cardiovascular biomarkers. Additionally, neonatal blood samples from national biobank storage will be retrieved for comparison with current biomarker profiles if available.\n\nFor those congenital heart disease cases referred for open heart surgery or cardiac catheter intervention to correct the congenital heart lesion based on standard care assessment decisions during the study period, follow-up will end one year after such intervention.\n\nTo evaluate cardiovascular assessments in predefined age groups, a subgroup of participating cases will be asked to complete additional cardiac magnetic resonance imaging based on study protocols.",
+  "study_type": "I",
+  "study_status": "Active, not recruiting",
+  "study_results": "N/A",
+  "conditions": "N/A",
+  "primary_outcome_measures": "N/A",
   "source": [
-    {      
+    {
       "id": 1,
-      "key": "key",
-      "source_name": "source doc1.pdf"
+      "key": "Cardiology/Study1/NCT01784796.pdf",
+      "source_name": "NCT01784796.pdf"
     },
     {
       "id": 2,
-      "key": "key",
-      "source_name": "source doc1.pdf"
+      "key": "Cardiology/Study1/NCT01837069.pdf",
+      "source_name": "NCT01837069.pdf"
     },
     {
       "id": 3,
-      "key": "key",
-      "source_name": "source doc1.pdf"
+      "key": "Cardiology/Study1/NCT03373110.pdf",
+      "source_name": "NCT03373110.pdf"
     },
     {
       "id": 4,
-      "key": "key",
-      "source_name": "source doc1.pdf"
-    },
-    {
-      "id": 5,
-      "key": "key",
-      "source_name": "source doc1.pdf"
-    },
-    {
-      "id": 6,
-      "key": "key",
-      "source_name": "source doc1.pdf"
-    },
-    {
-      "id": 7,
-      "key": "key",
-      "source_name": "source doc1.pdf"
-    },
-    {
-      "id": 8,
-      "key": "key",
-      "source_name": "source doc1.pdf"
+      "key": "Cardiology/Study1/NCT03826914.pdf",
+      "source_name": "NCT03826914.pdf"
     }
   ]
 }

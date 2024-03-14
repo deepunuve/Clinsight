@@ -8,7 +8,7 @@ const BASE_URL = 'https://api.example.com'; // Your API base URL
 // await axios.get('http://13.59.144.105:9003/upload')
 // Function to make a GET request
 export const getGraphData = async () => {
-  return axios.get('http://13.59.144.105:9004/get_re')
+  return axios.post('http://13.59.144.105:9004/graph')
     .then(response => {
       // Return data from the API call
       return response.data;
@@ -32,8 +32,9 @@ export const getGraphDocData = async () => {
       console.error('Error fetching data:', error);
     });
 };
-export const getStudiesLocal= async () => {
+export const getStudiesLocal = async () => {
   return axios.get('assets/study.json')
+  //return axios.get('http://13.59.144.105:9003/return_studylist/')
     .then(response => {
       // Return data from the API call
       return response.data;
@@ -43,7 +44,7 @@ export const getStudiesLocal= async () => {
       console.error('Error fetching data:', error);
     });
 };
-export const getStudyType= async () => {
+export const getStudyType = async () => {
   return axios.get('assets/studytype.json')
     .then(response => {
       // Return data from the API call
@@ -54,8 +55,9 @@ export const getStudyType= async () => {
       console.error('Error fetching data:', error);
     });
 };
-export const getStudyDetails= async () => {
+export const getStudyDetails = async (id) => {
   return axios.get('assets/studyDetails.json')
+  //return axios.get(`http://13.59.144.105:9003/return_study_details/?nct_id=${id}`)
     .then(response => {
       // Return data from the API call
       return response.data;

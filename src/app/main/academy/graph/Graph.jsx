@@ -25,14 +25,22 @@ class Graph extends Component {
       elements: any,
       isVisible: true,
       layout: '',
-      isLoading: true
+      isLoading: true,
+      isFullScreen: false,
     };
     this.cyRef = React.createRef();
+    this.toggleFullScreen = this.toggleFullScreen.bind(this);
   }
   toggleVisibility = () => {
     this.setState(prevState => ({
       isVisible: !prevState.isVisible
     }));
+  }
+  toggleFullScreen() {
+    this.setState({
+      isFullScreen: this.state.isFullScreen ? false : true,
+    });
+
   }
   componentDidMount() {
     this.getGraphDataDetails();
@@ -43,6 +51,7 @@ class Graph extends Component {
       this.initializeCytoscape(this.state.elements, event.target.value);
     }
   };
+
 
   componentDidUpdate(prevProps) {
     // Check if the node or edge props have changed
@@ -253,49 +262,53 @@ class Graph extends Component {
   // }
 
   render() {
-    const { isVisible, age } = this.state;
+    const { isVisible, age, isFullScreen } = this.state;
     const { course, max } = this.props;
     return (
-      <div style={{ width: "100%" }}>
-        <div className="flex shrink-0 items-center">
-          <IconButton onClick={this.toggleVisibility} aria-label="toggle sidebar" >
-            <FuseSvgIcon>heroicons-outline:menu</FuseSvgIcon>
-          </IconButton>
-          {max == undefined ? (<Button
-            onClick={this.props.onClick}
-            style={{ background: 'none' }}
-            variant="contained"
-            endIcon={<FuseSvgIcon size={20}>heroicons-solid:arrows-expand</FuseSvgIcon>}
-          >
-          </Button>) : null}
+      <div>
 
-          <FormControl sx={{ m: 1, width: 300 }}>
-            <InputLabel id="category-select-label">Layout</InputLabel>
-            <Select
-              labelId="demo-select-small-label"
-              id="demo-select-small"
-              value={layout}
-              label="layout"
-              onChange={this.handleChange}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value="cola">cola</MenuItem>
-              <MenuItem value="breadthfirst">breadthfirst</MenuItem>
-              <MenuItem value="grid">grid</MenuItem>
-              <MenuItem value="circle">circle</MenuItem>
-              <MenuItem value="random">random</MenuItem>
-              <MenuItem value="concentric">concentric</MenuItem>
-            </Select>
-          </FormControl>
-        </div>
         <div className={`animated-div ${isVisible ? 'show' : 'hide'}`}>
           {this.state.isLoading && <FuseLoading />}
-          <div
-            ref={this.cyRef}
-            style={{ width: '100%', height: '400px' }}
-          />
+          <div className={` ${isFullScreen ? 'fullscreen' : 'fullscreen-container'}`}>
+            <div className="flex shrink-0 items-center">
+              <IconButton onClick={this.toggleVisibility} aria-label="toggle sidebar" >
+                <FuseSvgIcon>heroicons-outline:menu</FuseSvgIcon>
+              </IconButton>
+              <Button
+                onClick={this.toggleFullScreen}
+                style={{ background: 'none' }}
+                variant="contained"
+                endIcon={<FuseSvgIcon size={20}>heroicons-solid:arrows-expand</FuseSvgIcon>}
+              >
+              </Button>
+
+              <FormControl sx={{ m: 1, width: 300 }}>
+                <InputLabel id="category-select-label">Layout</InputLabel>
+                <Select
+                  labelId="demo-select-small-label"
+                  id="demo-select-small"
+                  value={layout}
+                  label="layout"
+                  onChange={this.handleChange}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value="cola">cola</MenuItem>
+                  <MenuItem value="breadthfirst">breadthfirst</MenuItem>
+                  <MenuItem value="grid">grid</MenuItem>
+                  <MenuItem value="circle">circle</MenuItem>
+                  <MenuItem value="random">random</MenuItem>
+                  <MenuItem value="concentric">concentric</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+
+            <div
+              ref={this.cyRef}
+              className={` ${isFullScreen ? 'graph-full' : 'graph-normal'}`}
+            />
+          </div>
         </div>
       </div>
     );
