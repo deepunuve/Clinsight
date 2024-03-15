@@ -3,187 +3,69 @@
     {
       "data": {
         "id": 1,
-        "label": "Study Data 1.pdf"
+        "label": "Cardiology/Study1/NCT01784796.pdf"
       }
     },
     {
       "data": {
         "id": 2,
-        "label": "Study Data 2.pdf"
+        "label": "Cardiology/Study1/NCT01837069.pdf"
       }
     },
     {
       "data": {
         "id": 3,
-        "label": "Study Data 3.pdf"
+        "label": "Cardiology/Study1/NCT03373110.pdf"
       }
     },
     {
       "data": {
         "id": 4,
-        "label": "Study Data 4.pdf"
-      }
-    },
-    {
-      "data": {
-        "id": 5,
-        "label": "Study Data 5.pdf"
-      }
-    },
-    {
-      "data": {
-        "id": 6,
-        "label": "Study Data 6.pdf"
-      }
-    },
-    {
-      "data": {
-        "id": 7,
-        "label": "Study Data 7.pdf"
-      }
-    },
-    {
-      "data": {
-        "id": 8,
-        "label": "Study Data 8.pdf"
-      }
-    },
-    {
-      "data": {
-        "id": 9,
-        "label": "Study Data 9.pdf"
-      }
-    },
-    {
-      "data": {
-        "id": 10,
-        "label": "Study Data 10.pdf"
-      }
-    },
-    {
-      "data": {
-        "id": 11,
-        "label": "Study Data 11.pdf"
-      }
-    },
-    {
-      "data": {
-        "id": 12,
-        "label": "Study Data 12.pdf"
-      }
-    },
-    {
-      "data": {
-        "id": 13,
-        "label": "Study Data 13.pdf"
-      }
-    },
-    {
-      "data": {
-        "id": 14,
-        "label": "Study Data 14.pdf"
-      }
-    },
-    {
-      "data": {
-        "id": 15,
-        "label": "Study Data 15.pdf"
-      }
-    },
-    {
-      "data": {
-        "id": 16,
-        "label": "Study Data 16.pdf"
-      }
-    },
-    {
-      "data": {
-        "id": 17,
-        "label": "Study Data 17.pdf"
-      }
-    },
-    {
-      "data": {
-        "id": 18,
-        "label": "Study Data 18.pdf"
-      }
-    },
-    {
-      "data": {
-        "id": 19,
-        "label": "Study Data 19.pdf"
+        "label": "Cardiology/Study1/NCT03826914.pdf"
       }
     }
   ],
   "edges": [
     {
       "data": {
-        "source": 5,
-        "target": 8,
-        "label": "11/12/2023"
+        "source": "1",
+        "target": "2",
+        "label": "2024-03-13"
       }
     },
     {
       "data": {
-        "source": 2,
-        "target": 3,
-        "label": "11/10/2023"
+        "source": "1",
+        "target": "3",
+        "label": "2024-03-13"
       }
     },
     {
       "data": {
-        "source": 3,
-        "target": 1,
-        "label": "1/12/2023"
+        "source": "1",
+        "target": "4",
+        "label": "2024-03-13"
       }
     },
     {
       "data": {
-        "source": 5,
-        "target": 10,
-        "label": "3/4/2023"
+        "source": "2",
+        "target": "3",
+        "label": "2024-03-13"
       }
     },
     {
       "data": {
-        "source": 13,
-        "target": 7,
-        "label": "11/3/2023"
+        "source": "2",
+        "target": "4",
+        "label": "2024-03-13"
       }
     },
     {
       "data": {
-        "source": 13,
-        "target": 11,
-        "label": "11/7/2023"
-      }
-    },
-    {
-      "data": {
-        "source": 13,
-        "target": 5,
-        "label": "11/8/2023"
-      }
-    },
-    {
-      "data": {
-        "source": 13,
-        "target": 1,
-        "label": "9/12/2023"
-      }
-    },
-    {
-      "data": {
-        "source": 13,
-        "target": 12,
-        "label": "3/6/2023"
-      }
-    },
-    {
-      "data": {
-        "source": 13,
-        "target": 8,
-        "label": "3/11/2023"
+        "source": "3",
+        "target": "4",
+        "label": "2024-03-13"
       }
     }
   ]

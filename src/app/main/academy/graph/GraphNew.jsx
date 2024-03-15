@@ -2,18 +2,48 @@ import React, { Component } from 'react';
 import { ForceGraph3D, ForceGraph2D } from 'react-force-graph';
 import { getGraphDataLocalNew } from '../../../store/apiServices';
 import SpriteText from 'three-spritetext';
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
+import Button from '@mui/material/Button';
 
 class GraphNew extends Component {
   constructor(props) {
     super(props);
     this.state = {
       elements: null,
-      SpriteText: null
+      SpriteText: null,
+      isFullScreen: false,
     };
     this.fgRef = React.createRef();
+    this.toggleFullScreen = this.toggleFullScreen.bind(this);
   }
   componentDidMount() {
     this.getGraphDataDetails();
+  }
+  toggleFullScreen() {
+    this.setState({
+      isFullScreen: this.state.isFullScreen ? false : true,
+    });
+
+  }
+  handleNodeHover(node) {
+    // Toggle 'hovered' state for the node
+    const { data } = this.state;
+    const hoveredNode = data.nodes.find(n => n.id === node.id);
+    if (hoveredNode) {
+      hoveredNode.hovered = !hoveredNode.hovered;
+      this.setState({ data });
+    }
+  }
+
+  handleLinkHover(link, prevLink) {
+    // Highlight connected nodes on mouseover
+    const { data } = this.state;
+    if (link && link !== prevLink) {
+      data.nodes.forEach(node => {
+        node.hovered = link.source === node.id || link.target === node.id;
+      });
+      this.setState({ data });
+    }
   }
   handleClick = node => {
     if (this.fgRef.current) {
@@ -29,6 +59,20 @@ class GraphNew extends Component {
       );
     }
   };
+  // handleClick = node => {
+  //   if (this.fgRef.current) {
+  //     // Aim at node from outside it
+  //     const distance = 40;
+  //     const distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
+
+  //     // Call cameraPosition method on the ForceGraph3D component
+  //     this.fgRef.current.cameraPosition(
+  //       { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }, // new position
+  //       node, // lookAt ({ x, y, z })
+  //       3000  // ms transition duration
+  //     );
+  //   }
+  // };
   getGraphDataDetails = async (status) => {
     try {
       await getGraphDataLocalNew().
@@ -39,7 +83,9 @@ class GraphNew extends Component {
     } catch (error) {
     }
   };
+
   render() {
+    const { isVisible, age, isFullScreen } = this.state;
     const GROUPS = 12;
     const data = {
       nodes: [
@@ -54,33 +100,64 @@ class GraphNew extends Component {
     };
     if (this.state.elements)
       return (
-        <div style={{ height: '300px', width: '100%' }}>
+        <div className={` ${isFullScreen ? 'fullscreen' : 'fullscreen-container'}`} >
+          <div className="flex shrink-0 items-center">
+            <Button
+              onClick={this.toggleFullScreen}
+              style={{ background: 'none' }}
+              variant="contained"
+              endIcon={<FuseSvgIcon size={20}>heroicons-solid:arrows-expand</FuseSvgIcon>}
+            >
+            </Button>
+          </div>
+          {this.state.isLoading && <FuseLoading />}
+
           <ForceGraph3D
             ref={this.fgRef}
             graphData={this.state.elements}
-            nodeAutoColorBy="group"
+            nodeLabel={node => `${node.id}: ${node.label}`}
+            nodeAutoColorBy="user"
+            linkDirectionalParticles={10}
+            // nodeAutoColorBy="group"
             cameraPosition={{ x: 0, y: 0, z: 10 }}
-            ambientLightColor={0xffffff} // Set ambient light color
-            directionalLightColor={0xff0000} // Set directional light color
-            backgroundColor="#0164c9"
-            zoomDepth={100}
-            width={600} // Set width of the graph component
-            height={'100%'} // Set height of the graph component
-            nodeLabel="id"
-            linkDirectionalParticles={20}
-            linkDirectionalParticleSpeed={d => d.value * 0.001}
+            // ambientLightColor={0xffffff} // Set ambient light color
+            // directionalLightColor={0xff0000} // Set directional light color
+            // // backgroundColor="white"
+            zoomDepth={150}
+            width={isFullScreen ? '100%' : 400} // Set width of the graph component
+            height={isFullScreen ? '100%' : 500} // Set height of the graph component
+            // // nodeLabel="id"
+            linkDirectionalParticleSpeed={d => d.id * 0.001}
             linkWidth={2}
+            linkLabel="label"
+            // nodeLabel="id"
+            // nodeAutoColorBy="group"
+            cooldownTicks={100}
 
-
-            nodeRelSize={8}
-            nodeOpacity={1} // Set node opacity to 1 (fully opaque)
+            // onNodeHover={node => {
+            //   // Toggle 'hovered' state for the node
+            //   const hoveredNode = data.nodes.find(n => n.id === node.id);
+            //   if (hoveredNode) {
+            //     hoveredNode.hovered = !hoveredNode.hovered;
+            //   }
+            // }}
+            // onLinkHover={(link, prevLink) => {
+            //   if (link && link !== prevLink) {
+            //     // Highlight connected nodes on mouseover
+            //     data.nodes.forEach(node => {
+            //       node.hovered = link.source === node.id || link.target === node.id;
+            //     });
+            //   }
+            // }}
+            // nodeRelSize={8}
+            // nodeOpacity={1} // Set node opacity to 1 (fully opaque)
             onNodeClick={this.handleClick}
-            nodeThreeObject={node => {
-              const sprite = new SpriteText(node.id);
-              sprite.color = node.color;
-              sprite.textHeight = 8;
-              return sprite;
-            }}
+          // nodeThreeObject={node => {
+          //   const sprite = new SpriteText(node.id);
+          //   sprite.color = node.color;
+          //   sprite.textHeight = 8;
+          //   return sprite;
+          // }}
           />
         </div>
       );

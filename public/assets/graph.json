@@ -311,6 +311,234 @@
         "id": 52,
         "label": " jaundice"
       }
+    },
+    {
+      "data": {
+        "id": 53,
+        "label": "NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "id": 1,
+        "label": "preterm infants"
+      }
+    },
+    {
+      "data": {
+        "id": 2,
+        "label": " neonatal transfusion"
+      }
+    },
+    {
+      "data": {
+        "id": 3,
+        "label": "infants"
+      }
+    },
+    {
+      "data": {
+        "id": 4,
+        "label": " neonatal iron stores"
+      }
+    },
+    {
+      "data": {
+        "id": 5,
+        "label": "ematocrit"
+      }
+    },
+    {
+      "data": {
+        "id": 6,
+        "label": " infants with delayed cord clamping above the perineum"
+      }
+    },
+    {
+      "data": {
+        "id": 7,
+        "label": " infants with delayed cord clamping below the perineum"
+      }
+    },
+    {
+      "data": {
+        "id": 8,
+        "label": "maternal Hgb/Hct"
+      }
+    },
+    {
+      "data": {
+        "id": 9,
+        "label": " thirty two patients in each group"
+      }
+    },
+    {
+      "data": {
+        "id": 10,
+        "label": "maternal demographics"
+      }
+    },
+    {
+      "data": {
+        "id": 11,
+        "label": " age"
+      }
+    },
+    {
+      "data": {
+        "id": 12,
+        "label": " race"
+      }
+    },
+    {
+      "data": {
+        "id": 13,
+        "label": " socioeconomic status"
+      }
+    },
+    {
+      "data": {
+        "id": 14,
+        "label": "pre-natal care information"
+      }
+    },
+    {
+      "data": {
+        "id": 15,
+        "label": " IR NUMBER: HSC-MS-11-0633"
+      }
+    },
+    {
+      "data": {
+        "id": 16,
+        "label": "neonatal hematocrit"
+      }
+    },
+    {
+      "data": {
+        "id": 17,
+        "label": " sixty four study participants"
+      }
+    },
+    {
+      "data": {
+        "id": 18,
+        "label": "neonatal hematocrit at 2 ours of life"
+      }
+    },
+    {
+      "data": {
+        "id": 19,
+        "label": "maternal-neonatal contact"
+      }
+    },
+    {
+      "data": {
+        "id": 20,
+        "label": " common practice in many hospitals"
+      }
+    },
+    {
+      "data": {
+        "id": 21,
+        "label": " maternal-infant attachment"
+      }
+    },
+    {
+      "data": {
+        "id": 22,
+        "label": "females"
+      }
+    },
+    {
+      "data": {
+        "id": 23,
+        "label": " pregnancies"
+      }
+    },
+    {
+      "data": {
+        "id": 24,
+        "label": "32 0/7-36 6/7 gestation"
+      }
+    },
+    {
+      "data": {
+        "id": 25,
+        "label": " iron deficiency"
+      }
+    },
+    {
+      "data": {
+        "id": 26,
+        "label": "newborns"
+      }
+    },
+    {
+      "data": {
+        "id": 27,
+        "label": " fetal hemoglobin levels"
+      }
+    },
+    {
+      "data": {
+        "id": 28,
+        "label": "placenta"
+      }
+    },
+    {
+      "data": {
+        "id": 29,
+        "label": " delayed cord clamping"
+      }
+    },
+    {
+      "data": {
+        "id": 30,
+        "label": "Acra"
+      }
+    },
+    {
+      "data": {
+        "id": 31,
+        "label": " J Matern Fetal Neonatal Med."
+      }
+    },
+    {
+      "data": {
+        "id": 32,
+        "label": "Botet"
+      }
+    },
+    {
+      "data": {
+        "id": 33,
+        "label": "Palacio"
+      }
+    },
+    {
+      "data": {
+        "id": 34,
+        "label": "Carbonell-Estrany"
+      }
+    },
+    {
+      "data": {
+        "id": 35,
+        "label": "HSC-MS-11-0633"
+      }
+    },
+    {
+      "data": {
+        "id": 36,
+        "label": " IRB NUMBER"
+      }
+    },
+    {
+      "data": {
+        "id": 37,
+        "label": "data.pdf"
+      }
     }
   ],
   "edges": [
@@ -557,6 +785,790 @@
         "source": 1,
         "target": 52,
         "label": " lower risk"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 1,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 2,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 3,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 4,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 5,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 6,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 7,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 8,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 9,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 10,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 11,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 12,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 13,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 14,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 15,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 16,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 17,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 18,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 19,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 20,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 21,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 22,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 23,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 24,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 25,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 26,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 27,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 28,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 29,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 30,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 31,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 32,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 33,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 34,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 35,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 36,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 37,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 38,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 39,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 40,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 41,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 42,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 43,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 44,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 45,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 46,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 47,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 48,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 49,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 50,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 51,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 53,
+        "target": 52,
+        "label": "related to NCT01784796.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 1,
+        "target": 2,
+        "label": " risk"
+      }
+    },
+    {
+      "data": {
+        "source": 3,
+        "target": 4,
+        "label": " source"
+      }
+    },
+    {
+      "data": {
+        "source": 5,
+        "target": 6,
+        "label": "no clinically significant difference"
+      }
+    },
+    {
+      "data": {
+        "source": 5,
+        "target": 7,
+        "label": "no clinically significant difference"
+      }
+    },
+    {
+      "data": {
+        "source": 8,
+        "target": 9,
+        "label": "documented"
+      }
+    },
+    {
+      "data": {
+        "source": 10,
+        "target": 11,
+        "label": " documented"
+      }
+    },
+    {
+      "data": {
+        "source": 10,
+        "target": 12,
+        "label": " documented"
+      }
+    },
+    {
+      "data": {
+        "source": 10,
+        "target": 13,
+        "label": " documented"
+      }
+    },
+    {
+      "data": {
+        "source": 14,
+        "target": 15,
+        "label": " documented"
+      }
+    },
+    {
+      "data": {
+        "source": 16,
+        "target": 9,
+        "label": "needed"
+      }
+    },
+    {
+      "data": {
+        "source": 16,
+        "target": 17,
+        "label": "total"
+      }
+    },
+    {
+      "data": {
+        "source": 18,
+        "target": 9,
+        "label": "anticipated"
+      }
+    },
+    {
+      "data": {
+        "source": 19,
+        "target": 20,
+        "label": "relating to"
+      }
+    },
+    {
+      "data": {
+        "source": 19,
+        "target": 21,
+        "label": "benefits"
+      }
+    },
+    {
+      "data": {
+        "source": 22,
+        "target": 23,
+        "label": " include"
+      }
+    },
+    {
+      "data": {
+        "source": 24,
+        "target": 23,
+        "label": " with"
+      }
+    },
+    {
+      "data": {
+        "source": 1,
+        "target": 25,
+        "label": " at risk"
+      }
+    },
+    {
+      "data": {
+        "source": 26,
+        "target": 27,
+        "label": " improve"
+      }
+    },
+    {
+      "data": {
+        "source": 28,
+        "target": 29,
+        "label": " related to"
+      }
+    },
+    {
+      "data": {
+        "source": 30,
+        "target": 31,
+        "label": " published"
+      }
+    },
+    {
+      "data": {
+        "source": 32,
+        "target": 31,
+        "label": " published"
+      }
+    },
+    {
+      "data": {
+        "source": 33,
+        "target": 31,
+        "label": " published"
+      }
+    },
+    {
+      "data": {
+        "source": 34,
+        "target": 31,
+        "label": " published"
+      }
+    },
+    {
+      "data": {
+        "source": 35,
+        "target": 36,
+        "label": " assigned"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 1,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 2,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 3,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 4,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 5,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 6,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 7,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 8,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 9,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 10,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 11,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 12,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 13,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 14,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 15,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 16,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 17,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 18,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 19,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 20,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 21,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 22,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 23,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 24,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 25,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 26,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 27,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 28,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 29,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 30,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 31,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 32,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 33,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 34,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 35,
+        "label": "related to data.pdf"
+      }
+    },
+    {
+      "data": {
+        "source": 37,
+        "target": 36,
+        "label": "related to data.pdf"
       }
     }
   ]
