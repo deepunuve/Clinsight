@@ -27,6 +27,7 @@ import ResultDashNew from '../result/ResultDashNew';
 import QuickPanelToggleButton from 'app/theme-layouts/shared-components/quickPanel/QuickPanelToggleButton';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import DocumentGraphNew from '../graph/DocumentGraphNew';
 
 /**
  * The Course page.
@@ -167,7 +168,8 @@ function Course() {
 					<SwipeableViews>
 						<div className="flex justify-center p-16 pb-64  sm:pb-64  md:pb-64">
 							<Paper className="w-full mx-auto p-16 pb-64  sm:pb-64  md:pb-64 rounded-16 shadow overflow-hidden">
-								<DocumentGraph onClick={graphClick} />
+								{/* <DocumentGraph onClick={graphClick} /> */}
+								<DocumentGraphNew onClick={graphClick}/>
 							</Paper>
 						</div>
 					</SwipeableViews>

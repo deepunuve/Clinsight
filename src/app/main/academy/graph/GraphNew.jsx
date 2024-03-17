@@ -139,16 +139,16 @@ class GraphNew extends Component {
             linkHoverPrecision={10}
             onLinkClick={link => this.fgRef.current.emitParticle(link)}            
             linkDistance={100}
-            nodeRelSize={15}
+            nodeRelSize={5}
             nodeOpacity={1} // Set node opacity to 1 (fully opaque)
             onNodeClick={this.handleClick}
-            nodeThreeObject={node => {
-              const sprite = new SpriteText(node.label);
-              sprite.color = node.color;
-              sprite.textHeight = 8;
-              sprite.animations = true
-              return sprite;
-            }}
+            // nodeThreeObject={node => {
+            //   const sprite = new SpriteText(node.label);
+            //   sprite.color = node.color;
+            //   sprite.textHeight = 8;
+            //   sprite.animations = true
+            //   return sprite;
+            // }}
 
           />
         </div>
