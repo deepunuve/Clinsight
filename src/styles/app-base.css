@@ -283,7 +283,7 @@ input:-webkit-autofill:active {
 }
 
 .fullscreen-container {
-    width: 500px;
+    width: 300px;
     /* Initial width */
     height: 400px;
     /* Initial height */
@@ -304,9 +304,15 @@ input:-webkit-autofill:active {
     z-index: 1000;
     /* Ensure it appears on top of other content */
 }
-
+.node-label {
+    font-size: 12px;
+    padding: 1px 4px;
+    border-radius: 4px;
+    background-color: rgba(0,0,0,0.5);
+    user-select: none;
+  }
 .graph {
-    width: 500px;
+    width: 300px;
     min-height: 500px;
 }
 

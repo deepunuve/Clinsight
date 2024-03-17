@@ -12,6 +12,7 @@ class GraphNew extends Component {
       elements: null,
       SpriteText: null,
       isFullScreen: false,
+      parentWidth: 400,
     };
     this.fgRef = React.createRef();
     this.toggleFullScreen = this.toggleFullScreen.bind(this);
@@ -22,6 +23,7 @@ class GraphNew extends Component {
   toggleFullScreen() {
     this.setState({
       isFullScreen: this.state.isFullScreen ? false : true,
+      parentWidth: this.state.isFullScreen ? 400 : window.innerWidth,
     });
 
   }
@@ -116,48 +118,38 @@ class GraphNew extends Component {
             ref={this.fgRef}
             graphData={this.state.elements}
             nodeLabel={node => `${node.id}: ${node.label}`}
-            nodeAutoColorBy="user"
-            linkDirectionalParticles={10}
-            // nodeAutoColorBy="group"
+            nodeAutoColorBy="id"
             cameraPosition={{ x: 0, y: 0, z: 10 }}
             // ambientLightColor={0xffffff} // Set ambient light color
             // directionalLightColor={0xff0000} // Set directional light color
             // // backgroundColor="white"
-            zoomDepth={150}
-            width={isFullScreen ? '100%' : 400} // Set width of the graph component
-            height={isFullScreen ? '100%' : 500} // Set height of the graph component
+            zoomDepth={50}
+            width={this.state.parentWidth}
+            height='100%'
+            // Set width of the graph component
+            // height={'100%'} // Set height of the graph component
             // // nodeLabel="id"
-            linkDirectionalParticleSpeed={d => d.id * 0.001}
-            linkWidth={2}
+            // linkDirectionalParticleSpeed={d => d.id * 0.001}
+            // linkDirectionalParticles={true}
+            linkWidth={1}
             linkLabel="label"
-            // nodeLabel="id"
-            // nodeAutoColorBy="group"
             cooldownTicks={100}
-
-            // onNodeHover={node => {
-            //   // Toggle 'hovered' state for the node
-            //   const hoveredNode = data.nodes.find(n => n.id === node.id);
-            //   if (hoveredNode) {
-            //     hoveredNode.hovered = !hoveredNode.hovered;
-            //   }
-            // }}
-            // onLinkHover={(link, prevLink) => {
-            //   if (link && link !== prevLink) {
-            //     // Highlight connected nodes on mouseover
-            //     data.nodes.forEach(node => {
-            //       node.hovered = link.source === node.id || link.target === node.id;
-            //     });
-            //   }
-            // }}
-            // nodeRelSize={8}
-            // nodeOpacity={1} // Set node opacity to 1 (fully opaque)
+            linkDirectionalParticleColor={() => 'red'}
+            linkDirectionalParticleWidth={6}
+            linkHoverPrecision={10}
+            onLinkClick={link => this.fgRef.current.emitParticle(link)}            
+            linkDistance={100}
+            nodeRelSize={15}
+            nodeOpacity={1} // Set node opacity to 1 (fully opaque)
             onNodeClick={this.handleClick}
-          // nodeThreeObject={node => {
-          //   const sprite = new SpriteText(node.id);
-          //   sprite.color = node.color;
-          //   sprite.textHeight = 8;
-          //   return sprite;
-          // }}
+            nodeThreeObject={node => {
+              const sprite = new SpriteText(node.label);
+              sprite.color = node.color;
+              sprite.textHeight = 8;
+              sprite.animations = true
+              return sprite;
+            }}
+
           />
         </div>
       );
