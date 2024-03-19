@@ -4,7 +4,7 @@ import Hidden from '@mui/material/Hidden';
 import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import Stepper from '@mui/material/Stepper';
-import React,{ useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import SwipeableViews from 'react-swipeable-views';
 import { Step, StepContent, StepLabel } from '@mui/material';
@@ -24,7 +24,8 @@ import DocumentGraph from '../graph/DocumentGraph';
 import CourseHeader from '../course/CourseHeader';
 import SourceViewer from '../doc/SourceViewer';
 import { getStudyDetails } from '../../../store/apiServices';
-
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * The Course page.
@@ -39,25 +40,35 @@ function SourceView() {
 	const { courseId } = routeParams;
 	const childRef = React.createRef();
 	const [study, setStudy] = useState(null);
-    const [studyCount, setStudyCount] = useState(0);
+	const [selectedFile, setSelectedFile] = useState(null);
+	const [studyCount, setStudyCount] = useState(0);
 	const [isLoading, setIsLoading] = useState(false);
-	
+	const location = useLocation();
+	const state = location.state; // Access state object here
+	const { data } = state;
 	useEffect(() => {
-		 const fetchData = async () => {
-            await getStudyDetails(courseId).
-                then(response => {                  
-                    setStudy(response);
-                    setStudyCount(response.source.length);
-                });
-        };
-        fetchData(); // Call the async function
-    }, [isMobile, study]);
+		if (data) {
+			setStudy(data);
+			setStudyCount(data.source.length);
+		}
+		//  const fetchData = async () => {
+		//     await getStudyDetails(courseId).
+		//         then(response => {                  
+		//             setStudy(response);
+		//             setStudyCount(response.source.length);
+		//         });
+		// };
+		// fetchData(); // Call the async function
+	}, [isMobile, study]);
 
 	useEffect(() => {
 		setLeftSidebarOpen(!isMobile);
 		setRightSidebarOpen(!isMobile);
 	}, [isMobile]);
-	
+
+	function handleStepChange(index) {
+		setSelectedFile(index);
+	}
 
 	if (isLoading) {
 		return <FuseLoading />;
@@ -69,13 +80,13 @@ function SourceView() {
 
 	return (
 		<FusePageSimple
-			
+
 			content={
 				<div className="w-full">
 					<SwipeableViews>
 						<div className="flex justify-center p-16 pb-64  sm:pb-64  md:pb-64">
 							<Paper className="w-full mx-auto p-16 pb-64  sm:pb-64  md:pb-64 rounded-16 shadow overflow-hidden">
-								<SourceViewer/>
+								<SourceViewer file={selectedFile} />
 							</Paper>
 						</div>
 					</SwipeableViews>
@@ -90,7 +101,7 @@ function SourceView() {
 				<>
 					<div className="p-32">
 						<Button
-							 to={`/apps/academy/results/${study.id}`}
+							to={`/apps/courses/`}
 							component={Link}
 							className="mb-24"
 							color="secondary"
@@ -103,7 +114,7 @@ function SourceView() {
 								</FuseSvgIcon>
 							}
 						>
-							Back to results
+							Back to studies
 						</Button>
 
 						<CourseInfo course={study} />
@@ -115,52 +126,51 @@ function SourceView() {
 						orientation="vertical"
 					>
 						{study.source && (
-                            study.source.map((source, index) => {
-                                return (
-                                    <Step
-                                        key={index}
-                                        sx={{
-                                            '& .MuiStepLabel-root, & .MuiStepContent-root': {
-                                                cursor: 'pointer!important'
-                                            },
-                                            '& .MuiStepContent-root': {
-                                                color: 'text.secondary',
-                                                fontSize: 13
-                                            }
-                                        }}
-                                        // onClick={() => handleStepChange(step.order)}
-                                        expanded
-                                    >
-                                        <StepLabel
-                                            className="font-medium"
-                                            sx={{
-                                                '& .MuiSvgIcon-root': {
-                                                    color: 'background.default',
-                                                    '& .MuiStepIcon-text': {
-                                                        fill: (_theme) => _theme.palette.text.secondary
-                                                    },
-                                                    '&.Mui-completed': {
-                                                        color: 'secondary.main',
-                                                        '& .MuiStepIcon-text ': {
-                                                            fill: (_theme) => _theme.palette.secondary.contrastText
-                                                        }
-                                                    },
-                                                    '&.Mui-active': {
-                                                        color: 'secondary.main',
-                                                        '& .MuiStepIcon-text ': {
-                                                            fill: (_theme) => _theme.palette.secondary.contrastText
-                                                        }
-                                                    }
-                                                }
-                                            }}
-                                        >
-                                            {source.source_name}
-                                        </StepLabel>
-                                        {/* <StepContent>{step.subtitle}</StepContent> */}
-                                    </Step>
-                                );
-                            }))
-                        }
+							study.source.map((source, index) => {
+								return (
+									<Step
+										key={index}
+										sx={{
+											'& .MuiStepLabel-root, & .MuiStepContent-root': {
+												cursor: 'pointer!important'
+											},
+											'& .MuiStepContent-root': {
+												color: 'text.secondary',
+												fontSize: 13
+											}
+										}}
+										onClick={() => handleStepChange(source.source_name)}
+										expanded
+									>
+										<StepLabel
+											className="font-medium"
+											sx={{
+												'& .MuiSvgIcon-root': {
+													color: 'background.default',
+													'& .MuiStepIcon-text': {
+														fill: (_theme) => _theme.palette.text.secondary
+													},
+													'&.Mui-completed': {
+														color: 'secondary.main',
+														'& .MuiStepIcon-text ': {
+															fill: (_theme) => _theme.palette.secondary.contrastText
+														}
+													},
+													'&.Mui-active': {
+														color: 'secondary.main',
+														'& .MuiStepIcon-text ': {
+															fill: (_theme) => _theme.palette.secondary.contrastText
+														}
+													}
+												}
+											}}
+										>
+											{source.source_name}
+										</StepLabel>
+									</Step>
+								);
+							}))
+						}
 					</Stepper>
 				</>
 			}

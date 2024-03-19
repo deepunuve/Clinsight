@@ -90,12 +90,11 @@ function ResultDashNew(props) {
         const state = { data: study, max: true };
         navigate(destination, { state });
     }
-    // function handleClickBackToInput() {
-    //     alert("");
-    //     const destination = `/apps/academy/course/${study.id}`;
-    //     const state = { data: study };
-    //     navigate(destination, { state });
-    // }
+    function handleClickBackToInput() {
+        const destination = `/apps/academy/sourceView/${study.id}`;
+        const state = { data: study };
+        navigate(destination, { state });
+    }
     // function updateCurrentStep(index) {
     //     if (course && (index > course.totalSteps || index < 0)) {
     //         return;
@@ -223,7 +222,7 @@ function ResultDashNew(props) {
                         <Paper className="flex flex-col flex-auto p-24 shadow rounded-2xl overflow-hidden" style={{ height: '520px', 'overflow-y': 'auto' }}>
                             <div className="flex flex-col sm:flex-row items-start justify-between" >
                                 {/* <Graph ref={childRef} course={study} onClick={handleClick} /> */}
-                                <GraphNew />
+                                <GraphNew data={study} ref={childRef}  />
                             </div>
                         </Paper>
                     </motion.div>
@@ -285,11 +284,7 @@ function ResultDashNew(props) {
                 <>
                     <div className="p-32">
                         <Button
-                            // to={`/apps/academy/courses/${study.id}`}
-                            to={{
-                                pathname: `/apps/academy/courses/${study.id}`,
-                                state: { data: 'Hello from state!' } // Pass state data
-                            }}
+                            to={`/apps/academy/courses/${study.id}`}
                             component={Link}
                             // onClick={handleClickBackToInput}
                             className="mb-24"
@@ -306,11 +301,11 @@ function ResultDashNew(props) {
                             Back to results
                         </Button>
                         <Button
-                            to={`/apps/academy/courses/${study.id}`}
-                            component={Link}
-                            style={{ background: 'none' }}
+                            // to={`/apps/academy/courses/${study.id}`}
+                            onClick={handleClickBackToInput}
+                            style={{ background: 'none', "margin-top": '-10%' }}
                             variant="contained"
-                            endIcon={<FuseSvgIcon size={20}>heroicons-solid:arrows-expand</FuseSvgIcon>}
+                            endIcon={<FuseSvgIcon size={20}>heroicons-solid:folder-open</FuseSvgIcon>}
                         >
                         </Button>
                         <Divider />

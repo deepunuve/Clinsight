@@ -1,67 +1,56 @@
 {
-  "nodes": [
-    {
-      
+    "nodes": [
+      {
         "id": 1,
-        "label": "Cardiology/Study1/NCT01784796.pdf"
-    },
-    {
-      
+        "label": "NCT01784796.pdf"
+      },
+      {
         "id": 2,
-        "label": "Cardiology/Study1/NCT01837069.pdf"
-    },
-    {
-      
+        "label": "NCT01837069.pdf"
+      },
+      {
         "id": 3,
-        "label": "Cardiology/Study1/NCT03373110.pdf"
-    },
-    {
-      
+        "label": "NCT03373110.pdf"
+      },
+      {
         "id": 4,
-        "label": "Cardiology/Study1/NCT03826914.pdf"
-    }
-    ,
-    {
-      
+        "label": "NCT03826914.pdf"
+      },
+      {
         "id": 5,
-        "label": "Cardiology/Study1/sNCT03826914.pdf"
-    }
-  ],
-  "links": [
-    {      
+        "label": "data.pdf"
+      }
+    ],
+    "links": [
+      {
         "source": 1,
         "target": 2,
         "label": "2024-03-13"
-    },
-    {
-      
+      },
+      {
         "source": 1,
         "target": 3,
         "label": "2024-03-13"
-    },
-    {
-      
+      },
+      {
         "source": 1,
         "target": 4,
         "label": "2024-03-13"
-    },
-    {
-      
+      },
+      {
         "source": 2,
         "target": 3,
         "label": "2024-03-13"
-    },
-    {
-      
+      },
+      {
         "source": 2,
         "target": 4,
         "label": "2024-03-13"
-    },
-    {
-      
+      },
+      {
         "source": 3,
         "target": 4,
         "label": "2024-03-13"
-    }
-  ]
-}
+      }
+    ]
+  }

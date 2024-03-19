@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { ForceGraph3D, ForceGraph2D } from 'react-force-graph';
-import { getGraphDataLocalNew } from '../../../store/apiServices';
+import { getGraphData, getStudiesLocal } from '../../../store/apiServices';
 import SpriteText from 'three-spritetext';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Button from '@mui/material/Button';
+import { group } from 'd3';
 
 class GraphNew extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class GraphNew extends Component {
       SpriteText: null,
       isFullScreen: false,
       parentWidth: 400,
+      parentheight: 500,
     };
     this.fgRef = React.createRef();
     this.toggleFullScreen = this.toggleFullScreen.bind(this);
@@ -24,6 +26,7 @@ class GraphNew extends Component {
     this.setState({
       isFullScreen: this.state.isFullScreen ? false : true,
       parentWidth: this.state.isFullScreen ? 400 : window.innerWidth,
+      parentheight: this.state.isFullScreen ? 500 : window.innerHeight,
     });
 
   }
@@ -36,7 +39,19 @@ class GraphNew extends Component {
       this.setState({ data });
     }
   }
-
+  nodeColor = (node) => {
+    // Highlight selected node in a different color
+    if (selectedNode && node.id === selectedNode.id) {
+      return 'red';
+    }
+    // Highlight connected nodes in a different color
+    if (selectedNode && graphData.links.some((link) => link.source === selectedNode.id || link.target === selectedNode.id)) {
+      if (graphData.links.some((link) => link.source === node.id || link.target === node.id)) {
+        return 'green';
+      }
+    }
+    return 'gray'; // Default color
+  };
   handleLinkHover(link, prevLink) {
     // Highlight connected nodes on mouseover
     const { data } = this.state;
@@ -47,6 +62,29 @@ class GraphNew extends Component {
       this.setState({ data });
     }
   }
+  handleChildClick = (value) => {
+    const jsonData = this.state.elements;
+    if (jsonData != null) {
+      const exists = jsonData.nodes.filter(node => node.label.includes(value));
+      if (exists !== undefined && exists.length > 0) {
+        exists.map(node => {
+          if (this.fgRef.current) {
+            // Aim at node from outside it
+            const distance = 40;
+            const distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
+
+            // Call cameraPosition method on the ForceGraph3D component
+            this.fgRef.current.cameraPosition(
+              { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }, // new position
+              node, // lookAt ({ x, y, z })
+              3000  // ms transition duration
+            );
+          }
+        });
+      }
+    }
+  };
+
   handleClick = node => {
     if (this.fgRef.current) {
       // Aim at node from outside it
@@ -77,29 +115,56 @@ class GraphNew extends Component {
   // };
   getGraphDataDetails = async (status) => {
     try {
-      await getGraphDataLocalNew().
-        then(response => {
-          this.setState({ elements: response });
+      if (this.props.data) {
+        const updatedItems = [];
+        this.props.data.source.map(source => {
+          updatedItems.push(source.source_name);
         });
+        const postData = {
+          id: this.props.data.id,
+          doc: updatedItems
+        };
+        let input = JSON.stringify(postData)
+        console.log(input);
+        await getGraphData(postData).
+          then(response => {
+            this.setState({ elements: response });
+          });
+      }
 
     } catch (error) {
     }
   };
+  getNodeShape = (node) => {
+    const shapeMap = {
+      A: 'cylinder',
+      B: 'sphere',
+      C: 'tetrahedron', // Example of another shape
+      // Add more mappings here as needed
+    };
+    return shapeMap[node.id] || 'sphere'; // Default shape is sphere
+  };
 
+  nodeColor(node) {
+    const { selectedNode } = this.state;
+    const { graphData } = this.props.data;
+    const colorMap = {};
+
+    // Create a color map based on group numbers
+    graphData.nodes.map(n => {
+      colorMap[n.group] = colorMap[n.group] || `hsl(${Math.random() * 360}, 100%, 50%)`;
+    });
+
+    if (selectedNode && node.id === selectedNode.id) {
+      return 'green'; // Highlight selected node
+    }
+    return colorMap[node.group]; // Use color map to assign color based on group
+  }
   render() {
     const { isVisible, age, isFullScreen } = this.state;
-    const GROUPS = 12;
-    const data = {
-      nodes: [
-        { id: 'Node 1', color: 'red' },
-        { id: 'Node 2', color: 'blue' },
-        // Add more nodes as needed
-      ],
-      links: [
-        { source: 'Node 1', target: 'Node 2' },
-        // Add more links as needed
-      ],
-    };
+    if (this.state.elements) {
+      const firstNode = this.state.elements[0];
+    }
     if (this.state.elements)
       return (
         <div className={` ${isFullScreen ? 'fullscreen' : 'fullscreen-container'}`} >
@@ -117,38 +182,40 @@ class GraphNew extends Component {
           <ForceGraph3D
             ref={this.fgRef}
             graphData={this.state.elements}
-            nodeLabel={node => `${node.id}: ${node.label}`}
+            nodeLabel={node => `${node.label}`}
             nodeAutoColorBy="id"
+            // nodeAutoColorBy="group"
+            // nodeColor={(node) => this.nodeColor(node)}
             cameraPosition={{ x: 0, y: 0, z: 10 }}
             // ambientLightColor={0xffffff} // Set ambient light color
             // directionalLightColor={0xff0000} // Set directional light color
-            // // backgroundColor="white"
-            zoomDepth={50}
+            backgroundColor="#111827"
+            zoomDepth={100}
             width={this.state.parentWidth}
-            height='100%'
-            // Set width of the graph component
-            // height={'100%'} // Set height of the graph component
-            // // nodeLabel="id"
-            // linkDirectionalParticleSpeed={d => d.id * 0.001}
-            // linkDirectionalParticles={true}
+            height={this.state.parentheight}            
             linkWidth={1}
             linkLabel="label"
             cooldownTicks={100}
             linkDirectionalParticleColor={() => 'red'}
             linkDirectionalParticleWidth={6}
             linkHoverPrecision={10}
-            onLinkClick={link => this.fgRef.current.emitParticle(link)}            
+            onLinkClick={link => this.fgRef.current.emitParticle(link)}
             linkDistance={100}
             nodeRelSize={5}
             nodeOpacity={1} // Set node opacity to 1 (fully opaque)
             onNodeClick={this.handleClick}
-            // nodeThreeObject={node => {
-            //   const sprite = new SpriteText(node.label);
-            //   sprite.color = node.color;
-            //   sprite.textHeight = 8;
-            //   sprite.animations = true
-            //   return sprite;
-            // }}
+            nodeThreeObject={node => {
+              let geometry;
+              if (node.shape === 'sphere') {
+                // Create tetrahedron geometry
+                geometry = new THREE.SphereGeometry(0.5);
+                const color = node.id === 1 ? 0xffffff : 0x2194ce; // Highlight first node
+                geometry.scale(20, 20, 20);
+                const material = new THREE.MeshBasicMaterial({ color });
+                return new THREE.Mesh(geometry, material);
+              }
+
+            }}
 
           />
         </div>

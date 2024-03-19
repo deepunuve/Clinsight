@@ -17,6 +17,14 @@ const navigationConfig = [
 		icon: 'heroicons-outline:academic-cap',
 		url: '/apps/academy',
 		translate: 'Studies'
+	},
+	{
+		id: 'source',
+		title: 'Sources',
+		type: 'item',
+		icon: 'heroicons-outline:folder-open',
+		url: '/dashboard',
+		translate: 'Sources'
 	}
 ];
 export default navigationConfig;

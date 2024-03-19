@@ -205,20 +205,20 @@ input:-webkit-autofill:active {
 }
 
 .react-chatbot-kit-chat-header {
-    background-image: linear-gradient(to right, #0164c9, #013366) !important;
+    background-image: linear-gradient(to right, #111827, #111827) !important;
     color: white !important;
     font-size: 14px !important;
 }
 
 .react-chatbot-kit-chat-bot-message {
-    background-image: linear-gradient(to right, #0164c9, #013366) !important;
+    background-image: linear-gradient(to right, #111827, #111827) !important;
     color: white !important;
     width: auto !important;
     font-size: 12px !important;
 }
 
 .nav-tabs .nav-link.active {
-    background-image: linear-gradient(to right, #0164c9, #013366) !important;
+    background-image: linear-gradient(to right, #111827, #111827) !important;
     color: white;
 }
 
@@ -238,11 +238,11 @@ input:-webkit-autofill:active {
 }
 
 .react-chatbot-kit-chat-bot-message-arrow {
-    border-right: 8px solid #0164c9 !important;
+    border-right: 8px solid #111827 !important;
 }
 
 .react-chatbot-kit-chat-btn-send {
-    background-image: linear-gradient(to right, #0164c9, #013366) !important;
+    background-image: linear-gradient(to right, #111827, #111827) !important;
 }
 
 .react-chatbot-kit-chat-input {
@@ -287,7 +287,7 @@ input:-webkit-autofill:active {
     /* Initial width */
     height: 400px;
     /* Initial height */
-
+    margin-bottom: 10%;
     transition: all 0.3s ease;
     /* Smooth transition for size changes */
 }
@@ -303,14 +303,33 @@ input:-webkit-autofill:active {
     /* Full height of the viewport */
     z-index: 1000;
     /* Ensure it appears on top of other content */
+    margin-bottom: 10%;
 }
+
+.logo-box-doc {
+    border: 2px solid #ccc;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    height: 120px;
+    width: 20%;
+    cursor: pointer;
+    float: left;
+}
+
+.logo-doc-img {
+    max-width: 100px;
+    /* Adjust according to your logo size */
+}
+
 .node-label {
     font-size: 12px;
     padding: 1px 4px;
     border-radius: 4px;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     user-select: none;
-  }
+}
+
 .graph {
     width: 300px;
     min-height: 500px;

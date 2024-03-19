@@ -54,10 +54,14 @@ class DocumentGraphNew extends Component {
     this.state.elements.links.forEach(link => {
       if (link.source.id === node.id) {
         let data = this.state.elements.nodes.find(node => node.id === link.target.id);
-        updatedItems.push({ id: data.id, source_name: data.label, key: 'key' });
+        if (!updatedItems.some(item => item.id === data.id)) {
+          updatedItems.push({ id: data.id, source_name: data.label, key: 'key' });
+        }
       } else if (link.target.id === node.id) {
         let data = this.state.elements.nodes.find(node => node.id === link.source.id);
-        updatedItems.push({ id: data.id, source_name: data.label, key: 'key' });
+        if (!updatedItems.some(item => item.id === data.id)) {
+          updatedItems.push({ id: data.id, source_name: data.label, key: 'key' });
+        }
       }
     });
     this.setState({ sourceNames: updatedItems });
@@ -79,6 +83,8 @@ class DocumentGraphNew extends Component {
 
   getGraphDataDetails = async (status) => {
     try {
+
+
       await getGraphDocData().
         then(response => {
           this.setState({ elements: response });

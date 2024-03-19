@@ -7,8 +7,10 @@ const BASE_URL = 'https://api.example.com'; // Your API base URL
 
 // await axios.get('http://13.59.144.105:9003/upload')
 // Function to make a GET request
-export const getGraphData = async () => {
-  return axios.post('http://13.59.144.105:9004/graph')
+export const getGraphData = async (inputData) => {
+  //return axios.post('http://13.59.144.105:9004/ner_re_graph')
+  //return axios.post('http://13.59.144.105:9004/multiple_graph', inputData)
+  return axios.get('assets/graph.json')
     .then(response => {
       // Return data from the API call
       return response.data;
@@ -20,9 +22,10 @@ export const getGraphData = async () => {
 };
 
 // http://13.59.144.105:9004/get_re
-// 'assets/graphHome.json'
+// 'assets/graphHome.json'http://13.59.144.105:9004/document_graph
 export const getGraphDocData = async () => {
   return axios.get('assets/graphHome.json')
+    //return axios.get('http://13.59.144.105:9004/document_graph')
     .then(response => {
       // Return data from the API call
       return response.data;
@@ -33,6 +36,7 @@ export const getGraphDocData = async () => {
     });
 };
 export const getStudiesLocal = async () => {
+  //return axios.get('http://13.59.144.105:9003/return_studylist/')
   return axios.get('assets/study.json')
     .then(response => {
       // Return data from the API call
@@ -46,6 +50,7 @@ export const getStudiesLocal = async () => {
 
 export const getStudyType = async () => {
   return axios.get('assets/studytype.json')
+    //return axios.get('http://13.59.144.105:9003/return_study_type/')
     .then(response => {
       // Return data from the API call
       return response.data;
@@ -57,7 +62,7 @@ export const getStudyType = async () => {
 };
 export const getStudyDetails = async (id) => {
   return axios.get('assets/studyDetails.json')
-    //return axios.get(`http://13.59.144.105:9003/return_study_details/?nct_id=${id}`)
+  //return axios.get(`http://13.59.144.105:9003/return_study_details/?nct_id=${id}`)
     .then(response => {
       // Return data from the API call
       return response.data;

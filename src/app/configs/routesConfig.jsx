@@ -9,7 +9,7 @@ import Error404Page from '../main/404/Error404Page';
 import DashboardConfig from '../main/dashboard/DashboardConfig';
 import AcademyAppConfig from '../main/academy/AcademyAppConfig';
 
-const routeConfigs = [AcademyAppConfig, SignOutConfig, SignInConfig, SignUpConfig];
+const routeConfigs = [DashboardConfig, AcademyAppConfig, SignOutConfig, SignInConfig, SignUpConfig];
 /**
  * The routes of the application.
  */
@@ -18,6 +18,11 @@ const routes = [
 	{
 		path: '/',
 		element: <Navigate to="/apps/academy" />,
+		auth: settingsConfig.defaultAuth
+	},
+	{
+		path: '/',
+		element: <Navigate to="/source" />,
 		auth: settingsConfig.defaultAuth
 	},
 	{

@@ -78,7 +78,6 @@ function ResultDash() {
     const currentStep = course?.progress?.currentStep || 0;
 
     const handleClickInChild = () => {
-        alert("");
         // Do something here...
     };
 
@@ -216,7 +215,7 @@ function ResultDash() {
                 <>
                     <div className="p-4">
                         <Button
-                           to={`/apps/academy/courses/${course.id}/${course.slug}`}
+                            to={`/apps/academy/courses/${course.id}/${course.slug}`}
                             component={Link}
                             className="mb-24"
                             color="secondary"
