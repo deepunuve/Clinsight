@@ -65,7 +65,7 @@ class GraphNew extends Component {
   handleChildClick = (value) => {
     const jsonData = this.state.elements;
     if (jsonData != null) {
-      const exists = jsonData.nodes.filter(node => node.label.includes(value));
+      const exists = jsonData.nodes.filter(node => node.label.toLowerCase().includes(value.toLowerCase()));
       if (exists !== undefined && exists.length > 0) {
         exists.map(node => {
           if (this.fgRef.current) {
@@ -192,7 +192,7 @@ class GraphNew extends Component {
             backgroundColor="#111827"
             zoomDepth={100}
             width={this.state.parentWidth}
-            height={this.state.parentheight}            
+            height={this.state.parentheight}
             linkWidth={1}
             linkLabel="label"
             cooldownTicks={100}
@@ -209,8 +209,8 @@ class GraphNew extends Component {
               if (node.shape === 'sphere') {
                 // Create tetrahedron geometry
                 geometry = new THREE.SphereGeometry(0.5);
-                const color = node.id === 1 ? 0xffffff : 0x2194ce; // Highlight first node
-                geometry.scale(20, 20, 20);
+                const color = node.id === this.state.elements.id ? 0xffffff : 0x2194ce; // Highlight first node
+                geometry.scale(25, 25, 25);
                 const material = new THREE.MeshBasicMaterial({ color });
                 return new THREE.Mesh(geometry, material);
               }

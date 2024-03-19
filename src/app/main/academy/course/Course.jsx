@@ -97,23 +97,7 @@ function Course() {
 			fetchData();
 		}
 	}, [location.search]);
-	// const currentStep = course?.progress?.currentStep || 0;
 
-	// function updateCurrentStep(index) {
-	// 	if (course && (index > course.totalSteps || index < 0)) {
-	// 		return;
-	// 	}
-
-	// 	updateCourse({ courseId, data: { progress: { currentStep: index } } });
-	// }
-
-	// function handleNext() {
-	// 	updateCurrentStep(currentStep + 1);
-	// }
-
-	// function handleBack() {
-	// 	updateCurrentStep(currentStep - 1);
-	// }
 
 	function handleStepChange(index) {
 		updateCurrentStep(index + 1);
@@ -129,7 +113,9 @@ function Course() {
 	if (isLoading) {
 		return <FuseLoading />;
 	}
-
+	if (!sessionData) {
+		return <FuseLoading />;
+	}
 	if (!study) {
 		return <FuseLoading />;
 	}
@@ -169,7 +155,7 @@ function Course() {
 						<div className="flex justify-center p-16 pb-64  sm:pb-64  md:pb-64">
 							<Paper className="w-full mx-auto p-16 pb-64  sm:pb-64  md:pb-64 rounded-16 shadow overflow-hidden">
 								{/* <DocumentGraph onClick={graphClick} /> */}
-								<DocumentGraphNew onClick={graphClick}/>
+								<DocumentGraphNew onClick={graphClick} />
 							</Paper>
 						</div>
 					</SwipeableViews>

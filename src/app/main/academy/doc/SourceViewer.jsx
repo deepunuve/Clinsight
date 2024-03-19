@@ -12,7 +12,7 @@ export default class SourceViewer extends Component {
         this.state = {
             fileShow: false,
             expanded: true,
-            pdfUrl: '',
+            pdfUrl: null,
             fileData: null,
             s3Key: '',
             isLoading: true
@@ -36,7 +36,7 @@ export default class SourceViewer extends Component {
 
     };
     getPdfDetails = async (filename) => {
-
+        this.setState({ isLoading: true });
         //if (file) {
         // const formData = new FormData();
         // formData.append('file', file);
@@ -76,14 +76,13 @@ export default class SourceViewer extends Component {
                     </div>
                     <div className={`animated-div ${expanded ? 'show' : 'hide'}`}>
                         {this.state.isLoading && <FuseLoading />}
-
-                        <iframe
+                        {this.state.pdfUrl !== null || this.state.pdfUrl !== ' ' ? (<iframe
                             src={this.state.pdfUrl}
                             title="PDF Viewer"
                             width="90%"
                             height="500px"
                             style={{ marginTop: '4%', marginLeft: '3%' }}
-                        />
+                        />) : (<div>No data Found</div>)}
 
                     </div>
                 </div>
