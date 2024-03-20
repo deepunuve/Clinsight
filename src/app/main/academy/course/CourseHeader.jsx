@@ -36,7 +36,7 @@ function CourseHeader(props) {
                 >
                     {page === "1" ? (
                         <Button
-                            to={`/apps/academy/results/${course.id}/${course.slug}`}
+                            to={`/TA/results/${course.id}/${course.slug}`}
                             component={Link}
                             className="px-16 min-w-128"
                             color="secondary"

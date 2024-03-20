@@ -33,7 +33,7 @@ function ResultHeader(props) {
                     className="flex-1 text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate mx-10"
                 >
                     <Button
-                        to={`/apps/academy/course/${course.id}`}
+                        to={`/TA/course/${course.id}`}
                         component={Link}
                         className="px-16 min-w-128"
                         color="secondary"

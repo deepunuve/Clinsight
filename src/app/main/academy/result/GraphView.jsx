@@ -56,7 +56,7 @@ function GraphView() {
 
 
 	function handleClick() {
-		const destination = `/apps/academy/results/${study.id}`;
+		const destination = `/TA/results/${study.id}`;
 		const state = { data: study, max: true };
 		navigate(destination, { state });
 	}

@@ -47,7 +47,6 @@ class DocumentGraphNew extends Component {
     }
   }
   handleClick = node => {
-
     const { sourceNames } = this.state;
     const updatedItems = [...sourceNames];
     updatedItems.push({ id: node.id, source_name: node.label, key: 'key' });

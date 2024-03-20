@@ -221,7 +221,10 @@ input:-webkit-autofill:active {
     background-image: linear-gradient(to right, #111827, #111827) !important;
     color: white;
 }
-
+.bold-italic {
+    font-weight: bold;
+    font-style: italic;
+  }
 .react-chatbot-kit-user-chat-message {
     background-color: #0085ff !important;
     color: white !important;

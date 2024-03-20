@@ -99,7 +99,7 @@ function Content() {
 							square
 						>
 							<IconButton
-								to="/apps/academy/courses"
+								to="/TA/courses"
 								component={Link}
 							>
 								<FuseSvgIcon>
@@ -207,7 +207,7 @@ function Content() {
 				<>
 					<div className="p-32">
 						<Button
-							to={`/apps/academy/results/${course.id}/${course.slug}`}
+							to={`/TA/results/${course.id}/${course.slug}`}
 							component={Link}
 							className="mb-24"
 							color="secondary"

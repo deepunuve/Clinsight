@@ -68,6 +68,7 @@ function Course() {
 		study.source = childValue;
 		updateSessionData(study);
 	};
+	
 	const fetchData = async () => {
 		await getStudyDetails(courseId).
 			then(response => {
@@ -103,7 +104,7 @@ function Course() {
 		updateCurrentStep(index + 1);
 	}
 	function handleClick() {
-		const destination = `/apps/academy/results/${study.id}`;
+		const destination = `/TA/results/${study.id}`;
 		const state = { data: study };
 		navigate(destination, { state });
 	}
@@ -170,7 +171,7 @@ function Course() {
 				<>
 					<div className="p-32">
 						<Button
-							to="/apps/academy/courses"
+							to="/TA/clinical"
 							component={Link}
 							className="mb-24"
 							color="secondary"

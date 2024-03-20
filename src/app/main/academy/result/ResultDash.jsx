@@ -215,7 +215,7 @@ function ResultDash() {
                 <>
                     <div className="p-4">
                         <Button
-                            to={`/apps/academy/courses/${course.id}/${course.slug}`}
+                            to={`/TA/courses/${course.id}/${course.slug}`}
                             component={Link}
                             className="mb-24"
                             color="secondary"

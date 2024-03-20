@@ -41,7 +41,7 @@ function CourseCard(props) {
 				}}
 			>
 				<Button
-					to={`/apps/academy/courses/${course.id}`}
+					to={`TA/clinical/${course.id}`}
 					component={Link}
 					className="px-16 min-w-128"
 					color="secondary"

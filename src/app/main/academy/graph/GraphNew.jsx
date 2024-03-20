@@ -15,9 +15,11 @@ class GraphNew extends Component {
       isFullScreen: false,
       parentWidth: 400,
       parentheight: 500,
+      sourceNames: []
     };
     this.fgRef = React.createRef();
     this.toggleFullScreen = this.toggleFullScreen.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
   componentDidMount() {
     this.getGraphDataDetails();
@@ -30,6 +32,7 @@ class GraphNew extends Component {
     });
 
   }
+
   handleNodeHover(node) {
     // Toggle 'hovered' state for the node
     const { data } = this.state;
@@ -39,19 +42,8 @@ class GraphNew extends Component {
       this.setState({ data });
     }
   }
-  nodeColor = (node) => {
-    // Highlight selected node in a different color
-    if (selectedNode && node.id === selectedNode.id) {
-      return 'red';
-    }
-    // Highlight connected nodes in a different color
-    if (selectedNode && graphData.links.some((link) => link.source === selectedNode.id || link.target === selectedNode.id)) {
-      if (graphData.links.some((link) => link.source === node.id || link.target === node.id)) {
-        return 'green';
-      }
-    }
-    return 'gray'; // Default color
-  };
+
+
   handleLinkHover(link, prevLink) {
     // Highlight connected nodes on mouseover
     const { data } = this.state;
@@ -86,6 +78,11 @@ class GraphNew extends Component {
   };
 
   handleClick = node => {
+    const updatedItems = [];
+    updatedItems.push({ id: node.id, source_name: node.label, key: 'key' });
+    this.setState({ sourceNames: updatedItems });
+    this.handleGraphClick(updatedItems);
+    
     if (this.fgRef.current) {
       // Aim at node from outside it
       const distance = 40;
@@ -99,20 +96,11 @@ class GraphNew extends Component {
       );
     }
   };
-  // handleClick = node => {
-  //   if (this.fgRef.current) {
-  //     // Aim at node from outside it
-  //     const distance = 40;
-  //     const distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
 
-  //     // Call cameraPosition method on the ForceGraph3D component
-  //     this.fgRef.current.cameraPosition(
-  //       { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }, // new position
-  //       node, // lookAt ({ x, y, z })
-  //       3000  // ms transition duration
-  //     );
-  //   }
-  // };
+  handleGraphClick(newValue) {
+    this.props.onClick(newValue);
+  };
+
   getGraphDataDetails = async (status) => {
     try {
       if (this.props.data) {
@@ -135,31 +123,9 @@ class GraphNew extends Component {
     } catch (error) {
     }
   };
-  getNodeShape = (node) => {
-    const shapeMap = {
-      A: 'cylinder',
-      B: 'sphere',
-      C: 'tetrahedron', // Example of another shape
-      // Add more mappings here as needed
-    };
-    return shapeMap[node.id] || 'sphere'; // Default shape is sphere
-  };
 
-  nodeColor(node) {
-    const { selectedNode } = this.state;
-    const { graphData } = this.props.data;
-    const colorMap = {};
 
-    // Create a color map based on group numbers
-    graphData.nodes.map(n => {
-      colorMap[n.group] = colorMap[n.group] || `hsl(${Math.random() * 360}, 100%, 50%)`;
-    });
 
-    if (selectedNode && node.id === selectedNode.id) {
-      return 'green'; // Highlight selected node
-    }
-    return colorMap[node.group]; // Use color map to assign color based on group
-  }
   render() {
     const { isVisible, age, isFullScreen } = this.state;
     if (this.state.elements) {
@@ -183,9 +149,7 @@ class GraphNew extends Component {
             ref={this.fgRef}
             graphData={this.state.elements}
             nodeLabel={node => `${node.label}`}
-            nodeAutoColorBy="id"
-            // nodeAutoColorBy="group"
-            // nodeColor={(node) => this.nodeColor(node)}
+            nodeAutoColorBy="group"
             cameraPosition={{ x: 0, y: 0, z: 10 }}
             // ambientLightColor={0xffffff} // Set ambient light color
             // directionalLightColor={0xff0000} // Set directional light color
@@ -206,10 +170,10 @@ class GraphNew extends Component {
             onNodeClick={this.handleClick}
             nodeThreeObject={node => {
               let geometry;
-              if (node.shape === 'sphere') {
+              if (node.isMain === true) {
                 // Create tetrahedron geometry
                 geometry = new THREE.SphereGeometry(0.5);
-                const color = node.id === this.state.elements.id ? 0xffffff : 0x2194ce; // Highlight first node
+                const color = 0xffffff; // Highlight first node
                 geometry.scale(25, 25, 25);
                 const material = new THREE.MeshBasicMaterial({ color });
                 return new THREE.Mesh(geometry, material);

@@ -35,6 +35,7 @@ import { getStudyDetails } from '../../../store/apiServices';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import GraphNew from '../graph/GraphNew';
+import { tr } from 'date-fns/locale';
 
 const container = {
     show: {
@@ -65,6 +66,8 @@ function ResultDashNew(props) {
     const [studyCount, setStudyCount] = useState(0);
     const [tabValue, setTabValue] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
+    const [dataUpdate, setDataUpdate] = useState('');
+    const [node, setNode] = useState('');
 
     const location = useLocation();
     const state = location.state; // Access state object here
@@ -86,12 +89,12 @@ function ResultDashNew(props) {
     }, [isMobile, study]);
 
     function handleClick() {
-        const destination = `/apps/academy/graphView/${study.id}`;
+        const destination = `/TA/graphView/${study.id}`;
         const state = { data: study, max: true };
         navigate(destination, { state });
     }
     function handleClickBackToInput() {
-        const destination = `/apps/academy/sourceView/${study.id}`;
+        const destination = `/TA/sourceView/${study.id}`;
         const state = { data: study };
         navigate(destination, { state });
     }
@@ -106,61 +109,43 @@ function ResultDashNew(props) {
 
         setInputValue(e.target.value);
     };
-    // function handleNext() {
-    //     updateCurrentStep(currentStep + 1);
-    // }
 
-    // function handleBack() {
-    //     updateCurrentStep(currentStep - 1);
-    // }
+    const graphClick = (childValue) => {
+        const newHtmlData = '<div class="react-chatbot-kit-chat-bot-message-container" >' +
+            '<div class="react-chatbot-kit-chat-bot-message" ><span>Clicked node <span class="bold-italic">"' + childValue[0].source_name + '"</span> is loaded here. Now you can explore based on this .</span></div>' +
+            '</div>';
+        setNode(childValue[0].source_name);
+        setMessages(messages + newHtmlData);
+    };
 
-    // function handleStepChange(index) {
-    //     updateCurrentStep(index + 1);
-    // }
     function handleSubmit(e) {
         e.preventDefault();
         let value = inputValue.trim();
         let datahtml = '';
         if (value !== '') {
-            if (value.includes("graph")) {
-
-                const newHtmlData = '<div class="react-chatbot-kit-user-chat-message-container">' +
-                    '<div class="react-chatbot-kit-user-chat-message">' + value +
-                    '<div class="react-chatbot-kit-user-chat-message-arrow"></div>' +
-                    '</div>' +
-                    '<div class="react-chatbot-kit-user-avatar">' +
-                    '<div class="react-chatbot-kit-user-avatar-container">' +
-                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="react-chatbot-kit-user-avatar-icon">' +
-                    '<path d="M256 288c79.5 0 144-64.5 144-144S335.5 0 256 0 112 64.5 112 144s64.5 144 144 144zm128 32h-55.1c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16H128C57.3 320 0 377.3 0 448v16c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48v-16c0-70.7-57.3-128-128-128z"></path>' +
-                    '</svg>' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>';
-                setMessages(messages + newHtmlData);
+            const postData = {
+                node: node,
+                query: value
+            };
+            setDataUpdate(postData);
+            if (childRef.current) {
+                childRef.current.handleChildClick(value);
             }
-
-            else {
-                if (childRef.current) {
-                    childRef.current.handleChildClick(value);
-                }
-                const newHtmlData = '<div class="react-chatbot-kit-user-chat-message-container">' +
-                    '<div class="react-chatbot-kit-user-chat-message">' + value +
-                    '<div class="react-chatbot-kit-user-chat-message-arrow"></div>' +
-                    '</div>' +
-                    '<div class="react-chatbot-kit-user-avatar">' +
-                    '<div class="react-chatbot-kit-user-avatar-container">' +
-                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="react-chatbot-kit-user-avatar-icon">' +
-                    '<path d="M256 288c79.5 0 144-64.5 144-144S335.5 0 256 0 112 64.5 112 144s64.5 144 144 144zm128 32h-55.1c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16H128C57.3 320 0 377.3 0 448v16c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48v-16c0-70.7-57.3-128-128-128z"></path>' +
-                    '</svg>' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>';
-                setMessages(messages + newHtmlData);
-            }
+            const newHtmlData = '<div class="react-chatbot-kit-user-chat-message-container">' +
+                '<div class="react-chatbot-kit-user-chat-message">' + value +
+                '<div class="react-chatbot-kit-user-chat-message-arrow"></div>' +
+                '</div>' +
+                '<div class="react-chatbot-kit-user-avatar">' +
+                '<div class="react-chatbot-kit-user-avatar-container">' +
+                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="react-chatbot-kit-user-avatar-icon">' +
+                '<path d="M256 288c79.5 0 144-64.5 144-144S335.5 0 256 0 112 64.5 112 144s64.5 144 144 144zm128 32h-55.1c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16H128C57.3 320 0 377.3 0 448v16c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48v-16c0-70.7-57.3-128-128-128z"></path>' +
+                '</svg>' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '</div>';
+            setMessages(messages + newHtmlData);
             setInputValue('');
         }
     };
@@ -221,8 +206,7 @@ function ResultDashNew(props) {
                     <motion.div variants={item} className="sm:col-span-2 md:col-span-4 lg:col-span-2" >
                         <Paper className="flex flex-col flex-auto p-24 shadow rounded-2xl overflow-hidden" style={{ height: '520px', 'overflow-y': 'auto' }}>
                             <div className="flex flex-col sm:flex-row items-start justify-between" >
-                                {/* <Graph ref={childRef} course={study} onClick={handleClick} /> */}
-                                <GraphNew data={study} ref={childRef}  />
+                                <GraphNew data={study} ref={childRef} onClick={graphClick} />
                             </div>
                         </Paper>
                     </motion.div>
@@ -264,7 +248,7 @@ function ResultDashNew(props) {
                                             label="Extract"
                                         />
                                     </Tabs>
-                                    {tabValue === 0 && <ResultContent course={study} />}
+                                    {tabValue === 0 && <ResultContent course={study} data={dataUpdate} />}
                                     {tabValue === 1 && <div> </div>}
                                     {tabValue === 2 && <div></div>}
                                 </div>
@@ -284,7 +268,7 @@ function ResultDashNew(props) {
                 <>
                     <div className="p-32">
                         <Button
-                            to={`/apps/academy/courses/${study.id}`}
+                            to={`/TA/clinical/${study.id}`}
                             component={Link}
                             // onClick={handleClickBackToInput}
                             className="mb-24"
@@ -298,7 +282,7 @@ function ResultDashNew(props) {
                                 </FuseSvgIcon>
                             }
                         >
-                            Back to results
+                            Back to study
                         </Button>
                         <Button
                             // to={`/apps/academy/courses/${study.id}`}

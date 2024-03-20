@@ -5,19 +5,47 @@ import IconButton from '@mui/material/IconButton';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import { getResultDetails } from '../../../store/apiServices';
 
 export default class ResultContent extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            expanded: true
+            expanded: true,
+            content: '',
         };
     }
     componentDidMount() {
     }
-    componentDidUpdate(prevProps) {
+
+    async componentDidUpdate(prevProps) {
+        if (this.props.data !== prevProps.data) {
+            try {
+                await this.getResultDetailsData(this.props.data);
+
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
     }
+    getResultDetailsData = async (inputData) => {
+        try {
+            if (this.props.data) { 
+                let input = JSON.stringify(inputData)
+                console.log(input);
+                await getResultDetails(input).
+                    then(response => {
+                        const updatedContent = this.state.content + response.data + '\n\n'; // Add new content after two new lines
+                        this.setState({
+                            content: updatedContent,
+                        });
+                    });
+            }
+
+        } catch (error) {
+        }
+    };
     toggleExpand = () => {
         this.setState((prevState) => ({
             expanded: !prevState.expanded
@@ -36,7 +64,7 @@ export default class ResultContent extends Component {
                         <FuseSvgIcon>heroicons-outline:menu</FuseSvgIcon>
                     </IconButton>
                     <Button
-                        to={`/apps/academy/content/694e4e5f-f25f-470b-bd0e-26b1d4f64028`}
+                        to={`/TA/content/694e4e5f-f25f-470b-bd0e-26b1d4f64028`}
                         component={Link}
                         style={{ background: "none" }}
                         variant="contained"
@@ -45,14 +73,10 @@ export default class ResultContent extends Component {
                     </Button>
                 </div>
 
-                <div className={`animated-div ${expanded ? 'show' : 'hide'}`} style={{ "margin-top": "30px" }}>
-                    <Typography>
-                        Diabetes is a chronic disease that occurs either when the pancreas does not produce enough insulin or when the body cannot effectively use the insulin it produces.
-                        Insulin is a hormone that regulates blood glucose. Hyperglycaemia, also called raised blood glucose or raised blood sugar, is a common effect of uncontrolled diabetes and over time leads to serious damage to many of the bodys systems, especially the nerves and blood vessels.
-
-                    </Typography>
-
-                    <a href="https://www.who.int/news-room/fact-sheets/detail/diabetes#:~:text=Overview,hormone%20that%20regulates%20blood%20glucose.">source diabetics</a>
+                <div className={`animated-div ${expanded ? 'show' : 'hide'}`} style={{ marginTop: "30px" }}>
+                    <div style={{ whiteSpace: 'pre-line' }}>
+                        {this.state.content}
+                    </div>
                 </div>
             </div>
         );

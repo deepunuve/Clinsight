@@ -17,15 +17,15 @@ const AcademyAppConfig = {
 	},
 	routes: [
 		{
-			path: 'apps/academy',
+			path: 'TA',
 			element: <AcademyApp />,
 			children: [
 				{
 					path: '',
-					element: <Navigate to="/apps/academy/courses" />
+					element: <Navigate to="/TA/clinical" />
 				},
 				{
-					path: 'courses/:courseId/*',
+					path: 'clinical/:courseId/*',
 					element: <Course />
 				},
 				{
@@ -45,7 +45,7 @@ const AcademyAppConfig = {
 					element: <SourceView />
 				},
 				{
-					path: 'courses',
+					path: 'clinical',
 					element: <Courses />
 				}
 			]

@@ -101,7 +101,7 @@ function SourceView() {
 				<>
 					<div className="p-32">
 						<Button
-							to={`/apps/courses/`}
+							to={`/TA/clinical/`}
 							component={Link}
 							className="mb-24"
 							color="secondary"

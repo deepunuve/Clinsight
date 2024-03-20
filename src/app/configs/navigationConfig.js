@@ -15,7 +15,7 @@ const navigationConfig = [
 		title: 'Studies',
 		type: 'item',
 		icon: 'heroicons-outline:academic-cap',
-		url: '/apps/academy',
+		url: '/TA',
 		translate: 'Studies'
 	},
 	{

@@ -62,7 +62,19 @@ export const getStudyType = async () => {
 };
 export const getStudyDetails = async (id) => {
   return axios.get('assets/studyDetails.json')
-  //return axios.get(`http://13.59.144.105:9003/return_study_details/?nct_id=${id}`)
+    //return axios.get(`http://13.59.144.105:9003/return_study_details/?nct_id=${id}`)
+    .then(response => {
+      // Return data from the API call
+      return response.data;
+    })
+    .catch(error => {
+      // Handle error
+      console.error('Error fetching data:', error);
+    });
+};
+export const getResultDetails = async (data) => {
+  return axios.post('assets/resultData.json')
+    //return axios.get(`http://13.59.144.105:9003/return_study_details/?nct_id=${id}`)
     .then(response => {
       // Return data from the API call
       return response.data;
