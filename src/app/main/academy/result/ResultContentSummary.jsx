@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { postContentData, getResultDetails } from '../../../store/apiServices';
 import FuseLoading from '@fuse/core/FuseLoading';
 
-export default class ResultContent extends Component {
+export default class ResultContentSummary extends Component {
 
     constructor(props) {
         super(props);
@@ -19,7 +19,7 @@ export default class ResultContent extends Component {
         };
     }
     async componentDidMount() {
-        const sessionData = sessionStorage.getItem('result');
+        const sessionData = sessionStorage.getItem('resultSum');
         if (sessionData) {
             this.setState({
                 content: sessionData,
@@ -47,7 +47,7 @@ export default class ResultContent extends Component {
     //         if (this.props.data) {
     //             let input = JSON.stringify(inputData)
     //             console.log(input);
-    //             const sessionData = sessionStorage.getItem('result');
+    //             const sessionData = sessionStorage.getItem('resultSum');
     //             if (sessionData) {
     //                 this.setState({ content: sessionData });
     //             }
@@ -60,15 +60,13 @@ export default class ResultContent extends Component {
     //                     else {
     //                         updatedContent = '<span style="color:green;font-weight: bold;">Qn. ' + inputData.query + ' ?</span>\n\n' + response.introduction + '\n\n'; // Add new content after two new lines
     //                     }
-    //                     sessionStorage.setItem('result', updatedContent);
+    //                     sessionStorage.setItem('resultSum', updatedContent);
     //                     this.setState({
     //                         content: updatedContent,
     //                     });
 
     //                 });
-
     //             this.setState({ isloading: false });
-
     //         }
 
     //     } catch (error) {
@@ -81,7 +79,7 @@ export default class ResultContent extends Component {
                     'query': inputData.query
                 };
                 console.log(payload);
-                const sessionData = sessionStorage.getItem('result');
+                const sessionData = sessionStorage.getItem('resultSum');
                 if (sessionData) {
                     this.setState({ content: sessionData });
                 }
@@ -94,7 +92,7 @@ export default class ResultContent extends Component {
                         else {
                             updatedContent = '<span style="color:green;font-weight: bold;">Qn. ' + inputData.query + ' ?</span>\n\n' + response + '\n\n'; // Add new content after two new lines
                         }
-                        sessionStorage.setItem('result', updatedContent);
+                        sessionStorage.setItem('resultSum', updatedContent);
                         this.setState({
                             content: updatedContent,
                         });
@@ -102,13 +100,11 @@ export default class ResultContent extends Component {
                     });
 
                 this.setState({ isloading: false });
-
             }
 
         } catch (error) {
         }
     };
-
 
     toggleExpand = () => {
         this.setState((prevState) => ({

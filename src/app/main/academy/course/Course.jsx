@@ -60,15 +60,16 @@ function Course() {
 	};
 	const clearSessionData = () => {
 		setSessionData(null);
-		// Clear data from sessionStorage
 		sessionStorage.removeItem('sessionData');
+		sessionStorage.removeItem('result');
+		sessionStorage.removeItem('resultSum');
 	};
 	const graphClick = (childValue) => {
 		setChildStateValue(childValue);
 		study.source = childValue;
 		updateSessionData(study);
 	};
-	
+
 	const fetchData = async () => {
 		await getStudyDetails(courseId).
 			then(response => {
@@ -91,7 +92,6 @@ function Course() {
 	useEffect(() => {
 		const previousData = JSON.parse(sessionStorage.getItem('sessionData'));
 		const previousId = previousData ? previousData.id : null;
-
 		// Clear session data if the id has changed
 		if (courseId !== previousId) {
 			clearSessionData();
@@ -133,7 +133,8 @@ function Course() {
 							className="flex-1 text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate mx-10"
 						>
 							<Button
-								onClick={handleClick}
+								to={`/TA/results/${study.id}`}
+								component={Link}
 								className="px-16 min-w-128"
 								color="secondary"
 								variant="contained"

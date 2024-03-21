@@ -49,20 +49,29 @@ class DocumentGraphNew extends Component {
   handleClick = node => {
     const { sourceNames } = this.state;
     const updatedItems = [...sourceNames];
-    updatedItems.push({ id: node.id, source_name: node.label, key: 'key' });
-    this.state.elements.links.forEach(link => {
-      if (link.source.id === node.id) {
-        let data = this.state.elements.nodes.find(node => node.id === link.target.id);
-        if (!updatedItems.some(item => item.id === data.id)) {
-          updatedItems.push({ id: data.id, source_name: data.label, key: 'key' });
-        }
-      } else if (link.target.id === node.id) {
-        let data = this.state.elements.nodes.find(node => node.id === link.source.id);
-        if (!updatedItems.some(item => item.id === data.id)) {
-          updatedItems.push({ id: data.id, source_name: data.label, key: 'key' });
-        }
+    if (!updatedItems.some(item => item.id === node.id)) {
+      updatedItems.push({ id: node.id, source_name: node.label, key: 'key' });
+    }
+    else {
+      const indexToRemove = updatedItems.findIndex(item => item.id === node.id);
+      if (indexToRemove !== -1) {
+        // Remove item from array
+        updatedItems.splice(indexToRemove, 1);
       }
-    });
+    }
+    // this.state.elements.links.forEach(link => {
+    //   if (link.source.id === node.id) {
+    //     let data = this.state.elements.nodes.find(node => node.id === link.target.id);
+    //     if (!updatedItems.some(item => item.id === data.id)) {
+    //       updatedItems.push({ id: data.id, source_name: data.label, key: 'key' });
+    //     }
+    //   } else if (link.target.id === node.id) {
+    //     let data = this.state.elements.nodes.find(node => node.id === link.source.id);
+    //     if (!updatedItems.some(item => item.id === data.id)) {
+    //       updatedItems.push({ id: data.id, source_name: data.label, key: 'key' });
+    //     }
+    //   }
+    // });
     this.setState({ sourceNames: updatedItems });
     this.handleGraphClick(updatedItems);
 

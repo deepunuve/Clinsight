@@ -43,22 +43,14 @@ function SourceView() {
 	const [selectedFile, setSelectedFile] = useState(null);
 	const [studyCount, setStudyCount] = useState(0);
 	const [isLoading, setIsLoading] = useState(false);
-	const location = useLocation();
-	const state = location.state; // Access state object here
-	const { data } = state;
+
 	useEffect(() => {
-		if (data) {
-			setStudy(data);
-			setStudyCount(data.source.length);
-		}
-		//  const fetchData = async () => {
-		//     await getStudyDetails(courseId).
-		//         then(response => {                  
-		//             setStudy(response);
-		//             setStudyCount(response.source.length);
-		//         });
-		// };
-		// fetchData(); // Call the async function
+		const storedSessionData = sessionStorage.getItem('sessionData');
+        if (storedSessionData) {
+            let sData = JSON.parse(storedSessionData);
+            setStudy(sData);
+            setStudyCount(sData.source.length);
+        }
 	}, [isMobile, study]);
 
 	useEffect(() => {

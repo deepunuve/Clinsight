@@ -36,6 +36,7 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import GraphNew from '../graph/GraphNew';
 import { tr } from 'date-fns/locale';
+import ResultContentSummary from './ResultContentSummary';
 
 const container = {
     show: {
@@ -67,11 +68,10 @@ function ResultDashNew(props) {
     const [tabValue, setTabValue] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
     const [dataUpdate, setDataUpdate] = useState('');
+    const [dataSumUpdate, setDataSumUpdate] = useState('');
     const [node, setNode] = useState('');
 
-    const location = useLocation();
-    const state = location.state; // Access state object here
-    const { data } = state;
+    // const { data } = state;
     const [isVisible, setIsVisible] = useState(false);
     const navigate = useNavigate();
 
@@ -82,29 +82,15 @@ function ResultDashNew(props) {
     useEffect(() => {
         setLeftSidebarOpen(!isMobile);
         setRightSidebarOpen(!isMobile);
-        if (data) {
-            setStudy(data);
-            setStudyCount(data.source.length);
+        const storedSessionData = sessionStorage.getItem('sessionData');
+        if (storedSessionData) {
+            let sData = JSON.parse(storedSessionData);
+            setStudy(sData);
+            setStudyCount(sData.source.length);
         }
     }, [isMobile, study]);
+   
 
-    function handleClick() {
-        const destination = `/TA/graphView/${study.id}`;
-        const state = { data: study, max: true };
-        navigate(destination, { state });
-    }
-    function handleClickBackToInput() {
-        const destination = `/TA/sourceView/${study.id}`;
-        const state = { data: study };
-        navigate(destination, { state });
-    }
-    // function updateCurrentStep(index) {
-    //     if (course && (index > course.totalSteps || index < 0)) {
-    //         return;
-    //     }
-
-    //     updateCourse({ courseId, data: { progress: { currentStep: index } } });
-    // }
     function handleInputChange(e) {
 
         setInputValue(e.target.value);
@@ -120,32 +106,55 @@ function ResultDashNew(props) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        let value = inputValue.trim();
+        let value = inputValue.trim().toLowerCase();
         let datahtml = '';
         if (value !== '') {
+
             const postData = {
                 node: node,
                 query: value
             };
-            setDataUpdate(postData);
-            if (childRef.current) {
-                childRef.current.handleChildClick(value);
+            if (value.includes("summarize")) {
+                setDataSumUpdate(postData);
+                setTabValue(1);
+                const newHtmlData = '<div class="react-chatbot-kit-user-chat-message-container">' +
+                    '<div class="react-chatbot-kit-user-chat-message">' + value +
+                    '<div class="react-chatbot-kit-user-chat-message-arrow"></div>' +
+                    '</div>' +
+                    '<div class="react-chatbot-kit-user-avatar">' +
+                    '<div class="react-chatbot-kit-user-avatar-container">' +
+                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="react-chatbot-kit-user-avatar-icon">' +
+                    '<path d="M256 288c79.5 0 144-64.5 144-144S335.5 0 256 0 112 64.5 112 144s64.5 144 144 144zm128 32h-55.1c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16H128C57.3 320 0 377.3 0 448v16c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48v-16c0-70.7-57.3-128-128-128z"></path>' +
+                    '</svg>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>';
+                setMessages(messages + newHtmlData);
             }
-            const newHtmlData = '<div class="react-chatbot-kit-user-chat-message-container">' +
-                '<div class="react-chatbot-kit-user-chat-message">' + value +
-                '<div class="react-chatbot-kit-user-chat-message-arrow"></div>' +
-                '</div>' +
-                '<div class="react-chatbot-kit-user-avatar">' +
-                '<div class="react-chatbot-kit-user-avatar-container">' +
-                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="react-chatbot-kit-user-avatar-icon">' +
-                '<path d="M256 288c79.5 0 144-64.5 144-144S335.5 0 256 0 112 64.5 112 144s64.5 144 144 144zm128 32h-55.1c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16H128C57.3 320 0 377.3 0 448v16c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48v-16c0-70.7-57.3-128-128-128z"></path>' +
-                '</svg>' +
-                '</div>' +
-                '</div>' +
-                '</div>' +
-                '</div>' +
-                '</div>';
-            setMessages(messages + newHtmlData);
+            else {
+                setDataUpdate(postData);
+                setTabValue(0);
+                if (childRef.current) {
+                    childRef.current.handleChildClick(value);
+                }
+                const newHtmlData = '<div class="react-chatbot-kit-user-chat-message-container">' +
+                    '<div class="react-chatbot-kit-user-chat-message">' + value +
+                    '<div class="react-chatbot-kit-user-chat-message-arrow"></div>' +
+                    '</div>' +
+                    '<div class="react-chatbot-kit-user-avatar">' +
+                    '<div class="react-chatbot-kit-user-avatar-container">' +
+                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="react-chatbot-kit-user-avatar-icon">' +
+                    '<path d="M256 288c79.5 0 144-64.5 144-144S335.5 0 256 0 112 64.5 112 144s64.5 144 144 144zm128 32h-55.1c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16H128C57.3 320 0 377.3 0 448v16c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48v-16c0-70.7-57.3-128-128-128z"></path>' +
+                    '</svg>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>';
+                setMessages(messages + newHtmlData);
+            }
             setInputValue('');
         }
     };
@@ -249,7 +258,7 @@ function ResultDashNew(props) {
                                         />
                                     </Tabs>
                                     {tabValue === 0 && <ResultContent course={study} data={dataUpdate} />}
-                                    {tabValue === 1 && <div> </div>}
+                                    {tabValue === 1 && <ResultContentSummary course={study} data={dataSumUpdate} />}
                                     {tabValue === 2 && <div></div>}
                                 </div>
 
@@ -270,7 +279,6 @@ function ResultDashNew(props) {
                         <Button
                             to={`/TA/clinical/${study.id}`}
                             component={Link}
-                            // onClick={handleClickBackToInput}
                             className="mb-24"
                             color="secondary"
                             variant="text"
@@ -285,8 +293,8 @@ function ResultDashNew(props) {
                             Back to study
                         </Button>
                         <Button
-                            // to={`/apps/academy/courses/${study.id}`}
-                            onClick={handleClickBackToInput}
+                            to={`/TA/sourceView/${study.id}`}
+                            component={Link}
                             style={{ background: 'none', "margin-top": '-10%' }}
                             variant="contained"
                             endIcon={<FuseSvgIcon size={20}>heroicons-solid:folder-open</FuseSvgIcon>}
