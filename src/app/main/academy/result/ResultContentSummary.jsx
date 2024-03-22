@@ -42,55 +42,23 @@ export default class ResultContentSummary extends Component {
             }
         }
     }
-    // getResultDetailsData = async (inputData) => {
-    //     try {
-    //         if (this.props.data) {
-    //             let input = JSON.stringify(inputData)
-    //             console.log(input);
-    //             const sessionData = sessionStorage.getItem('resultSum');
-    //             if (sessionData) {
-    //                 this.setState({ content: sessionData });
-    //             }
-    //             await getResultDetails(input).
-    //                 then(response => {
-    //                     let updatedContent = '';
-    //                     if (sessionData) {
-    //                         updatedContent = sessionData + '<span style="color:green;font-weight: bold;">Qn. ' + inputData.query + ' ?</span>\n\n' + response.introduction + '\n\n';
-    //                     }
-    //                     else {
-    //                         updatedContent = '<span style="color:green;font-weight: bold;">Qn. ' + inputData.query + ' ?</span>\n\n' + response.introduction + '\n\n'; // Add new content after two new lines
-    //                     }
-    //                     sessionStorage.setItem('resultSum', updatedContent);
-    //                     this.setState({
-    //                         content: updatedContent,
-    //                     });
-
-    //                 });
-    //             this.setState({ isloading: false });
-    //         }
-
-    //     } catch (error) {
-    //     }
-    // };
     getResultDetailsData = async (inputData) => {
         try {
             if (this.props.data) {
-                let payload = {
-                    'query': inputData.query
-                };
-                console.log(payload);
+                let input = JSON.stringify(inputData)
+                console.log(input);
                 const sessionData = sessionStorage.getItem('resultSum');
                 if (sessionData) {
                     this.setState({ content: sessionData });
                 }
-                await postContentData(payload).
+                await getResultDetails(input).
                     then(response => {
                         let updatedContent = '';
                         if (sessionData) {
-                            updatedContent = sessionData + '<span style="color:green;font-weight: bold;">Qn. ' + inputData.query + ' ?</span>\n\n' + response + '\n\n';
+                            updatedContent = sessionData + '<span style="color:green;font-weight: bold;">Qn. ' + inputData.query + ' ?</span>\n\n' + response.introduction + '\n\n';
                         }
                         else {
-                            updatedContent = '<span style="color:green;font-weight: bold;">Qn. ' + inputData.query + ' ?</span>\n\n' + response + '\n\n'; // Add new content after two new lines
+                            updatedContent = '<span style="color:green;font-weight: bold;">Qn. ' + inputData.query + ' ?</span>\n\n' + response.introduction + '\n\n'; // Add new content after two new lines
                         }
                         sessionStorage.setItem('resultSum', updatedContent);
                         this.setState({
@@ -98,13 +66,45 @@ export default class ResultContentSummary extends Component {
                         });
 
                     });
-
                 this.setState({ isloading: false });
             }
 
         } catch (error) {
         }
     };
+    // getResultDetailsData = async (inputData) => {
+    //     try {
+    //         if (this.props.data) {
+    //             let payload = {
+    //                 'query': inputData.query
+    //             };
+    //             console.log(payload);
+    //             const sessionData = sessionStorage.getItem('resultSum');
+    //             if (sessionData) {
+    //                 this.setState({ content: sessionData });
+    //             }
+    //             await postContentData(payload).
+    //                 then(response => {
+    //                     let updatedContent = '';
+    //                     if (sessionData) {
+    //                         updatedContent = sessionData + '<span style="color:green;font-weight: bold;">Qn. ' + inputData.query + ' ?</span>\n\n' + response + '\n\n';
+    //                     }
+    //                     else {
+    //                         updatedContent = '<span style="color:green;font-weight: bold;">Qn. ' + inputData.query + ' ?</span>\n\n' + response + '\n\n'; // Add new content after two new lines
+    //                     }
+    //                     sessionStorage.setItem('resultSum', updatedContent);
+    //                     this.setState({
+    //                         content: updatedContent,
+    //                     });
+
+    //                 });
+
+    //             this.setState({ isloading: false });
+    //         }
+
+    //     } catch (error) {
+    //     }
+    // };
 
     toggleExpand = () => {
         this.setState((prevState) => ({
