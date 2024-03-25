@@ -8,6 +8,7 @@ const Courses = lazy(() => import('./courses/Courses'));
 const ResultDashNew = lazy(() => import('./result/ResultDashNew'));
 const GraphView = lazy(() => import('./result/GraphView'));
 const SourceView = lazy(() => import('./result/SourceView'));
+const Dashboard = lazy(() => import('./course/Dashboard'));
 /**
  * The Academy app config.
  */
@@ -29,6 +30,10 @@ const AcademyAppConfig = {
 					element: <Course />
 				},
 				{
+					path: 'dashboard/:courseId/*',
+					element: <Dashboard />
+				},
+				{
 					path: 'results/:courseId/*',
 					element: <ResultDashNew state={{ key: 'value' }} />
 				},
@@ -47,7 +52,7 @@ const AcademyAppConfig = {
 				{
 					path: 'clinical',
 					element: <Courses />
-				}
+				}				
 			]
 		}
 	]

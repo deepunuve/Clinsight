@@ -1,7 +1,7 @@
 import FusePageSimple from '@fuse/core/FusePageSimple';
 import { useTheme } from '@mui/material/styles';
 import Hidden from '@mui/material/Hidden';
-
+import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import Stepper from '@mui/material/Stepper';
 import { useEffect, useRef, useState } from 'react';
@@ -11,7 +11,6 @@ import { Step, StepContent, StepLabel } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import IconButton from '@mui/material/IconButton';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
@@ -29,11 +28,21 @@ import QuickPanelToggleButton from 'app/theme-layouts/shared-components/quickPan
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import DocumentGraphNew from '../graph/DocumentGraphNew';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
+import { styled } from '@mui/material/styles';
+import HomeTab from './HomeTab';
 
+const Root = styled(FusePageSimple)(({ theme }) => ({
+	'& .FusePageSimple-header': {
+		backgroundColor: theme.palette.background.paper,
+		boxShadow: `inset 0 0 0 1px  ${theme.palette.divider}`
+	}
+}));
 /**
  * The Course page.
  */
-function Course() {
+function Dashboard() {
 	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 	const theme = useTheme();
 	const pageLayout = useRef(null);
@@ -48,6 +57,15 @@ function Course() {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const state = location.state; // Access state object here
+	const [tabValue, setTabValue] = useState(0);
+
+	function handleChangeTab(event, value) {
+		setTabValue(value);
+	}
+
+	if (isLoading) {
+		return <FuseLoading />;
+	}
 
 	const [sessionData, setSessionData] = useState(() => {
 		// Retrieve data from sessionStorage on component mount
@@ -123,134 +141,128 @@ function Course() {
 	}
 
 	return (
-		<FusePageSimple
-			header={
-				<div className="flex flex-col p-24 w-full sm:px-40">
+		<Root
+			header={<div className="flex flex-col w-full px-24 sm:px-32">
+				<div className="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 my-32 sm:my-48">
+					<div className="flex flex-auto items-center min-w-0">
 
-					<div className="flex items-center w-full mt-8 -mx-10">
+						<div className="flex flex-col min-w-0 mx-16">
+							<Typography className="text-2xl md:text-5xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
+								{`Protocol - ${study.id}!`}
+							</Typography>
 
-						<Typography
-							component="h2"
-							className="flex-1 text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate mx-10"
-						>
-							<Button
-								to={`/TA/results/${study.id}`}
-								component={Link}
-								className="px-16 min-w-128"
-								color="secondary"
-								variant="contained"
-								endIcon={<FuseSvgIcon size={20}>heroicons-solid:arrow-sm-right</FuseSvgIcon>}
-							>
-								Explore More
-							</Button>
-						</Typography>
+							<div className="flex items-center">
+								<FuseSvgIcon
+									size={20}
+									color="action"
+								>
+									heroicons-solid:book-open
+								</FuseSvgIcon>
 
-						<div className="flex shrink-0 items-center">
-							<QuickPanelToggleButton />
+								<Typography
+									className="mx-6 leading-6 truncate"
+									color="text.secondary"
+								>
+									{study.title}
+
+								</Typography>
+
+							</div>
 						</div>
 					</div>
+					<div className="flex items-center mt-24 sm:mt-0 sm:mx-8 space-x-12">
+						<Button
+							to={`/TA/clinical`}
+							component={Link}
+							className="whitespace-nowrap"
+							variant="contained"
+							color="primary"
+							startIcon={<FuseSvgIcon size={20}>heroicons-solid:arrow-left</FuseSvgIcon>}
+						>
+							Studies
+						</Button>
+						<Button
+							to={`/TA/clinical/${study.id}`}
+							component={Link}
+							className="whitespace-nowrap"
+							variant="contained"
+							color="secondary"
+							startIcon={<FuseSvgIcon size={20}>heroicons-solid:chart-pie</FuseSvgIcon>}
+						>
+							Explore
+						</Button>
+					</div>
 				</div>
+				<div className="flex items-center">
+					<Button
+						// onClick={handleOpenProjectMenu}
+						className="flex items-center border border-solid border-b-0 rounded-t-xl rounded-b-0 h-40 px-16 text-13 sm:text-16"
+						sx={{
+							backgroundColor: (theme) => theme.palette.background.default,
+							borderColor: (theme) => theme.palette.divider
+						}}
+						endIcon={
+							<FuseSvgIcon
+								size={20}
+								color="action"
+							>
+								heroicons-solid:chevron-down
+							</FuseSvgIcon>
+						}
+					>
+
+					</Button>
+
+				</div>
+			</div>
 
 			}
 			content={
-				<div className="w-full">
-					<SwipeableViews>
-						<div className="flex justify-center p-16 pb-64  sm:pb-64  md:pb-64">
-							<Paper className="w-full mx-auto p-16 pb-64  sm:pb-64  md:pb-64 rounded-16 shadow overflow-hidden">
-								{/* <DocumentGraph onClick={graphClick} /> */}
-								<DocumentGraphNew onClick={graphClick} />
-							</Paper>
-						</div>
-					</SwipeableViews>
+				<div className="w-full p-12 pt-16 sm:pt-24 lg:ltr:pr-0 lg:rtl:pl-0">
+					<Tabs
+						value={tabValue}
+						onChange={handleChangeTab}
+						indicatorColor="secondary"
+						textColor="inherit"
+						variant="scrollable"
+						scrollButtons={false}
+						className="w-full px-24 -mx-4 min-h-40"
+						classes={{ indicator: 'flex justify-center bg-transparent w-full h-full' }}
+						TabIndicatorProps={{
+							children: (
+								<Box
+									sx={{ bgcolor: 'text.disabled' }}
+									className="w-full h-full rounded-full opacity-20"
+								/>
+							)
+						}}
+					>
+						<Tab
+							className="text-14 font-semibold min-h-40 min-w-64 mx-4 px-12"
+							disableRipple
+							label="Home"
+						/>
+						<Tab
+							className="text-14 font-semibold min-h-40 min-w-64 mx-4 px-12"
+							disableRipple
+							label="Budget"
+						/>
+						<Tab
+							className="text-14 font-semibold min-h-40 min-w-64 mx-4 px-12"
+							disableRipple
+							label="Team"
+						/>
+					</Tabs>
+					{tabValue === 0 && <HomeTab />}
+					{tabValue === 1 && <div></div>}
+					{tabValue === 2 && <div></div>}
 				</div>
 			}
-			leftSidebarOpen={leftSidebarOpen}
-			leftSidebarOnClose={() => {
-				setLeftSidebarOpen(false);
-			}}
-			leftSidebarWidth={300}
-			leftSidebarContent={
-				<>
-					<div className="p-32">
-						<Button
-							to={`/TA/dashboard/${study.id}`}
-							component={Link}
-							className="mb-24"
-							color="secondary"
-							variant="text"
-							startIcon={
-								<FuseSvgIcon size={20}>
-									{theme.direction === 'ltr'
-										? 'heroicons-outline:arrow-sm-left'
-										: 'heroicons-outline:arrow-sm-right'}
-								</FuseSvgIcon>
-							}
-						>
-							Back to Studies
-						</Button>
-						{study && (<CourseInfo course={study} />)}
-					</div>
-					<Divider />
-					<Stepper
-						classes={{ root: 'p-32' }}
-						activeStep={studyCount}
-						orientation="vertical"
-					>
 
-						{study.source && (
-							study.source.map((source, index) => {
-								return (
-									<Step
-										key={index}
-										sx={{
-											'& .MuiStepLabel-root, & .MuiStepContent-root': {
-												cursor: 'pointer!important'
-											},
-											'& .MuiStepContent-root': {
-												color: 'text.secondary',
-												fontSize: 13
-											}
-										}}
-										// onClick={() => handleStepChange(source.id)}
-										expanded
-									>
-										<StepLabel
-											className="font-medium"
-											sx={{
-												'& .MuiSvgIcon-root': {
-													color: 'background.default',
-													'& .MuiStepIcon-text': {
-														fill: (_theme) => _theme.palette.text.secondary
-													},
-													'&.Mui-completed': {
-														color: 'secondary.main',
-														'& .MuiStepIcon-text ': {
-															fill: (_theme) => _theme.palette.secondary.contrastText
-														}
-													},
-													'&.Mui-active': {
-														color: 'secondary.main',
-														'& .MuiStepIcon-text ': {
-															fill: (_theme) => _theme.palette.secondary.contrastText
-														}
-													}
-												}
-											}}
-										>
-											{source.source_name}
-										</StepLabel>
-										{/* <StepContent>{step.subtitle}</StepContent> */}
-									</Step>
-								);
-							}))
-						}
-					</Stepper>
-				</>
-			}
 			scroll="content"
 			ref={pageLayout}
 		/>
 	);
 }
 
-export default Course;
+export default Dashboard;

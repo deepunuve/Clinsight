@@ -6,10 +6,10 @@ import SignInConfig from '../main/sign-in/SignInConfig';
 import SignUpConfig from '../main/sign-up/SignUpConfig';
 import SignOutConfig from '../main/sign-out/SignOutConfig';
 import Error404Page from '../main/404/Error404Page';
-import DashboardConfig from '../main/dashboard/DashboardConfig';
 import AcademyAppConfig from '../main/academy/AcademyAppConfig';
+import SourceAppConfig from '../main/dash/AcademyAppConfig';
 
-const routeConfigs = [DashboardConfig, AcademyAppConfig, SignOutConfig, SignInConfig, SignUpConfig];
+const routeConfigs = [SourceAppConfig, AcademyAppConfig, SignOutConfig, SignInConfig, SignUpConfig];
 /**
  * The routes of the application.
  */

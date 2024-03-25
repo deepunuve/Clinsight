@@ -13,7 +13,7 @@ class GraphNew extends Component {
       elements: null,
       SpriteText: null,
       isFullScreen: false,
-      parentWidth: 400,
+      parentWidth: 600,
       parentheight: 500,
       sourceNames: []
     };

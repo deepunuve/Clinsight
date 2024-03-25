@@ -23,9 +23,9 @@ export const getGraphData = async (inputData) => {
 
 // http://13.59.144.105:9004/get_re
 // 'assets/graphHome.json'http://13.59.144.105:9004/document_graph
-export const getGraphDocData = async () => {
+export const getGraphDocData = async (id) => {
   return axios.get('assets/graphHome.json')
-    //return axios.get('http://13.59.144.105:9004/document_graph')
+    //  return axios.get(`http://13.59.144.105:9004/document_graph?study_id=${id}`)
     .then(response => {
       // Return data from the API call
       return response.data;

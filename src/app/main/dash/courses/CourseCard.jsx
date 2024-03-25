@@ -41,14 +41,14 @@ function CourseCard(props) {
 				}}
 			>
 				<Button
-					to={`/TA/dashboard/${course.id}`}
+					to={`/apps/academy/courses/${course.id}/${course.slug}`}
 					component={Link}
 					className="px-16 min-w-128"
 					color="secondary"
 					variant="contained"
 					endIcon={<FuseSvgIcon size={20}>heroicons-solid:arrow-sm-right</FuseSvgIcon>}
 				>
-					Start
+					{buttonStatus()}
 				</Button>
 			</CardActions>
 		</Card>

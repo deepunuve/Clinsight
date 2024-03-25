@@ -19,11 +19,11 @@ const navigationConfig = [
 		translate: 'Studies'
 	},
 	{
-		id: 'source',
+		id: 'apps.academy1',
 		title: 'Sources',
 		type: 'item',
 		icon: 'heroicons-outline:folder-open',
-		url: '/dashboard',
+		url: '/apps/academy',
 		translate: 'Sources'
 	}
 ];

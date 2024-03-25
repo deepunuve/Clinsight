@@ -11,13 +11,17 @@ class DocumentGraphNew extends Component {
     this.state = {
       elements: null,
       SpriteText: null,
-      sourceNames: []
+      sourceNames: [],
+      study: null
     };
     this.fgRef = React.createRef();
     this.toggleFullScreen = this.toggleFullScreen.bind(this);
   }
   componentDidMount() {
-    this.getGraphDataDetails();
+    const storedSessionData = sessionStorage.getItem('sessionData');
+    let data = storedSessionData ? JSON.parse(storedSessionData) : null
+    this.setState({ study: data });
+    this.getGraphDataDetails(data.id);
   }
   toggleFullScreen() {
     this.setState({
@@ -89,11 +93,9 @@ class DocumentGraphNew extends Component {
     }
   };
 
-  getGraphDataDetails = async (status) => {
+  getGraphDataDetails = async (id) => {
     try {
-
-
-      await getGraphDocData().
+      await getGraphDocData(id).
         then(response => {
           this.setState({ elements: response });
         });
