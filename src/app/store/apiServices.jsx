@@ -72,9 +72,23 @@ export const getStudyDetails = async (id) => {
       console.error('Error fetching data:', error);
     });
 };
-export const getResultDetails = async (data) => {
-  return axios.post('assets/resultData.json')
+
+export const getDataCluster = async (id) => {
+  return axios.get('assets/clusterData.json')
     //return axios.get(`http://13.59.144.105:9003/return_study_details/?nct_id=${id}`)
+    .then(response => {
+      // Return data from the API call
+      return response.data;
+    })
+    .catch(error => {
+      // Handle error
+      console.error('Error fetching data:', error);
+    });
+};
+
+export const getResultDetails = async (inputData) => {
+  //return axios.post('http://13.59.144.105:9003/Question_answering', inputData)
+  return axios.get('assets/resultData.json')
     .then(response => {
       // Return data from the API call
       return response.data;

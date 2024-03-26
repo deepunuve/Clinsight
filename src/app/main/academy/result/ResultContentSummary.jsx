@@ -45,20 +45,28 @@ export default class ResultContentSummary extends Component {
     getResultDetailsData = async (inputData) => {
         try {
             if (this.props.data) {
-                let input = JSON.stringify(inputData)
+
+                const postData = {
+                    query: inputData.query,
+                    node: inputData.node
+                };
+                let input = JSON.stringify(postData)
                 console.log(input);
+
                 const sessionData = sessionStorage.getItem('resultSum');
                 if (sessionData) {
                     this.setState({ content: sessionData });
                 }
-                await getResultDetails(input).
+                await getResultDetails(postData).
                     then(response => {
                         let updatedContent = '';
                         if (sessionData) {
-                            updatedContent = sessionData + '<span style="color:green;font-weight: bold;">Qn. ' + inputData.query + ' ?</span>\n\n' + response.introduction + '\n\n';
+                            updatedContent = sessionData + '<span style="color:green;font-weight: bold;">Qn. ' + inputData.query + ' ?</span>\n\n' + response.answer + '\n\n';
+                            updatedContent = updatedContent + '<span style="color:green;font-weight: bold;">Sources</span>\n\n<span style="color:blue;font-weight: bold;">' + response.source + '</span>\n\n';
                         }
                         else {
-                            updatedContent = '<span style="color:green;font-weight: bold;">Qn. ' + inputData.query + ' ?</span>\n\n' + response.introduction + '\n\n'; // Add new content after two new lines
+                            updatedContent = '<span style="color:green;font-weight: bold;">Qn. ' + inputData.query + ' ?</span>\n\n' + response.answer + '\n\n';
+                            updatedContent = updatedContent + '<span style="color:green;font-weight: bold;">Sources</span>\n\n<span style="color:blue;font-weight: bold;">' + response.source + '</span>\n\n';
                         }
                         sessionStorage.setItem('resultSum', updatedContent);
                         this.setState({
@@ -66,7 +74,9 @@ export default class ResultContentSummary extends Component {
                         });
 
                     });
+
                 this.setState({ isloading: false });
+
             }
 
         } catch (error) {

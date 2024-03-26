@@ -22,7 +22,7 @@ import Error404Page from '../../404/Error404Page';
 import { useGetAcademyCourseQuery, useUpdateAcademyCourseMutation } from '../AcademyApi';
 import DocumentGraph from '../graph/DocumentGraph';
 import CourseHeader from './CourseHeader';
-import { getStudyDetails } from '../../../store/apiServices';
+import { getDataCluster, getStudyDetails } from '../../../store/apiServices';
 import ResultDashNew from '../result/ResultDashNew';
 import QuickPanelToggleButton from 'app/theme-layouts/shared-components/quickPanel/QuickPanelToggleButton';
 import { useNavigate } from 'react-router-dom';
@@ -32,6 +32,7 @@ import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import { styled } from '@mui/material/styles';
 import HomeTab from './HomeTab';
+import ColoredText from './ColoredText';
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
 	'& .FusePageSimple-header': {
@@ -52,6 +53,7 @@ function Dashboard() {
 	const { courseId } = routeParams;
 	const [isLoading, setIsLoading] = useState(false);
 	const [study, setStudy] = useState(null);
+	const [cluster, setCluster] = useState(null);
 	const [studyCount, setStudyCount] = useState(0);
 	const [childStateValue, setChildStateValue] = useState([]);
 	const navigate = useNavigate();
@@ -82,13 +84,13 @@ function Dashboard() {
 		sessionStorage.removeItem('sessionData');
 		sessionStorage.removeItem('result');
 		sessionStorage.removeItem('resultSum');
+		sessionStorage.removeItem('chatData');
 	};
 	const graphClick = (childValue) => {
 		setChildStateValue(childValue);
 		study.source = childValue;
 		updateSessionData(study);
 	};
-
 	const fetchData = async () => {
 		await getStudyDetails(courseId).
 			then(response => {
@@ -97,6 +99,15 @@ function Dashboard() {
 				updateSessionData(response);
 			});
 	};
+
+	const clusterData = async () => {
+		await getDataCluster(courseId).
+			then(response => {
+				setCluster(response);
+			});
+	};
+	clusterData();
+
 	useEffect(() => {
 		setLeftSidebarOpen(!isMobile);
 		setRightSidebarOpen(!isMobile);
@@ -130,15 +141,19 @@ function Dashboard() {
 
 	// const activeStep = currentStep !== 0 ? currentStep : 1;
 
-	if (isLoading) {
-		return <FuseLoading />;
-	}
+
 	if (!sessionData) {
 		return <FuseLoading />;
 	}
 	if (!study) {
 		return <FuseLoading />;
 	}
+	const text = 'This is a sample text with color highlights.';
+	const ranges = [
+		{ start: 5, end: 6, color: 'red' },     // "is"
+		{ start: 11, end: 16, color: 'blue' },  // "sample"
+		{ start: 23, end: 28, color: 'green' }  // "color"
+	];
 
 	return (
 		<Root
@@ -240,21 +255,22 @@ function Dashboard() {
 						<Tab
 							className="text-14 font-semibold min-h-40 min-w-64 mx-4 px-12"
 							disableRipple
-							label="Home"
+							label="Document Insights"
 						/>
 						<Tab
 							className="text-14 font-semibold min-h-40 min-w-64 mx-4 px-12"
 							disableRipple
-							label="Budget"
-						/>
-						<Tab
-							className="text-14 font-semibold min-h-40 min-w-64 mx-4 px-12"
-							disableRipple
-							label="Team"
+							label="Compare & Contrast"
 						/>
 					</Tabs>
 					{tabValue === 0 && <HomeTab />}
-					{tabValue === 1 && <div></div>}
+					{tabValue === 1 && (<div className="w-full">
+						<div className="flex justify-center p-16 pb-64  sm:pb-64  md:pb-64">
+							<Paper className="w-full mx-auto p-16 pb-64  sm:pb-64  md:pb-64 rounded-16 shadow overflow-hidden">
+								<ColoredText text={cluster.data} ranges={cluster.matrix} />
+							</Paper>
+						</div>
+					</div>)}
 					{tabValue === 2 && <div></div>}
 				</div>
 			}

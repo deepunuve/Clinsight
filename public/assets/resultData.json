@@ -1,3 +1,82 @@
 {
-  "introduction":"Diabetes mellitus refers to a group of diseases that affect how the body uses blood sugar (glucose). Glucose is an important source of energy for the cells that make up the muscles and tissues. It's also the brain's main source of fuel. The main cause of diabetes varies by type. But no matter what type of diabetes you have, it can lead to excess sugar in the blood. Too much sugar in the blood can lead to serious health problems. Chronic diabetes conditions include type 1 diabetes and type 2 diabetes. Potentially reversible diabetes conditions include prediabetes and gestational diabetes. Prediabetes happens when blood sugar levels are higher than normal. But the blood sugar levels aren't high enough to be called diabetes. And prediabetes can lead to diabetes unless steps are taken to prevent it. Gestational diabetes happens during pregnancy. But it may go away after the baby is born."
+  "answer": "The overall objective of this study is to determine whether daily supplementation with the dietary supplement Cardioflex for 90 days will reduce risk factor biomarkers for CVD in adults aged 30–65 years old.  { \"answer\": \"The overall objective of this study is to determine whether daily supplementation with the dietary supplement Cardioflex for 90 days will reduce risk factor biomarkers for CVD in adults aged 30–65 years old.\", }",
+  "source": "{\n  \"Cardioflex Q10\": \"RESEARCH OBJECTIVES\\nThe overall objective of this study is to determine whether daily supplementation with the dietary supplement Cardioflex for 90 days will reduce risk factor biomarkers for CVD in adults aged 30–65 years old.\"\n }",
+  "matrix":[
+    {
+       "word":" Cardioflex Q10",
+       "start_index":77,
+       "end_index":91,
+       "type":"Protein"
+    },
+    {
+       "word":" lipid",
+       "start_index":527,
+       "end_index":532,
+       "type":"Chemical",
+       "color":"red"
+    },
+    {
+       "word":" lipid",
+       "start_index":965,
+       "end_index":970,
+       "type":"Chemical",
+       "color":"red"
+    },
+    {
+       "word":" cholesterol",
+       "start_index":1006,
+       "end_index":1017,
+       "type":"Chemical",
+       "color":"red"
+    },
+    {
+       "word":" LDL-cholesterol",
+       "start_index":1019,
+       "end_index":1034,
+       "type":"Chemical",
+       "color":"red"
+    },
+    {
+       "word":" triglycerides",
+       "start_index":1040,
+       "end_index":1053,
+       "type":"Chemical",
+       "color":"red"
+    },
+    {
+       "word":" HDL-cholesterol",
+       "start_index":1070,
+       "end_index":1085,
+       "type":"Chemical",
+       "color":"red"
+    },
+    {
+       "word":" lipid",
+       "start_index":1573,
+       "end_index":1578,
+       "type":"Chemical",
+       "color":"red"
+    },
+    {
+       "word":"Cardiovascular Disease",
+       "start_index":104,
+       "end_index":126,
+       "type":"Disease",
+       "color":"green"
+    },
+    {
+       "word":"CVD",
+       "start_index":294,
+       "end_index":297,
+       "type":"Disease",
+       "color":"green"
+    },
+    {
+       "word":"CVD",
+       "start_index":1743,
+       "end_index":1746,
+       "type":"Disease",
+       "color":"green"
+    }
+ ]
 }

@@ -64,6 +64,7 @@ function Course() {
 		sessionStorage.removeItem('sessionData');
 		sessionStorage.removeItem('result');
 		sessionStorage.removeItem('resultSum');
+		sessionStorage.removeItem('chatData');
 	};
 	const graphClick = (childValue) => {
 		setChildStateValue(childValue);

@@ -82,7 +82,6 @@ class GraphNew extends Component {
     updatedItems.push({ id: node.id, source_name: node.label, key: 'key' });
     this.setState({ sourceNames: updatedItems });
     this.handleGraphClick(updatedItems);
-    
     if (this.fgRef.current) {
       // Aim at node from outside it
       const distance = 40;

@@ -37,6 +37,9 @@ import { useNavigate } from 'react-router-dom';
 import GraphNew from '../graph/GraphNew';
 import { tr } from 'date-fns/locale';
 import ResultContentSummary from './ResultContentSummary';
+import Loader from './../loader';
+import { postContentData, getResultDetails } from '../../../store/apiServices';
+
 
 const container = {
     show: {
@@ -67,10 +70,11 @@ function ResultDashNew(props) {
     const [studyCount, setStudyCount] = useState(0);
     const [tabValue, setTabValue] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
+    const [isLoadingGraph, setIsLoadingGraph] = useState(false);
     const [dataUpdate, setDataUpdate] = useState('');
     const [dataSumUpdate, setDataSumUpdate] = useState('');
     const [node, setNode] = useState('');
-
+    const messagesEndRef = useRef(null);
     // const { data } = state;
     const [isVisible, setIsVisible] = useState(false);
     const navigate = useNavigate();
@@ -78,46 +82,65 @@ function ResultDashNew(props) {
     function handleChangeTab(event, value) {
         setTabValue(value);
     }
-
+    let chatData = null;
     useEffect(() => {
+        
         setLeftSidebarOpen(!isMobile);
         setRightSidebarOpen(!isMobile);
         const storedSessionData = sessionStorage.getItem('sessionData');
+        chatData = sessionStorage.getItem('chatData');
         if (storedSessionData) {
             let sData = JSON.parse(storedSessionData);
             setStudy(sData);
             setStudyCount(sData.source.length);
+            setMessages(chatData);
         }
+
     }, [isMobile, study]);
-   
 
     function handleInputChange(e) {
 
         setInputValue(e.target.value);
     };
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
 
+    const scrollToBottom = () => {
+        if (messagesEndRef.current) {
+            messagesEndRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        }
+    };
     const graphClick = (childValue) => {
         const newHtmlData = '<div class="react-chatbot-kit-chat-bot-message-container" >' +
             '<div class="react-chatbot-kit-chat-bot-message" ><span>Clicked node <span class="bold-italic">"' + childValue[0].source_name + '"</span> is loaded here. Now you can explore based on this .</span></div>' +
             '</div>';
         setNode(childValue[0].source_name);
-        setMessages(messages + newHtmlData);
+        if (messages) {
+            setMessages(messages + newHtmlData);
+            sessionStorage.setItem('chatData', messages + newHtmlData);
+        }
+        else {
+            setMessages(newHtmlData);
+            sessionStorage.setItem('chatData', newHtmlData);
+        }
     };
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
+        setIsLoadingGraph(true);
         e.preventDefault();
         let value = inputValue.trim().toLowerCase();
         let datahtml = '';
         if (value !== '') {
-
+            let newHtmlData = '';
             const postData = {
                 node: node,
                 query: value
             };
             if (value.includes("summarize")) {
                 setDataSumUpdate(postData);
-                setTabValue(1);
-                const newHtmlData = '<div class="react-chatbot-kit-user-chat-message-container">' +
+                setTabValue(0);
+                newHtmlData = '<div class="react-chatbot-kit-user-chat-message-container">' +
                     '<div class="react-chatbot-kit-user-chat-message">' + value +
                     '<div class="react-chatbot-kit-user-chat-message-arrow"></div>' +
                     '</div>' +
@@ -131,15 +154,12 @@ function ResultDashNew(props) {
                     '</div>' +
                     '</div>' +
                     '</div>';
-                setMessages(messages + newHtmlData);
             }
             else {
-                setDataUpdate(postData);
-                setTabValue(0);
                 if (childRef.current) {
                     childRef.current.handleChildClick(value);
                 }
-                const newHtmlData = '<div class="react-chatbot-kit-user-chat-message-container">' +
+                newHtmlData = '<div class="react-chatbot-kit-user-chat-message-container">' +
                     '<div class="react-chatbot-kit-user-chat-message">' + value +
                     '<div class="react-chatbot-kit-user-chat-message-arrow"></div>' +
                     '</div>' +
@@ -153,12 +173,29 @@ function ResultDashNew(props) {
                     '</div>' +
                     '</div>' +
                     '</div>';
-                setMessages(messages + newHtmlData);
+
             }
+
+            await getResultDetails(postData).
+                then(response => {
+                    newHtmlData = newHtmlData + '<div class="react-chatbot-kit-chat-bot-message-container" >' +
+                        '<div class="react-chatbot-kit-chat-bot-message" ><span>' + response.answer + '</span></div>' +
+                        '</div>';
+                });
+
+            if (messages) {
+                setMessages(messages + newHtmlData);
+                sessionStorage.setItem('chatData', messages + newHtmlData);
+            }
+            else {
+                setMessages(newHtmlData);
+                sessionStorage.setItem('chatData', newHtmlData);
+            }
+            setIsLoadingGraph(false);
             setInputValue('');
         }
     };
-    // const activeStep = currentStep !== 0 ? currentStep : 1;
+
 
     if (isLoading) {
         return <FuseLoading />;
@@ -180,8 +217,8 @@ function ResultDashNew(props) {
                     <motion.div variants={item} className="sm:col-span-2 md:col-span-4 lg:col-span-2" >
                         <Paper className="flex flex-col flex-auto p-24 shadow rounded-2xl overflow-hidden">
                             <div className="flex flex-col sm:flex-row items-start justify-between">
-                                <div className="chat-box" style={{ padding: "10px" }}>
-                                    <div class="chatbot">
+                                <div className="chat-box" style={{ padding: "10px" }} >
+                                    <div class="chatbot" >
                                         <div class="react-chatbot-kit-chat-container border"  >
                                             <div class="react-chatbot-kit-chat-inner-container" >
                                                 <div class="react-chatbot-kit-chat-header">Conversation with Nuve-bot</div>
@@ -189,11 +226,15 @@ function ResultDashNew(props) {
                                                     <div class="react-chatbot-kit-chat-bot-message-container" >
                                                         <div class="react-chatbot-kit-chat-bot-message" ><span>how may I help you</span></div>
                                                     </div>
-                                                    <div class="react-chatbot-kit-chat-bot-message-container" >
-                                                        <div class="react-chatbot-kit-chat-bot-message" ><span>Please select a document from above graph to proceed</span></div>
-                                                    </div>
+                                                    {/* <div class="react-chatbot-kit-chat-bot-message-container" >
+                                                        <div class="react-chatbot-kit-chat-bot-message" ><span>Please select a node from the graph to proceed.</span></div>
+                                                    </div> */}
+                                                   
                                                     <div dangerouslySetInnerHTML={{ __html: messages }}></div>
+                                                    {isLoadingGraph && <Loader />}
+                                                    <div ref={messagesEndRef}></div>
                                                 </div>
+
                                                 <div class="react-chatbot-kit-chat-input-container">
                                                     <form class="react-chatbot-kit-chat-input-form" >
                                                         <input class="react-chatbot-kit-chat-input" value={inputValue} onChange={handleInputChange} />
@@ -204,6 +245,7 @@ function ResultDashNew(props) {
                                                         </button>
                                                     </form>
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -241,11 +283,7 @@ function ResultDashNew(props) {
                                             )
                                         }}
                                     >
-                                        <Tab
-                                            className="text-14 font-semibold min-h-40 min-w-64 mx-4 px-12"
-                                            disableRipple
-                                            label="Query"
-                                        />
+
                                         <Tab
                                             className="text-14 font-semibold min-h-40 min-w-64 mx-4 px-12"
                                             disableRipple
@@ -257,9 +295,8 @@ function ResultDashNew(props) {
                                             label="Extract"
                                         />
                                     </Tabs>
-                                    {tabValue === 0 && <ResultContent course={study} data={dataUpdate} />}
-                                    {tabValue === 1 && <ResultContentSummary course={study} data={dataSumUpdate} />}
-                                    {tabValue === 2 && <div></div>}
+                                    {tabValue === 0 && <ResultContentSummary course={study} data={dataSumUpdate} />}
+                                    {tabValue === 1 && <div></div>}
                                 </div>
 
                             </div>
