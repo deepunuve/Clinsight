@@ -106,7 +106,9 @@ function Dashboard() {
 				setCluster(response);
 			});
 	};
-	clusterData();
+	if (!cluster) {
+		clusterData();
+	}
 
 	useEffect(() => {
 		setLeftSidebarOpen(!isMobile);
@@ -263,7 +265,7 @@ function Dashboard() {
 							label="Compare & Contrast"
 						/>
 					</Tabs>
-					{tabValue === 0 && <HomeTab />}
+					{tabValue === 0 && <HomeTab studyId={study.id} />}
 					{tabValue === 1 && (<div className="w-full">
 						<div className="flex justify-center p-16 pb-64  sm:pb-64  md:pb-64">
 							<Paper className="w-full mx-auto p-16 pb-64  sm:pb-64  md:pb-64 rounded-16 shadow overflow-hidden">

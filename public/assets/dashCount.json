@@ -1,0 +1,26 @@
+[
+   {
+     "Disease": {
+       "name": "Disease",
+       "count": 52
+     }
+   },
+   {
+     "Chemical": {
+       "name": "Chemical",
+       "count": 14
+     }
+   },
+   {
+     "Protein": {
+       "name": "Protein",
+       "count": 0
+     }
+   },
+   {
+     "Gene": {
+       "name": "Gene",
+       "count": 9
+     }
+   }
+ ]

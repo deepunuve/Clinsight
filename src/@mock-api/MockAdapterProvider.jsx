@@ -6,7 +6,6 @@ import apiService from 'app/store/apiService';
 import ExtendedMockAdapter from './ExtendedMockAdapter';
 import { authApiMocks } from './api/auth-api';
 import { academyApiMocks } from './api/academy-api';
-
 const mockAdapterOptions = {
 	delayResponse: 0
 };

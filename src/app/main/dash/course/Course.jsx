@@ -18,7 +18,6 @@ import FuseLoading from '@fuse/core/FuseLoading';
 import CourseInfo from '../CourseInfo';
 import CourseProgress from '../CourseProgress';
 import Error404Page from '../../404/Error404Page';
-import { useGetAcademyCourseQuery, useUpdateAcademyCourseMutation } from '../AcademyApi';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -113,12 +112,7 @@ function Course(props) {
 		resolver: zodResolver(schema)
 	});
 	const { isValid, dirtyFields, errors } = formState;
-	const { data: course, isLoading } = useGetAcademyCourseQuery(
-		{ courseId },
-		{
-			skip: !courseId
-		}
-	);
+	
 	const [alignment, setAlignment] = useState('web');
 
 	const handleChange = (

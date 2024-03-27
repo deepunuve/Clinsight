@@ -221,10 +221,12 @@ input:-webkit-autofill:active {
     background-image: linear-gradient(to right, #111827, #111827) !important;
     color: white;
 }
+
 .bold-italic {
     font-weight: bold;
     font-style: italic;
-  }
+}
+
 .react-chatbot-kit-user-chat-message {
     background-color: #0085ff !important;
     color: white !important;
@@ -275,6 +277,86 @@ input:-webkit-autofill:active {
     /* Blue */
     border-radius: 50%;
     animation: spinner 1.5s linear infinite;
+}
+
+.topSecContainer {
+    display: flex;
+    align-items: center;
+    /* Center items vertically */
+}
+
+.topSecLeft {
+    margin-right: auto;
+    /* Push to the left side */
+}
+
+.topSecRight {
+    margin-left: auto;
+    display: flex;
+    /* Push to the right side */
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pagination button {
+    padding: 8px 16px;
+    margin: 0 4px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+  }
+  
+  .pagination button.active {
+    background-color: #111827;
+    color: #fff;
+    border-color: #111827;
+  }
+  
+  .pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+.sort-option {
+    margin-left: 10px;
+    /* Adjust spacing between options */
+}
+
+.boxContainer {
+    display: flex;
+}
+
+.boxData {
+    width: auto;
+    height: auto;
+    margin-right: 10px;
+}
+
+.space {
+    height: 10px;
+}
+
+.space2 {
+    height: 20px;
+}
+
+.icon {
+    font-size: 12px;
+    /* Adjust icon size as needed */
+    margin-right: 5px;
+    /* Adjust spacing between icon and text */
+}
+
+.text {
+    font-size: 12px;
+    /* Adjust text size as needed */
+}
+
+/* Remove right margin from the last box to prevent overflow */
+.box:last-child {
+    margin-right: 0;
 }
 
 .spinner-container {
